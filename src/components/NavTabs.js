@@ -26,11 +26,11 @@ export default function NavTabs () {
   return (
     <>
       <div className='nav-widget-wrapper w-full  h-[60px] relative z-30 bg-[#db1436]  quomodo-shop-nav-bar lg:block hidden'>
-        <div className='container-x mx-auto h-full'>
+        <div className='mx-auto max-w-[1216px] h-full'>
           <div className='w-full h-full relative'>
             <div className='w-full h-full flex justify-between items-center'>
               <div className='category-and-nav flex xl:space-x-7 space-x-3 items-center'>
-                <div className='category w-[270px] h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative ml-96'>
+                <div className='category w-[270px] h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative'>
                   <button type='button' className='w-full h-full flex justify-between items-center'>
                     <div className='flex space-x-3 items-center'>
                       <span><MenuHamburgerIcon /></span>

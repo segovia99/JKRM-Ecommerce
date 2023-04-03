@@ -18,3 +18,19 @@ export const DropdownIcon = () => (
 export const MenuHamburgerIcon = () => (
   <svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' className='fill-current'><path d='M0 0h14v1H0zM0 8h14v1H0zM0 4h10v1H0z' /></svg>
 )
+
+export const MenuIcon = () => (
+  <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' strokeWidth='2' className='h-6 w-6' viewBox='0 0 24 24'><path strokeLinecap='round' strokeLinejoin='round' d='M4 6h16M4 12h16M4 18h7' /></svg>
+)
+
+export const InstagramIcon = () => (
+  <svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='fill-current text-gray-500 hover:text-black' xmlns='http://www.w3.org/2000/svg'><path d='M12.1016 4.90039C12.6538 4.90039 13.1016 4.45268 13.1016 3.90039C13.1016 3.34811 12.6538 2.90039 12.1016 2.90039C11.5493 2.90039 11.1016 3.34811 11.1016 3.90039C11.1016 4.45268 11.5493 4.90039 12.1016 4.90039Z' /><path d='M8 12C5.8 12 4 10.2 4 8C4 5.8 5.8 4 8 4C10.2 4 12 5.8 12 8C12 10.2 10.2 12 8 12ZM8 6C6.9 6 6 6.9 6 8C6 9.1 6.9 10 8 10C9.1 10 10 9.1 10 8C10 6.9 9.1 6 8 6Z' /><path d='M12 16H4C1.9 16 0 14.1 0 12V4C0 1.9 1.9 0 4 0H12C14.1 0 16 1.9 16 4V12C16 14.1 14.1 16 12 16ZM4 2C3.1 2 2 3.1 2 4V12C2 13 3 14 4 14H12C12.9 14 14 12.9 14 12V4C14 3.1 12.9 2 12 2H4Z' /></svg>
+)
+
+export const FacebookIcon = () => (
+  <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' fill='none' className='fill-current text-gray-500 hover:text-black'><path d='M3 16V9H0V6h3V4c0-2.7 1.7-4 4.1-4 1.2 0 2.1.1 2.4.1v2.8H7.8c-1.3 0-1.6.6-1.6 1.5V6H10L9 9H6.3v7H3Z' /></svg>
+)
+
+export const YoutubeIcon = () => (
+  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='12' fill='none' className='fill-current text-gray-500 hover:text-black'><path d='M15.8 2.8C15.6 1.5 15 .6 13.6.4 11.4 0 8 0 8 0S4.6 0 2.4.4C1 .6.3 1.5.2 2.8 0 4.1 0 6 0 6s0 1.9.2 3.2c.2 1.3.8 2.2 2.2 2.4C4.6 12 8 12 8 12s3.4 0 5.6-.4c1.4-.3 2-1.1 2.2-2.4C16 7.9 16 6 16 6s0-1.9-.2-3.2ZM6 9V3l5 3-5 3Z' /></svg>
+)

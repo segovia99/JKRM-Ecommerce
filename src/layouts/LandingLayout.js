@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import LandingNavbar from '@/components/LandingNavbar'
+import Footer from '@/components/Footer'
 
 const LandingLayout = ({ children }) => {
   return (
@@ -10,12 +11,13 @@ const LandingLayout = ({ children }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header>
-        <LandingNavbar />
-      </header>
+
+      <LandingNavbar />
+
       <main>
         {children}
       </main>
+      <Footer />
     </>
   )
 }
