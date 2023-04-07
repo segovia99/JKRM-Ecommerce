@@ -12,3 +12,63 @@
     border-color: rgba(var(--colors-whop-stroke),var(--tw-border-opacity)) !important;
 }
 
+html {
+    font-family: "Inter", sans-serif;
+    background-color: #f8f8f8;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .font-100 {
+    font-weight: 100;
+  }
+  .font-200 {
+    font-weight: 200;
+  }
+  .font-300 {
+    font-weight: 300;
+  }
+  .font-400 {
+    font-weight: 400;
+  }
+  .font-500 {
+    font-weight: 500;
+  }
+  .font-600 {
+    font-weight: 600;
+  }
+  .font-700 {
+    font-weight: 700;
+  }
+  .font-800 {
+    font-weight: 800;
+  }
+  .font-900 {
+    font-weight: 900;
+  }
+  .container-x {
+    @apply md:px-6 px-2 w-full;
+    max-width: 1216px !important;
+  }
+
+  .red-btn {
+    @apply w-full text-[13px] text-black font-semibold bg-[#db1436] flex justify-center items-center h-full;
+    line-height: 0;
+  }
+
+.animate-right-dir {
+    animation: rightDir 1s infinite;
+  }
+  @keyframes rightDir {
+    0%,
+    100% {
+      transform: translatex(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }

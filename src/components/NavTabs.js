@@ -34,7 +34,7 @@ export default function NavTabs () {
                   <button type='button' className='w-full h-full flex justify-between items-center'>
                     <div className='flex space-x-3 items-center'>
                       <span><MenuHamburgerIcon /></span>
-                      <span className='text-sm font-600 text-qblacktext'>Todas las Categorias</span>
+                      <span className='text-sm font-semibold text-black'>Todas las Categorias</span>
                     </div>
                     <div>
                       <span><DropdownIcon /></span>
