@@ -3,7 +3,7 @@
 // import styles from '@/styles/Home.module.css'
 
 import Maincontend from '@/components/MainContend'
-import LandingLayout from '@/layouts/LandingLayout'
+import LandingLayout from '@/components/layouts/LandingLayout'
 
 // const inter = Inter({ subsets: ['latin'] })
 
