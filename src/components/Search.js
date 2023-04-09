@@ -25,7 +25,7 @@ function Search (props) {
   })
 
   const autocomplete = useMemo(() => createAutocomplete({
-    placeholder: 'Busca tu oferta',
+    placeholder: 'Buscar Producto',
     onStateChange: ({ state }) => setAutocompleteState(state),
     getSources: () => [{
       sourceId: 'offers-next-api',
