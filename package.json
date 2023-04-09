@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "1.8.3",
     "aos": "^3.0.0-beta.6",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",

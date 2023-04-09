@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { CartIcon, FavoriteIcon, SearchIcon } from './Icons'
+import { CartIcon, FavoriteIcon } from './Icons'
 import NavActions from './NavActions'
 import NavTabs from './NavTabs'
 import MobileHeader from './MobileHeader'
+import Search from './Search'
 
 const LandingNavbar = () => {
   return (
@@ -15,10 +16,7 @@ const LandingNavbar = () => {
               <Link href='/'>
                 <img src='/logo.webp' width='152' height='36' />
               </Link>
-              <form className='border-whop-stroke relative flex w-full max-w-[500px] items-stretch rounded-md border border-solid outline-2 transition'>
-                <input type='text' placeholder='Buscar Producto' className='text2 placeholder:text-whop-gray flex-1 rounded-l-md border-none px-3 py-[11px] outline-none' />
-                <button className='text-white border-whop-stroke text-whop-dark-gray hover:bg-whop-hover active:bg-whop-hover-press flex items-center rounded-r-md border-0 border-l border-solid bg-[#db1436] px-6 transition'><SearchIcon /></button>
-              </form>
+              <Search />
 
               <div className='flex space-x-6 items-center'>
                 <div className='relative'>
