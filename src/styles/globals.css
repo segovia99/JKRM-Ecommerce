@@ -57,6 +57,15 @@ html {
     @apply w-full text-[13px] text-black font-semibold bg-[#db1436] flex justify-center items-center h-full;
     line-height: 0;
   }
+  .gray-btn {
+    align-items: center;
+    background: #f0f1f3;
+    display: flex;
+    font-size: .875rem;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25rem;
+  }
 
 .animate-right-dir {
     animation: rightDir 1s infinite;
@@ -73,6 +82,8 @@ html {
     }
   }
 
+  
+
   .border-qgray-border {
     --tw-border-opacity: 1;
     border-color: rgb(239 239 239/var(--tw-border-opacity));
@@ -82,6 +93,11 @@ html {
     --tw-text-opacity: 1;
     color: rgb(34 34 34/var(--tw-text-opacity));
   } 
+
+  .text-qred {
+    --tw-text-opacity: 1;
+    color: rgb(239 38 44/var(--tw-text-opacity));
+  }
 
   .text-qgray {
     --tw-text-opacity: 1;
@@ -98,4 +114,26 @@ html {
     --tw-text-opacity: 1;
     background-color: rgb(34 34 34/var(--tw-bg-opacity));
     color: rgb(255 255 255/var(--tw-text-opacity));
+  }
+
+  .overflow-y-scroll {
+    overflow-y: scroll;
+  }
+
+  .cart-wrappwer {
+    --tw-border-opacity: 1;
+    border-color: rgb(219 20 54/var(--tw-border-opacity))
+  }
+
+  .scrollable::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  
+  .scrollable::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
   }

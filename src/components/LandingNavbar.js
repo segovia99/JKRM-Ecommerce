@@ -4,6 +4,7 @@ import NavActions from './NavActions'
 import NavTabs from './NavTabs'
 import MobileHeader from './MobileHeader'
 import Search from './Search'
+import Cart from './Cart'
 
 const LandingNavbar = () => {
   return (
@@ -30,6 +31,7 @@ const LandingNavbar = () => {
                     <span><CartIcon /></span>
                     <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>5</span>
                   </div>
+                  <Cart />
                 </div>
                 <NavActions />
               </div>
