@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import MainBanners from './MainBanners'
 import ToolsSection from './ToolsSection'
 import ShopBrands from './ShopBrands'
+import TopSellingProducts from './TopSellingProducts'
 
 function Maincontend () {
   useEffect(() => {
@@ -15,6 +16,7 @@ function Maincontend () {
       <MainBanners />
       <ToolsSection />
       <ShopBrands />
+      <TopSellingProducts/>
     </div>
   )
 }

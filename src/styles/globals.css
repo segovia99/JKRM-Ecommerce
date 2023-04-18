@@ -54,7 +54,7 @@ html {
   }
 
   .red-btn {
-    @apply w-full text-[13px] text-black font-semibold bg-[#db1436] flex justify-center items-center h-full;
+    @apply w-full text-[13px] font-semibold bg-[#db1436] flex justify-center items-center h-full;
     line-height: 0;
   }
   .gray-btn {
