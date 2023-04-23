@@ -44,7 +44,7 @@ function Cart () {
             <Link href='/'>
               <div className='w-full h-[50px] mb-[10px]'>
                 <div className='red-btn'>
-                  <span class='text-sm text-white'>Pagar</span>
+                  <span className='text-sm text-white'>Pagar</span>
                 </div>
               </div>
             </Link>

@@ -2,7 +2,9 @@
 const about = () => {
   return (
 
-    <div>about</div>
+    <div className='bg-red-500'>
+      <div className='text-white'>About</div>
+    </div>
 
   )
 }

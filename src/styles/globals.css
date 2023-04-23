@@ -137,3 +137,8 @@ html {
   .scrollable::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  .bg-whop-black {
+    --tw-bg-opacity: 1;
+    background-color: rgba(var(--colors-whop-black),var(--tw-bg-opacity));
+}

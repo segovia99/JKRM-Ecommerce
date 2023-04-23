@@ -59,20 +59,20 @@ export default function Detail () {
                       <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{title}</p>
                       <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'><span className='text-2xl font-500 text-red-600'>{price}</span></div>
                       <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{description}</p>
-                      <div data-aos='fade-up' class='quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px] aos-init aos-animate'>
-                        <div class='w-[120px] h-full px-[26px] flex items-center border border-qgray-border'>
-                          <div class='flex justify-between items-center w-full'>
-                            <button type='button' class='text-base text-qgray'>-</button>
-                            <span class='text-qblack'>1</span>
-                            <button type='button' class='text-base text-qgray'>+</button>
+                      <div data-aos='fade-up' className='quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px] aos-init aos-animate'>
+                        <div className='w-[120px] h-full px-[26px] flex items-center border border-qgray-border'>
+                          <div className='flex justify-between items-center w-full'>
+                            <button type='button' className='text-base text-qgray'>-</button>
+                            <span className='text-qblack'>1</span>
+                            <button type='button' className='text-base text-qgray'>+</button>
                           </div>
                         </div>
-                        <div class='w-[60px] h-full flex justify-center items-center border border-qgray-border'>
-                          <button type='button'><span><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z' stroke='#D5D5D5' stroke-width='2' stroke-miterlimit='10' stroke-linecap='square' /></svg></span>
+                        <div className='w-[60px] h-full flex justify-center items-center border border-qgray-border'>
+                          <button type='button'><span><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z' stroke='#D5D5D5' strokeWidth='2' strokeMiterlimit='10' stroke-linecap='square' /></svg></span>
                           </button>
                         </div>
-                        <div class='flex-1 h-full'>
-                          <button type='button' class='black-btn text-sm font-semibold w-full h-full'>Agregar al Carrito</button>
+                        <div className='flex-1 h-full'>
+                          <button type='button' className='black-btn text-sm font-semibold w-full h-full'>Agregar al Carrito</button>
                         </div>
                       </div>
                     </div>
