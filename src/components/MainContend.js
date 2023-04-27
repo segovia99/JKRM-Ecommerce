@@ -16,7 +16,7 @@ function Maincontend () {
       <MainBanners />
       <ToolsSection />
       <ShopBrands />
-      <TopSellingProducts/>
+      <TopSellingProducts />
     </div>
   )
 }
