@@ -9,9 +9,9 @@ export default function App ({ Component, pageProps }) {
   return (
 
     <>
-    <CookiesProvider>
-      <Component {...pageProps} />
-      <ToastContainer />
+      <CookiesProvider>
+        <Component {...pageProps} />
+        <ToastContainer />
       </CookiesProvider>
     </>
 
