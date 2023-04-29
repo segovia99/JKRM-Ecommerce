@@ -1,7 +1,8 @@
+import db from 'db.json'
 
 export default function handler (req, res) {
   if (req.method === 'GET') {
-    res.status(200).json({ name: 'John Doe' })
+    res.status(200).json(db)
   }
 
   if (req.method === 'POST') {
