@@ -22,16 +22,17 @@ export default function Productos ({ categorias, productos }) {
     })();
   }, []);
 
-  const modifyProduct = (id, nombre, descripcion, precio, cantidad) => {
+  const modifyProduct = (id, nombre, descripcion, precio, cantidad, url) => {
     queryAttr('input', 'name', 'idProducto').value = id;
     queryAttr('input', 'name', 'nombreProducto').value = nombre;
     queryAttr('input', 'name', 'descripcionProducto').value = descripcion;
     queryAttr('input', 'name', 'precioProducto').value = precio;
     queryAttr('input', 'name', 'cantidadProducto').value = cantidad;
+    queryAttr('input', 'name', 'imgProducto').value = url;
   };
   
-  const insertProduct = async (idCategoria, nombre, descripcion, precio, cantidad) => {
-    let temp = { idCategoria, nombre, descripcion, precio, cantidad };
+  const insertProduct = async (idCategoria, nombre, descripcion, precio, cantidad, url) => {
+    let temp = { idCategoria, nombre, descripcion, precio, cantidad, url };
     const resProducts = await axios.post('/api/productosCRUD/productos', temp);
     setProducts(resProducts.data);
   };
@@ -41,8 +42,8 @@ export default function Productos ({ categorias, productos }) {
     setProducts(products.filter(product => product.id != id));
   };
 
-  const updateProduct = async (id_categoria, id, nombre, descripcion, precio, cantidad) => {
-    let temp = { id_categoria, id, nombre, descripcion, precio, cantidad };
+  const updateProduct = async (id_categoria, id, nombre, descripcion, precio, cantidad, url) => {
+    let temp = { id_categoria, id, nombre, descripcion, precio, cantidad, url };
     const resProducts = await axios.put('/api/productosCRUD/productos', temp);
     setProducts(resProducts.data);
   };
@@ -69,7 +70,7 @@ export default function Productos ({ categorias, productos }) {
           <button onClick={ closeProduct } className="m-[2%] float-right hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">close</button>
         </div>
         <div className="w-[50vw] h-[50vh]">
-          <img src="" id="image" className='w-[100%]'></img>
+          <img src="" id="image" className='w-[100%] max-w-[400px]'></img>
         </div>
       </div>
 			<div className="w-[100%] h-[85vh] mt-[56px]">
@@ -102,13 +103,15 @@ export default function Productos ({ categorias, productos }) {
 												<td>{item.descripcion}</td>
 												<td>{item.precio}</td>
 												<td>{item.cantidad}</td>
+                        <td><a href={item.url} target="_blank" className="underline text-[#d97179]">imagen URL</a></td>
 												<td><button onClick={() => deleteProduct(item.id)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">borrar</button></td>
 												<td><button onClick={() => modifyProduct(
 													item.id,
 													item.nombre,
 													item.descripcion,
 													item.precio,
-													item.cantidad
+													item.cantidad,
+                          item.url
 												)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">modificar</button></td>
 											</tr>
 										);
@@ -121,13 +124,15 @@ export default function Productos ({ categorias, productos }) {
 												<td>{item.descripcion}</td>
 												<td>{item.precio}</td>
 												<td>{item.cantidad}</td>
+                        <td><a href={item.url} target="_blank" className="underline text-[#d97179]">imagen URL</a></td>
 												<td><button onClick={() => deleteProduct(item.id)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">borrar</button></td>
 												<td><button onClick={() => modifyProduct(
 													item.id,
 													item.nombre,
 													item.descripcion,
 													item.precio,
-													item.cantidad
+													item.cantidad,
+                          item.url
 												)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">modificar</button></td>
 											</tr>
 										);
@@ -144,7 +149,8 @@ export default function Productos ({ categorias, productos }) {
 							queryAttr('input', 'name', 'nombreProducto').value,
 							queryAttr('input', 'name', 'descripcionProducto').value,
 							queryAttr('input', 'name', 'precioProducto').value,
-							queryAttr('input', 'name', 'cantidadProducto').value
+							queryAttr('input', 'name', 'cantidadProducto').value,
+              queryAttr('input', 'name', 'imgProducto').value
 						)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">insertar</button>
 						<button onClick={() => updateProduct(
 							queryAttr('select', 'id', 'sel').value,
@@ -152,7 +158,8 @@ export default function Productos ({ categorias, productos }) {
 							queryAttr('input', 'name', 'nombreProducto').value,
 							queryAttr('input', 'name', 'descripcionProducto').value,
 							queryAttr('input', 'name', 'precioProducto').value,
-							queryAttr('input', 'name', 'cantidadProducto').value
+							queryAttr('input', 'name', 'cantidadProducto').value,
+              queryAttr('input', 'name', 'imgProducto').value
 						)} className="hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]">guardar</button>
 						<div className="ml-[16px]">
 							<label>categoria </label>
