@@ -28,7 +28,7 @@ function Search (props) {
     placeholder: 'Buscar Producto',
     onStateChange: ({ state }) => setAutocompleteState(state),
     getSources: () => [{
-      sourceId: 'offers-next-api',
+      sourceId: 'product-next-api',
       getItems: ({ query }) => {
         if (query) {
           return fetch(`/api/search?q=${query}`)
@@ -52,7 +52,10 @@ function Search (props) {
 
   return (
     <form ref={formRef} className='border-whop-stroke relative flex w-full max-w-[500px] items-stretch rounded-md border border-solid outline-2 transition' {...formProps}>
-      <input ref={inputRef} type='text' placeholder='Buscar Producto' className='text2 placeholder:text-whop-gray flex-1 rounded-l-md border-none px-3 py-[11px] outline-none' {...inputProps} />
+      <input
+        type='text'
+        ref={inputRef} id='txtBuscar' aria-labelledby='txtBuscar' placeholder='Buscar Producto' className='text2 placeholder:text-whop-gray flex-1 rounded-l-md border-none px-3 py-[11px] outline-none' {...inputProps}
+      />
       <button className='text-white border-whop-stroke text-whop-dark-gray hover:bg-whop-hover active:bg-whop-hover-press flex items-center rounded-r-md border-0 border-l border-solid bg-[#db1436] px-6 transition'><SearchIcon /></button>
       {
         autocompleteState.isOpen && (

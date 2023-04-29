@@ -1,8 +1,19 @@
 import Link from 'next/link'
 import { ArrowRIcon } from './Icons'
 import ProductCardOne from './ProductCardOne'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 function ToolsSection () {
+  const [products, setProducts] = useState([])
+  const loadData = async () => {
+    const response = await axios.get('/api/products')
+    // console.log(response.data)
+    setProducts(response.data)
+  }
+  useEffect(() => {
+    loadData()
+  }, [])
   return (
     <section data-aos='fade-up' className='section-style-one category-products mb-[60px] aos-init aos-animate'>
       <div className='section-wrapper w-full '>
@@ -25,10 +36,14 @@ function ToolsSection () {
           <div className='section-content'>
             <div className='products-section w-full'>
               <div className='grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5'>
-                <ProductCardOne />
-                <ProductCardOne />
-                <ProductCardOne />
-                <ProductCardOne />
+                {
+                products.slice(0, 4).map((product) => {
+                  const { description, price, img, title, id } = product
+                  return (
+                    <ProductCardOne key={id} title={title} description={description} price={price} img={img} id={id} />
+                  )
+                })
+               }
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ const navigation = {
     },
     {
       name: 'Catálogo',
-      href: '/'
+      href: '/catalogo'
     },
     {
       name: 'Sobre nosotros',
