@@ -7,13 +7,13 @@ function queryAttr (element, attribute, query) {
 }
 
 function clearInputs () {
-  queryAttr('input', 'name', 'idProducto').value = ""
-  queryAttr('input', 'name', 'nombreProducto').value = ""
-  queryAttr('input', 'name', 'descripcionProducto').value = ""
-  queryAttr('input', 'name', 'precioProducto').value = ""
-  queryAttr('input', 'name', 'cantidadProducto').value = ""
-  queryAttr('input', 'name', 'imgProducto').value = ""
-  queryAttr('input', 'name', 'marcaProducto').value = "";
+  queryAttr('input', 'name', 'idProducto').value = ''
+  queryAttr('input', 'name', 'nombreProducto').value = ''
+  queryAttr('input', 'name', 'descripcionProducto').value = ''
+  queryAttr('input', 'name', 'precioProducto').value = ''
+  queryAttr('input', 'name', 'cantidadProducto').value = ''
+  queryAttr('input', 'name', 'imgProducto').value = ''
+  queryAttr('input', 'name', 'marcaProducto').value = ''
 }
 
 export default function Categorias () {
@@ -40,13 +40,13 @@ export default function Categorias () {
   const insertCategory = async (id, nombre) => {
     const resCategories = await axios.post('/api/categoriasCRUD/categorias', { nombre })
     setCategories(resCategories.data)
-		clearInputs();
+    clearInputs()
   }
 
   const updateCategory = async (id, nombre) => {
     const resCategories = await axios.put('/api/categoriasCRUD/categorias', { id, nombre })
     setCategories(resCategories.data)
-		clearInputs();
+    clearInputs()
   }
 
   return (

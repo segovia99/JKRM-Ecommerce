@@ -2,26 +2,26 @@ import Layout from '@/components/admin/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-for (var i = 0; i < 10; i++) {
-  console.log(i);
+for (let i = 0; i < 10; i++) {
+  console.log(i)
 }
 
-function queryAttr(element, attribute, query) {
+function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
 
 // clear ipnuts
-function clearInputs() {
-  queryAttr('input', 'name', 'idProducto').value = ""
-  queryAttr('input', 'name', 'nombreProducto').value = ""
-  queryAttr('input', 'name', 'descripcionProducto').value = ""
-  queryAttr('input', 'name', 'precioProducto').value = ""
-  queryAttr('input', 'name', 'cantidadProducto').value = ""
-  queryAttr('input', 'name', 'imgProducto').value = ""
-  queryAttr('input', 'name', 'marcaProducto').value = "";
+function clearInputs () {
+  queryAttr('input', 'name', 'idProducto').value = ''
+  queryAttr('input', 'name', 'nombreProducto').value = ''
+  queryAttr('input', 'name', 'descripcionProducto').value = ''
+  queryAttr('input', 'name', 'precioProducto').value = ''
+  queryAttr('input', 'name', 'cantidadProducto').value = ''
+  queryAttr('input', 'name', 'imgProducto').value = ''
+  queryAttr('input', 'name', 'marcaProducto').value = ''
 }
 
-export default function Productos({ categorias, productos }) {
+export default function Productos ({ categorias, productos }) {
   let idCategorias = 1
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
@@ -42,14 +42,14 @@ export default function Productos({ categorias, productos }) {
     queryAttr('input', 'name', 'precioProducto').value = precio
     queryAttr('input', 'name', 'cantidadProducto').value = cantidad
     queryAttr('input', 'name', 'imgProducto').value = url
-    queryAttr('input', 'name', 'marcaProducto').value = marca;
+    queryAttr('input', 'name', 'marcaProducto').value = marca
   }
 
   const insertProduct = async (idCategoria, nombre, descripcion, precio, cantidad, url, marca) => {
     const temp = { idCategoria, nombre, descripcion, precio, cantidad, url, marca }
     const resProducts = await axios.post('/api/productosCRUD/productos', temp)
     setProducts(resProducts.data)
-    clearInputs();
+    clearInputs()
   }
 
   const deleteProduct = async (id) => {
@@ -61,7 +61,7 @@ export default function Productos({ categorias, productos }) {
     const temp = { idCategoria, id, nombre, descripcion, precio, cantidad, url, marca }
     const resProducts = await axios.put('/api/productosCRUD/productos', temp)
     setProducts(resProducts.data)
-    clearInputs();
+    clearInputs()
   }
 
   const filterProduct = async (idCategoria) => {

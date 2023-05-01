@@ -1,19 +1,19 @@
 import Link from 'next/link'
 
-function CartProductItem () {
+function CartProductItem ({ img, title, price, id }) {
   return (
     <>
 
       <div className='flex space-x-[6px] justify-center items-center px-4 my-[20px]'>
         <div className='w-[65px] h-full'>
-          <img src='/Products/Producto.jpg' className='w-full h-full object-contain' />
+          <img src={img} alt={title} className='w-full h-full object-contain' />
         </div>
         <div className='flex-1 h-full flex flex-col justify-center '>
-          <Link href='/'>
-            <p className='title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600'>STANLEY - Flexómetro Tylon de 5 Metros</p>
+          <Link href={`/detail/${id}`}>
+            <p className='title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600'>{title}</p>
           </Link>
           <p className='price'>
-            <span className='offer-price text-qred font-600 text-[15px] ml-2'>$50</span>
+            <span className='offer-price text-qred font-600 text-[15px] ml-2'>{price}</span>
           </p>
         </div>
       </div>

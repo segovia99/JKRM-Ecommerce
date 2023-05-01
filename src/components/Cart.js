@@ -1,30 +1,24 @@
 
 import Link from 'next/link'
 import CartProductItem from './CartProductItem'
+import { useCart } from '@/hooks/useCart'
 
 function Cart () {
+  const { cart } = useCart()
+
   return (
 
     <div className='w-[300px] bg-white border-t-[3px] cart-wrappwer  absolute -right-[115px] top-11 z-50 hidden group-hover:block' style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 15px 50px 0px' }}>
       <div className='w-full h-full'>
         <div className='product-items h-[310px] overflow-y-scroll scrollable scrollbar-thin'>
           <ul>
-            <li className='w-full h-full flex'>
-              <CartProductItem />
-            </li>
-            <li className='w-full h-full flex'>
-              <CartProductItem />
-            </li>
-            <li className='w-full h-full flex'>
-              <CartProductItem />
-            </li>
-            <li className='w-full h-full flex'>
-              <CartProductItem />
-            </li>
-            <li className='w-full h-full flex'>
-              <CartProductItem />
-            </li>
-
+            {
+              cart.map(product => (
+                <li className='w-full h-full flex' key={product.id}>
+                  <CartProductItem img={product.img} title={product.title} price={product.price} id={product.id} />
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div className='w-full px-4 mt-[20px] mb-[12px]'>

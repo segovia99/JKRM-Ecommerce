@@ -3,8 +3,10 @@ import { ArrowRIcon } from './Icons'
 import ProductCardOne from './ProductCardOne'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useCart } from '@/hooks/useCart'
 
 function ToolsSection () {
+  const { addToCart } = useCart()
   const [products, setProducts] = useState([])
   const loadData = async () => {
     const response = await axios.get('/api/products')
@@ -14,6 +16,7 @@ function ToolsSection () {
   useEffect(() => {
     loadData()
   }, [])
+
   return (
     <section data-aos='fade-up' className='section-style-one category-products mb-[60px] aos-init aos-animate'>
       <div className='section-wrapper w-full '>
@@ -40,7 +43,10 @@ function ToolsSection () {
                 products.slice(0, 4).map((product) => {
                   const { description, price, img, title, id } = product
                   return (
-                    <ProductCardOne key={id} title={title} description={description} price={price} img={img} id={id} />
+                    <ProductCardOne
+                      key={id} title={title} description={description} price={price} img={img} id={id} addToCart={() => addToCart(product)}
+                      {...product}
+                    />
                   )
                 })
                }
