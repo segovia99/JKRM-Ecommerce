@@ -2,12 +2,16 @@ import Layout from '@/components/admin/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function queryAttr (element, attribute, query) {
+for (var i = 0; i < 10; i++) {
+  console.log(i);
+}
+
+function queryAttr(element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
 
 // clear ipnuts
-function clearInputs () {
+function clearInputs() {
   queryAttr('input', 'name', 'idProducto').value = ""
   queryAttr('input', 'name', 'nombreProducto').value = ""
   queryAttr('input', 'name', 'descripcionProducto').value = ""
@@ -17,7 +21,7 @@ function clearInputs () {
   queryAttr('input', 'name', 'marcaProducto').value = "";
 }
 
-export default function Productos ({ categorias, productos }) {
+export default function Productos({ categorias, productos }) {
   let idCategorias = 1
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
@@ -104,59 +108,59 @@ export default function Productos ({ categorias, productos }) {
             </thead>
             <tbody>
               {
-              products.map(item => {
-                idCategorias++
-                if (idCategorias % 2 === 0) {
-                  return (
-                    <tr key={item.id} className='h-8 bg-[#f2f2f2]'>
-                      <td>{item.id}</td>
-                      <td>{item.categoria}</td>
-                      <td>{item.nombre}</td>
-                      <td>{item.descripcion}</td>
-                      <td>{item.precio}</td>
-                      <td>{item.cantidad}</td>
-                      <td><a href={item.url} target='_blank' className='underline text-[#d97179]'>imagen URL</a></td>
-                      <td>{item.marca}</td>
-                      <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
-                      <td>
-                        <button
-                          onClick={() => modifyProduct(item.id, item.nombre, item.descripcion, item.precio, item.cantidad, item.url, item.marca
-                          )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
-                        >modificar
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                } else {
-                  return (
-                    <tr key={item.id} className='h-8'>
-                      <td>{item.id}</td>
-                      <td>{item.categoria}</td>
-                      <td>{item.nombre}</td>
-                      <td>{item.descripcion}</td>
-                      <td>{item.precio}</td>
-                      <td>{item.cantidad}</td>
-                      <td><a href={item.url} target='_blank' className='underline text-[#d97179]'>imagen URL</a></td>
-                      <td>{item.marca}</td>
-                      <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
-                      <td>
-                        <button
-                          onClick={() => modifyProduct(
-                            item.id,
-                            item.nombre,
-                            item.descripcion,
-                            item.precio,
-                            item.cantidad,
-                            item.url,
-                            item.marca
-                          )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
-                        >modificar
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                }
-              })
+                products.map(item => {
+                  idCategorias++
+                  if (idCategorias % 2 === 0) {
+                    return (
+                      <tr key={item.id} className='h-8 bg-[#f2f2f2]'>
+                        <td>{item.id}</td>
+                        <td>{item.categoria}</td>
+                        <td>{item.nombre}</td>
+                        <td>{item.descripcion}</td>
+                        <td>{item.precio}</td>
+                        <td>{item.cantidad}</td>
+                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]'>imagen URL</a></td>
+                        <td>{item.marca}</td>
+                        <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
+                        <td>
+                          <button
+                            onClick={() => modifyProduct(item.id, item.nombre, item.descripcion, item.precio, item.cantidad, item.url, item.marca
+                            )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
+                          >modificar
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  } else {
+                    return (
+                      <tr key={item.id} className='h-8'>
+                        <td>{item.id}</td>
+                        <td>{item.categoria}</td>
+                        <td>{item.nombre}</td>
+                        <td>{item.descripcion}</td>
+                        <td>{item.precio}</td>
+                        <td>{item.cantidad}</td>
+                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]'>imagen URL</a></td>
+                        <td>{item.marca}</td>
+                        <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
+                        <td>
+                          <button
+                            onClick={() => modifyProduct(
+                              item.id,
+                              item.nombre,
+                              item.descripcion,
+                              item.precio,
+                              item.cantidad,
+                              item.url,
+                              item.marca
+                            )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
+                          >modificar
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  }
+                })
               }
             </tbody>
           </table>
@@ -196,7 +200,7 @@ export default function Productos ({ categorias, productos }) {
                 )} className='border border-gray-200'
               >
                 {
-                categories.map(item => (<option key={item.id} value={item.id}>{item.nombre}</option>))
+                  categories.map(item => (<option key={item.id} value={item.id}>{item.nombre}</option>))
                 }
               </select>
             </div>
