@@ -13,12 +13,12 @@ export default function NavActions () {
         ? (<><span><ProfileIcon /></span></>)
         : (
           <>
-            <button
-              data-modal-target='authentication-modal' data-modal-toggle='authentication-modal'
+            <Link
+              href='/login'
               className='flex h-full items-center border-b-2 text-sm border-primary text-primary'
             >
               Inicia sesión
-            </button>
+            </Link>
             <span className='h-6 w-px bg-gray-400' aria-hidden='true' />
             <Link
               href='/signup'

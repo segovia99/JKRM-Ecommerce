@@ -5,8 +5,10 @@ import NavTabs from './NavTabs'
 import MobileHeader from './MobileHeader'
 import Search from './Search'
 import Cart from './Cart'
+import { useCart } from '@/hooks/useCart'
 
 const LandingNavbar = () => {
+  const { cart } = useCart()
   return (
 
     <header className='header-section-wrapper relative'>
@@ -23,13 +25,13 @@ const LandingNavbar = () => {
                 <div className='relative'>
                   <Link href='/'>
                     <span><FavoriteIcon /></span>
-                    <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>1</span>
+                    <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>0</span>
                   </Link>
                 </div>
                 <div className='cart-wrapper group relative py-4'>
                   <div className='cart relative cursor-pointer'>
                     <span><CartIcon /></span>
-                    <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>5</span>
+                    <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>{cart.length}</span>
                   </div>
                   <Cart />
                 </div>

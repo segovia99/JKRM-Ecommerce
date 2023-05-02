@@ -1,12 +1,15 @@
 import FilterCatalago from '@/components/FilterCatalago'
 import ProductCardOne from '@/components/ProductCardOne'
 import LandingLayout from '@/components/layouts/LandingLayout'
+import { useCart } from '@/hooks/useCart'
 import AOS from 'aos'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export default function Catalogo () {
   const [products, setProducts] = useState([])
+  const { addToCart } = useCart()
   const loadData = async () => {
     const response = await axios.get('/api/products')
     // console.log(response.data)
@@ -29,7 +32,15 @@ export default function Catalogo () {
                 products.map((product) => {
                   const { description, price, img, title, id } = product
                   return (
-                    <ProductCardOne key={id} title={title} description={description} price={price} img={img} id={id} />
+                    <ProductCardOne
+                      key={id} title={title} description={description} price={price} img={img} id={id} addToCart={
+                        () => {
+                          addToCart(product)
+                          toast.success('se agrego al carrito', { autoClose: 1000 })
+                        }
+                      }
+                      {...product}
+                    />
                   )
                 })
                }

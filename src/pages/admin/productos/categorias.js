@@ -25,7 +25,7 @@ export default function Categorias () {
       const resCategories = await axios.get('/api/categoriasCRUD/categorias')
       setCategories(resCategories.data)
     })()
-  })
+  }, [])
 
   const deleteCategory = async (id) => {
     await axios.delete('/api/categoriasCRUD/categorias', { data: { id } })
@@ -37,7 +37,7 @@ export default function Categorias () {
     queryAttr('input', 'name', 'nombreCategoria').value = item.nombre
   }
 
-  const insertCategory = async (id, nombre) => {
+  const insertCategory = async (nombre) => {
     const resCategories = await axios.post('/api/categoriasCRUD/categorias', { nombre })
     setCategories(resCategories.data)
     clearInputs()

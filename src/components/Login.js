@@ -19,7 +19,7 @@ export default function Login () {
     // console.log(credentials)
     let idtoast
     try {
-      idtoast = toast.loading('validando credenciales')
+      idtoast = toast.loading('Comprobando Informacion')
       const res = await axios.post('/api/auth/login', credentials)
       // console.log(res.data)
 

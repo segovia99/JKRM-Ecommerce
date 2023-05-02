@@ -2,10 +2,6 @@ import Layout from '@/components/admin/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-for (let i = 0; i < 10; i++) {
-  console.log(i)
-}
-
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
@@ -26,13 +22,13 @@ export default function Productos ({ categorias, productos }) {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
 
+  const loadData = async () => {
+    const resProducts = await axios.get('/api/productosCRUD/productos', { params: { first: '1' } })
+    setProducts(resProducts.data)
+  }
   useEffect(() => {
-    (async () => {
-      const resCategories = await axios.get('/api/categoriasCRUD/categorias')
-      const resProducts = await axios.get('/api/productosCRUD/productos', { params: { first: 1 } })
-      setCategories(resCategories.data)
-      setProducts(resProducts.data)
-    })()
+    fetch('/api/categoriasCRUD/categorias').then(res => res.json()).then(data => { setCategories(data) })
+    loadData()
   }, [])
 
   const modifyProduct = (id, nombre, descripcion, precio, cantidad, url, marca) => {
@@ -59,8 +55,8 @@ export default function Productos ({ categorias, productos }) {
 
   const updateProduct = async (idCategoria, id, nombre, descripcion, precio, cantidad, url, marca) => {
     const temp = { idCategoria, id, nombre, descripcion, precio, cantidad, url, marca }
-    const resProducts = await axios.put('/api/productosCRUD/productos', temp)
-    setProducts(resProducts.data)
+    await axios.put('/api/productosCRUD/productos', temp)
+    setProducts(...products, temp)
     clearInputs()
   }
 
@@ -168,15 +164,19 @@ export default function Productos ({ categorias, productos }) {
         <div className='w-[100%] h-[40%] bg-white border-b border-gray-200 flex flex-col justify-center space-y-[16px]'>
           <div className='flex flex-row'>
             <button
-              onClick={() => insertProduct(
-                queryAttr('select', 'id', 'sel').value,
-                queryAttr('input', 'name', 'nombreProducto').value,
-                queryAttr('input', 'name', 'descripcionProducto').value,
-                queryAttr('input', 'name', 'precioProducto').value,
-                queryAttr('input', 'name', 'cantidadProducto').value,
-                queryAttr('input', 'name', 'imgProducto').value,
-                queryAttr('input', 'name', 'marcaProducto').value
-              )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
+              onClick={() => {
+                insertProduct(
+                  queryAttr('select', 'id', 'sel').value,
+                  queryAttr('input', 'name', 'nombreProducto').value,
+                  queryAttr('input', 'name', 'descripcionProducto').value,
+                  queryAttr('input', 'name', 'precioProducto').value,
+                  queryAttr('input', 'name', 'cantidadProducto').value,
+                  queryAttr('input', 'name', 'imgProducto').value,
+                  queryAttr('input', 'name', 'marcaProducto').value
+
+                )
+                console.log('hola mundo')
+              }} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
             >insertar
             </button>
             <button
@@ -201,7 +201,9 @@ export default function Productos ({ categorias, productos }) {
               >
                 {
                   categories.map(item => (<option key={item.id} value={item.id}>{item.nombre}</option>))
+
                 }
+
               </select>
             </div>
           </div>

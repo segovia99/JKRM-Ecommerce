@@ -1,18 +1,20 @@
 
 import '@/styles/globals.css'
-import '../../public/modal.js'
 import '../../node_modules/react-toastify/dist/ReactToastify.css'
 import { CookiesProvider } from 'react-cookie'
 import { ToastContainer } from 'react-toastify'
+import { CartProvider } from '@/context/cart.js'
 
 export default function App ({ Component, pageProps }) {
   return (
 
     <>
-      <CookiesProvider>
-        <Component {...pageProps} />
-        <ToastContainer />
-      </CookiesProvider>
+      <CartProvider>
+        <CookiesProvider>
+          <Component {...pageProps} />
+          <ToastContainer />
+        </CookiesProvider>
+      </CartProvider>
     </>
 
   )

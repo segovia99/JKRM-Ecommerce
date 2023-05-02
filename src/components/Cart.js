@@ -4,7 +4,7 @@ import CartProductItem from './CartProductItem'
 import { useCart } from '@/hooks/useCart'
 
 function Cart () {
-  const { cart } = useCart()
+  const { cart, removeFromCart } = useCart()
 
   return (
 
@@ -15,7 +15,7 @@ function Cart () {
             {
               cart.map(product => (
                 <li className='w-full h-full flex' key={product.id}>
-                  <CartProductItem img={product.img} title={product.title} price={product.price} id={product.id} />
+                  <CartProductItem img={product.img} title={product.title} price={product.price} id={product.id} removeFromCart={() => removeFromCart(product)} />
                 </li>
               ))
             }

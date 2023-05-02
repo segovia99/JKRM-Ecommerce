@@ -4,6 +4,7 @@ import ProductCardOne from './ProductCardOne'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useCart } from '@/hooks/useCart'
+import { toast } from 'react-toastify'
 
 function ToolsSection () {
   const { addToCart } = useCart()
@@ -44,7 +45,12 @@ function ToolsSection () {
                   const { description, price, img, title, id } = product
                   return (
                     <ProductCardOne
-                      key={id} title={title} description={description} price={price} img={img} id={id} addToCart={() => addToCart(product)}
+                      key={id} title={title} description={description} price={price} img={img} id={id} addToCart={
+                        () => {
+                          addToCart(product)
+                          toast.success('se agrego al carrito', { autoClose: 1000 })
+                        }
+                      }
                       {...product}
                     />
                   )
