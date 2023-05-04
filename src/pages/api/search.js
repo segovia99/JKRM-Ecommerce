@@ -1,5 +1,4 @@
 import { pool } from '@/db/db'
-import db from 'db.json'
 
 export default async function handler (req, res) {
   const { id, q } = req.query
@@ -12,10 +11,7 @@ export default async function handler (req, res) {
 
   // we have a keyword to search for
   if (q) {
-    const results = db.filter((product) => {
-      const { title } = product
-      return title.toLowerCase().includes(q.toLowerCase())
-    })
+    const [results] = await pool.query(`SELECT * FROM productos WHERE nombre LIKE '%${q}%'`)
     return res.status(200).json(results)
   }
 

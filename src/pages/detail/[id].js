@@ -3,27 +3,26 @@ import { useRouter } from 'next/router'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import AOS from 'aos'
 import '../../../node_modules/aos/dist/aos.css'
-import axios from 'axios'
+import { useCart } from '@/hooks/useCart'
+import { toast } from 'react-toastify'
 
 export default function Detail () {
+  const { addToCart } = useCart()
   const [product, setProduct] = useState(null)
   const router = useRouter()
   const { id } = router.query
-  const loadData = async () => {
-    const { data } = await axios.get(`/api/search?id=${id}`)
-    setProduct(data)
-    console.log(data)
-  }
+
   useEffect(() => {
     AOS.init()
     if (!id) return
-    loadData()
+    fetch(`/api/search?id=${id}`)
+      .then((res) => res.json())
+      .then(setProduct)
   }, [id])
 
   if (!product) return
 
-  const { precio, descripcion, url, nombre } = product
-
+  console.log(product[0])
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -35,23 +34,23 @@ export default function Detail () {
                   <div className='lg:w-1/2 xl:mr-[70px] lg:mr-[50px] aos-init aos-animate'>
                     <div className='w-full'>
                       <div className='w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3'>
-                        <img src={`${url}`} />
+                        <img src={`${product[0].url}`} />
                       </div>
                       <div className='flex gap-2 flex-wrap'>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${url}`} className='w-full h-full object-contain  ' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  ' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${url}`} className='w-full h-full object-contain opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain opacity-50' />
                         </div>
                       </div>
                     </div>
@@ -59,9 +58,9 @@ export default function Detail () {
                   <div className='flex-1'>
                     <div className='product-details w-full mt-10 lg:mt-0'>
                       <span data-aos='fade-up' className='text-gray-400 text-xs font-normal uppercase tracking-wider mb-2 inline-block aos-init aos-animate'>Nombre categoria</span>
-                      <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{nombre}</p>
-                      <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'><span className='text-2xl font-500 text-red-600'>${precio}</span></div>
-                      <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{descripcion}</p>
+                      <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{product[0].nombre}</p>
+                      <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'><span className='text-2xl font-500 text-red-600'>${product[0].precio}</span></div>
+                      <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{product[0].descripcion}</p>
                       <div data-aos='fade-up' className='quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px] aos-init aos-animate'>
                         <div className='w-[120px] h-full px-[26px] flex items-center border border-qgray-border'>
                           <div className='flex justify-between items-center w-full'>
@@ -75,7 +74,15 @@ export default function Detail () {
                           </button>
                         </div>
                         <div className='flex-1 h-full'>
-                          <button type='button' className='black-btn text-sm font-semibold w-full h-full'>Agregar al Carrito</button>
+                          <button
+                            type='button' className='black-btn text-sm font-semibold w-full h-full' onClick={
+                            () => {
+                              addToCart(product[0])
+                              toast.success('se agrego al carrito', { autoClose: 1000 })
+                            }
+                          }
+                          >Agregar al Carrito
+                          </button>
                         </div>
                       </div>
                     </div>

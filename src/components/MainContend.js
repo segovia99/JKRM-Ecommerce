@@ -1,5 +1,4 @@
 import AOS from 'aos'
-import '../../node_modules/aos/dist/aos.css'
 import { useEffect } from 'react'
 import MainBanners from './MainBanners'
 import ToolsSection from './ToolsSection'

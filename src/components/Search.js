@@ -4,14 +4,14 @@ import Link from 'next/link'
 
 import { SearchIcon } from './Icons'
 
-const AutocompleteItem = ({ id, title, img, price }) => {
+const AutocompleteItem = ({ id, nombre, url, precio }) => {
   return (
     <li>
       <Link href={`/detail/${id}`} className='hover:bg-blue-300 flex gap-4 p-4'>
-        <img src={img} alt={title} className='w-12 h-12 object-contain' />
+        <img src={url} alt={nombre} className='w-12 h-12 object-contain' />
         <div>
-          <h3 className='text-sm font-semibold'>{title}</h3>
-          <p className='text-xs text-gray-600'>{price}</p>
+          <h3 className='text-sm font-semibold'>{nombre}</h3>
+          <p className='text-xs text-gray-600'>${precio}</p>
         </div>
       </Link>
     </li>
@@ -62,7 +62,6 @@ function Search (props) {
           <div className='absolute mt-16 top-0 left-0 border border-gray-100 bg-white overflow-hidden rounded-lg shadow-lg z-50' ref={panelRef} {...autocomplete.getPanelProps()}>
             {autocompleteState.collections.map((collection, index) => {
               const { items } = collection
-              console.log({ items })
               return (
                 <section key={`section-${index}`}>
                   {items.length > 0 && (
