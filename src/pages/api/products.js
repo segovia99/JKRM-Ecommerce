@@ -1,8 +1,9 @@
-import db from 'db.json'
+import { pool } from '@/db/db'
 
-export default function handler (req, res) {
+export default async function handler (req, res) {
   if (req.method === 'GET') {
-    res.status(200).json(db)
+    const [result] = await pool.query('SELECT * FROM productos')
+    res.status(200).json(result)
   }
 
   if (req.method === 'POST') {

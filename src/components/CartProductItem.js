@@ -13,7 +13,7 @@ function CartProductItem ({ img, title, price, id, removeFromCart }) {
             <p className='title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600'>{title}</p>
           </Link>
           <p className='price'>
-            <span className='offer-price text-qred font-600 text-[15px] ml-2'>{price}</span>
+            <span className='offer-price text-qred font-600 text-[15px] ml-2'>${price}</span>
           </p>
         </div>
       </div>

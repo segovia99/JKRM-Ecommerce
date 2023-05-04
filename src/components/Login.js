@@ -12,7 +12,6 @@ export default function Login () {
 
   const router = useRouter()
   const { setIsLogin } = useIsLogin()
-  const isLogin = useIsLogin(state => state.isLogin)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,11 +29,11 @@ export default function Login () {
       }
       if (res.status === 200 && res.data.rol === 2) {
         const { name } = res.data
-        console.log(isLogin)
         setIsLogin()
-        console.log(isLogin)
         localStorage.setItem('isLogin', JSON.stringify(true))
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
+        router.push('/')
+        console.log('hola')
       }
     } catch (error) {
       toast.update(idtoast, { render: 'Email o contraseña incorrectos', autoClose: 2000, type: 'error', isLoading: false })
@@ -58,7 +57,7 @@ export default function Login () {
                 <div>
                   <label htmlFor='email' className='block mb-2 text-sm font-medium text-gray-900 '>Correo electrónico</label>
                   <input
-                    type='email' name='email' id='email' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' placeholder='name@company.com' required
+                    type='email' name='email' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' placeholder='name@company.com' required
                     onChange={(e) =>
                       setCredentials({
                         ...credentials,
@@ -69,7 +68,7 @@ export default function Login () {
                 <div>
                   <label htmlFor='password' className='block mb-2 text-sm font-medium text-gray-900'>Contraseña</label>
                   <input
-                    type='password' name='password' id='password' placeholder='••••••••' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark1:bg-gray-600 dark1:border-gray-500 dark1:placeholder-gray-400 dark1:text-white' required
+                    type='password' name='password' placeholder='••••••••' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark1:bg-gray-600 dark1:border-gray-500 dark1:placeholder-gray-400 dark1:text-white' required
                     onChange={(e) =>
                       setCredentials({
                         ...credentials,

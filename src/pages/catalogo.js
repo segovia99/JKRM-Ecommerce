@@ -30,10 +30,10 @@ export default function Catalogo () {
                 <div className='grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]'>
                   {
                 products.map((product) => {
-                  const { description, price, img, title, id } = product
+                  const { descripcion, precio, url, nombre, id } = product
                   return (
                     <ProductCardOne
-                      key={id} title={title} description={description} price={price} img={img} id={id} addToCart={
+                      key={id} title={nombre} description={descripcion} price={precio} img={url} id={id} addToCart={
                         () => {
                           addToCart(product)
                           toast.success('se agrego al carrito', { autoClose: 1000 })

@@ -1,12 +1,13 @@
+import { pool } from '@/db/db'
 import db from 'db.json'
 
-export default function handler (req, res) {
+export default async function handler (req, res) {
   const { id, q } = req.query
 
   // we have an id available
   if (id) {
-    const item = db.find((item) => item.id === +id)
-    return res.status(200).json(item)
+    const [result] = await pool.query(`SELECT * FROM productos WHERE id = ${id}`)
+    return res.status(200).json(result)
   }
 
   // we have a keyword to search for

@@ -3,23 +3,26 @@ import { useRouter } from 'next/router'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import AOS from 'aos'
 import '../../../node_modules/aos/dist/aos.css'
+import axios from 'axios'
 
 export default function Detail () {
   const [product, setProduct] = useState(null)
   const router = useRouter()
   const { id } = router.query
-
+  const loadData = async () => {
+    const { data } = await axios.get(`/api/search?id=${id}`)
+    setProduct(data)
+    console.log(data)
+  }
   useEffect(() => {
     AOS.init()
     if (!id) return
-    fetch(`/api/search?id=${id}`)
-      .then((res) => res.json())
-      .then(setProduct)
+    loadData()
   }, [id])
 
   if (!product) return
 
-  const { description, price, img, title } = product
+  const { precio, descripcion, url, nombre } = product
 
   return (
     <LandingLayout>
@@ -32,23 +35,23 @@ export default function Detail () {
                   <div className='lg:w-1/2 xl:mr-[70px] lg:mr-[50px] aos-init aos-animate'>
                     <div className='w-full'>
                       <div className='w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3'>
-                        <img src={`${img}`} />
+                        <img src={`${url}`} />
                       </div>
                       <div className='flex gap-2 flex-wrap'>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${img}`} className='w-full h-full object-contain  ' />
+                          <img src={`${url}`} className='w-full h-full object-contain  ' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${img}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${img}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${img}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${url}`} className='w-full h-full object-contain  opacity-50' />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${img}`} className='w-full h-full object-contain opacity-50' />
+                          <img src={`${url}`} className='w-full h-full object-contain opacity-50' />
                         </div>
                       </div>
                     </div>
@@ -56,9 +59,9 @@ export default function Detail () {
                   <div className='flex-1'>
                     <div className='product-details w-full mt-10 lg:mt-0'>
                       <span data-aos='fade-up' className='text-gray-400 text-xs font-normal uppercase tracking-wider mb-2 inline-block aos-init aos-animate'>Nombre categoria</span>
-                      <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{title}</p>
-                      <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'><span className='text-2xl font-500 text-red-600'>{price}</span></div>
-                      <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{description}</p>
+                      <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{nombre}</p>
+                      <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'><span className='text-2xl font-500 text-red-600'>${precio}</span></div>
+                      <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{descripcion}</p>
                       <div data-aos='fade-up' className='quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px] aos-init aos-animate'>
                         <div className='w-[120px] h-full px-[26px] flex items-center border border-qgray-border'>
                           <div className='flex justify-between items-center w-full'>

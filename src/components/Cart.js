@@ -15,7 +15,7 @@ function Cart () {
             {
               cart.map(product => (
                 <li className='w-full h-full flex' key={product.id}>
-                  <CartProductItem img={product.img} title={product.title} price={product.price} id={product.id} removeFromCart={() => removeFromCart(product)} />
+                  <CartProductItem img={product.url} title={product.nombre} price={product.precio} id={product.id} removeFromCart={() => removeFromCart(product)} />
                 </li>
               ))
             }
