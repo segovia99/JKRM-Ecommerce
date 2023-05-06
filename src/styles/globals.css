@@ -93,6 +93,10 @@ html {
     --tw-text-opacity: 1;
     color: rgb(34 34 34/var(--tw-text-opacity));
   } 
+  
+  .font-medium {
+    font-weight: 600;
+  }
 
   .text-qred {
     --tw-text-opacity: 1;

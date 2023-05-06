@@ -6,6 +6,8 @@ import { useCart } from '@/hooks/useCart'
 function Cart () {
   const { cart, removeFromCart } = useCart()
 
+  let total = 0
+
   return (
 
     <div className='w-[300px] bg-white border-t-[3px] cart-wrappwer  absolute -right-[115px] top-11 z-50 hidden group-hover:block' style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 15px 50px 0px' }}>
@@ -13,11 +15,14 @@ function Cart () {
         <div className='product-items h-[310px] overflow-y-scroll scrollable scrollbar-thin'>
           <ul>
             {
-              cart.map(product => (
-                <li className='w-full h-full flex' key={product.id}>
-                  <CartProductItem img={product.url} title={product.nombre} price={product.precio} id={product.id} removeFromCart={() => removeFromCart(product)} />
-                </li>
-              ))
+              cart.map(product => {
+                total += product.subtotal
+                return (
+                  <li className='w-full h-full flex' key={product.id}>
+                    <CartProductItem img={product.url} title={product.nombre} price={product.precio} id={product.id} removeFromCart={() => removeFromCart(product)} />
+                  </li>
+                )
+              })
             }
           </ul>
         </div>
@@ -26,11 +31,11 @@ function Cart () {
         </div>
         <div className='product-actions px-4 mb-[30px]'>
           <div className='total-equation flex justify-between items-center mb-[28px]'>
-            <span className='text-[15px] font-semibold text-qblack'>Subtotal</span>
-            <span className='text-[15px] font-500 text-qred '>$0</span>
+            <span className='text-[15px] font-semibold text-qblack'>Total</span>
+            <span className='text-[15px] font-500 text-qred '>${total}</span>
           </div>
           <div className='product-action-btn'>
-            <Link href='/'>
+            <Link href='/cart'>
               <div className='gray-btn w-full h-[50px] mb-[10px] '>
                 <span>Ver Carrito</span>
               </div>
