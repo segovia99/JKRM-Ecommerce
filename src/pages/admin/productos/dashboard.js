@@ -10,10 +10,9 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from "react-chartjs-2"
-import { Pie } from 'react-chartjs-2'
+  Legend
+} from 'chart.js'
+import { Bar, Pie } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +22,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
-);
+)
 
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
@@ -52,101 +51,101 @@ export default function Categorias () {
     '#f79cce',
     '#f79c9c'
   ]
-  
-  const [ values, setValues ] = useState({
-    labels:[0],
-    datasets:[{
-      label:['void'],
-      data:[0],
-      backgroundColor:colors
+
+  const [values, setValues] = useState({
+    labels: [0],
+    datasets: [{
+      label: ['void'],
+      data: [0],
+      backgroundColor: colors
     }]
   })
-  const [ filterSelection, setFilterSelection ] = useState('categorias')
-  const [ review, setReview ] = useState({})
-  const [ comments, setComments ] = useState([]);
+  const [filterSelection, setFilterSelection] = useState('categorias')
+  const [review, setReview] = useState({})
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     (async () => {
       const res = await axios.get('/api/dashboardQuerys/valoraciones')
       setComments(res.data)
-    })();
+    })()
   })
-  
+
   const query = async () => {
     const initialDate = queryAttr('input', 'id', 'initialDateInput').value
     const finalDate = queryAttr('input', 'id', 'finalDateInput').value
     const filter = queryAttr('select', 'id', 'filter').value
     const elements = queryAttr('select', 'id', 'elements').value
-    setFilterSelection(filter);
-    
-		if (filter == 'categorias') {
-			const res = await axios.get('/api/dashboardQuerys/categorias', {
-				params: {
-					initialDate,
-					finalDate,
-					filter,
-					elements
-				}
-			});
+    setFilterSelection(filter)
 
-			const resReview = await axios.get('/api/dashboardQuerys/categoriasReview', {
-				params: {
-					initialDate,
-					finalDate,
-					filter,
-					elements
-				}
-			});
-
-      setValues({
-        labels:res.data.map(item => item.nombre),
-        datasets:[{
-          label:filter,
-          data:res.data.map(item => item.conteo),
-          backgroundColor: colors,
-        }]
-      })
-      console.log(resReview.data[0]);
-
-			if (resReview.data[0]) {
-				setReview(resReview.data[0])
-			} else {
-				setReview({ nombre: 'empty', conteo: 0, valoracion: 0.00 })
-			}
-		} else if (filter == 'productos') {
-			const res = await axios.get('/api/dashboardQuerys/productos', {
-				params: {
-					initialDate,
-					finalDate,
-					filter,
-					elements
-				}
-			});
-
-      setValues({
-        labels:res.data.map(item => item.nombre),
-        datasets:[{
-          label:filter,
-          data:res.data.map(item => item.conteo),
-          backgroundColor: colors,
-        }]
+    if (filter == 'categorias') {
+      const res = await axios.get('/api/dashboardQuerys/categorias', {
+        params: {
+          initialDate,
+          finalDate,
+          filter,
+          elements
+        }
       })
 
-			const resReview = await axios.get('/api/dashboardQuerys/productosReview', {
-				params: {
-					initialDate,
-					finalDate,
-					filter,
-					elements
-				}
-			});
+      const resReview = await axios.get('/api/dashboardQuerys/categoriasReview', {
+        params: {
+          initialDate,
+          finalDate,
+          filter,
+          elements
+        }
+      })
+
+      setValues({
+        labels: res.data.map(item => item.nombre),
+        datasets: [{
+          label: filter,
+          data: res.data.map(item => item.conteo),
+          backgroundColor: colors
+        }]
+      })
+      console.log(resReview.data[0])
 
       if (resReview.data[0]) {
-				setReview(resReview.data[0])
-			} else {
-				setReview({ nombre: 'empty', conteo: 0, valoracion: 0.00 })
-			}
-		}
+        setReview(resReview.data[0])
+      } else {
+        setReview({ nombre: 'empty', conteo: 0, valoracion: 0.00 })
+      }
+    } else if (filter == 'productos') {
+      const res = await axios.get('/api/dashboardQuerys/productos', {
+        params: {
+          initialDate,
+          finalDate,
+          filter,
+          elements
+        }
+      })
+
+      setValues({
+        labels: res.data.map(item => item.nombre),
+        datasets: [{
+          label: filter,
+          data: res.data.map(item => item.conteo),
+          backgroundColor: colors
+        }]
+      })
+
+      const resReview = await axios.get('/api/dashboardQuerys/productosReview', {
+        params: {
+          initialDate,
+          finalDate,
+          filter,
+          elements
+        }
+      })
+
+      if (resReview.data[0]) {
+        setReview(resReview.data[0])
+      } else {
+        setReview({ nombre: 'empty', conteo: 0, valoracion: 0.00 })
+      }
+    }
   }
 
   return (

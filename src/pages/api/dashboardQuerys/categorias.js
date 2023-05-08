@@ -1,7 +1,7 @@
 import connection from '@/services/connection/connection'
 
 export default async function handler (req, res) {
-	const conn = await connection()
+  const conn = await connection()
 
   try {
     if (req.method == 'GET') {
