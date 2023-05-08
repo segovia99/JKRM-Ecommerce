@@ -1,9 +1,11 @@
 import CartList from '@/components/CartList'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import { useCart } from '@/hooks/useCart'
+import Link from 'next/link'
 
 export default function Cart () {
-  const { cart, removeFromCart } = useCart()
+  const { cart, removeFromCart, calculateTotal } = useCart()
+
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -22,6 +24,21 @@ export default function Cart () {
               <div className='w-full mb-[30px]'>
                 <div className='relative w-full overflow-x-auto border border-[#EDEDED]'>
                   <CartList products={cart} removeFromCart={removeFromCart} />
+                </div>
+              </div>
+              <div className='w-full mt-[30px] flex sm:justify-end'>
+                <div className='sm:w-[370px] w-full border border-[#EDEDED] px-[30px] py-[26px]'>
+                  <div className='total mb-6'>
+                    <div className=' flex justify-between'>
+                      <p className='text-[18px] font-medium text-qblack'>Total</p>
+                      <p className='text-[18px] font-medium text-qred'>${calculateTotal()}</p>
+                    </div>
+                  </div>
+                  <Link href=''>
+                    <div className='w-full h-[50px] black-btn flex justify-center items-center'>
+                      <span className='text-sm font-semibold'>Proceder a pagar</span>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>

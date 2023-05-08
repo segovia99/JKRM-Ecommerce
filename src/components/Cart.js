@@ -4,9 +4,7 @@ import CartProductItem from './CartProductItem'
 import { useCart } from '@/hooks/useCart'
 
 function Cart () {
-  const { cart, removeFromCart } = useCart()
-
-  let total = 0
+  const { cart, removeFromCart, calculateTotal } = useCart()
 
   return (
 
@@ -16,7 +14,6 @@ function Cart () {
           <ul>
             {
               cart.map(product => {
-                total += product.subtotal
                 return (
                   <li className='w-full h-full flex' key={product.id}>
                     <CartProductItem img={product.url} title={product.nombre} price={product.precio} id={product.id} removeFromCart={() => removeFromCart(product)} />
@@ -32,7 +29,7 @@ function Cart () {
         <div className='product-actions px-4 mb-[30px]'>
           <div className='total-equation flex justify-between items-center mb-[28px]'>
             <span className='text-[15px] font-semibold text-qblack'>Total</span>
-            <span className='text-[15px] font-500 text-qred '>${total}</span>
+            <span className='text-[15px] font-500 text-qred '>${calculateTotal()}</span>
           </div>
           <div className='product-action-btn'>
             <Link href='/cart'>
