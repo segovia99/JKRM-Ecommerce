@@ -115,7 +115,7 @@ export default function Productos () {
                         <td>{item.descripcion}</td>
                         <td>{item.precio}</td>
                         <td>{item.cantidad}</td>
-                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]' rel="noreferrer">imagen URL</a></td>
+                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]' rel='noreferrer'>imagen URL</a></td>
                         <td>{item.marca}</td>
                         <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
                         <td>
@@ -136,7 +136,7 @@ export default function Productos () {
                         <td>{item.descripcion}</td>
                         <td>{item.precio}</td>
                         <td>{item.cantidad}</td>
-                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]' rel="noreferrer">imagen URL</a></td>
+                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]' rel='noreferrer'>imagen URL</a></td>
                         <td>{item.marca}</td>
                         <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
                         <td>
