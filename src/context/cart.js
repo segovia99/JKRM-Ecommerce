@@ -42,6 +42,13 @@ export function CartProvider ({ children }) {
   useEffect(() => {
     initialstate()
   }, [])
+
+  const calculateTotal = () => {
+    return state.reduce((total, product) => {
+      return total + product.subtotal
+    }, 0)
+  }
+
   return (
     <CartContext.Provider value={{
       cart: state,
@@ -49,7 +56,8 @@ export function CartProvider ({ children }) {
       removeFromCart,
       clearCart,
       incrementQuantity,
-      decrementQuantity
+      decrementQuantity,
+      calculateTotal
     }}
     >
       {children}
