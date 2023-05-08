@@ -143,9 +143,9 @@ export default function Categorias () {
       <div className='w-[100%] h-[85vh] mt-[56px]'>
         <div className='w-[100%] h-[10%] my-[10px] border-b border-gray-200 bg-white'>
           <label className='px-2'>Perdiodo inicial</label>
-          <input id='initialDateInput' type='date'/>
+          <input id='initialDateInput' type='date' />
           <label className='px-2'>Perdiodo inicial</label>
-          <input id='finalDateInput' type='date'/>
+          <input id='finalDateInput' type='date' />
           <label className='px-2'>Filtro</label>
           <select id='filter'>
             <option value='categorias'>categorias</option>
@@ -168,7 +168,7 @@ export default function Categorias () {
         </div>
         <div className='w-[100%] h-[60%] my-[10px] border-b border-gray-200 bg-white flex flex-row justify-center'>
           <div className='h-[100%] w-[60%] bg-white'>
-            <Bar data={values} redraw/>
+            <Bar data={values} redraw />
           </div>
           <div className='h-[90%] w-[40%] bg-white flex flex-row justify-center'>
             <Pie data={values} />
@@ -178,15 +178,15 @@ export default function Categorias () {
           <div id='categorias' className='flex flex-row space-x-[10px] wrap'>
             <div className='ml-[16px]'>
               <label>{filterSelection} mejor vendido/a: </label>
-              <input defaultValue='empty' value={review.nombre}/>
+              <input defaultValue='empty' value={review.nombre} />
             </div>
             <div>
               <label>{filterSelection} total vendido/a: </label>
-              <input defaultValue={0} value={review.conteo}/>
+              <input defaultValue={0} value={review.conteo} />
             </div>
             <div>
               <label>{filterSelection} media valorado/a: </label>
-              <input defaultValue={0.00} value={review.valoracion}/>
+              <input defaultValue={0.00} value={review.valoracion} />
             </div>
           </div>
         </div>
