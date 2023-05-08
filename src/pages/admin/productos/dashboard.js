@@ -28,16 +28,6 @@ function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
 
-function clearInputs () {
-  queryAttr('input', 'name', 'idProducto').value = ''
-  queryAttr('input', 'name', 'nombreProducto').value = ''
-  queryAttr('input', 'name', 'descripcionProducto').value = ''
-  queryAttr('input', 'name', 'precioProducto').value = ''
-  queryAttr('input', 'name', 'cantidadProducto').value = ''
-  queryAttr('input', 'name', 'imgProducto').value = ''
-  queryAttr('input', 'name', 'marcaProducto').value = ''
-}
-
 export default function Categorias () {
   const colors = [
     '#9cf7b4',
@@ -78,7 +68,7 @@ export default function Categorias () {
     const elements = queryAttr('select', 'id', 'elements').value
     setFilterSelection(filter)
 
-    if (filter == 'categorias') {
+    if (filter === 'categorias') {
       const res = await axios.get('/api/dashboardQuerys/categorias', {
         params: {
           initialDate,
@@ -112,7 +102,7 @@ export default function Categorias () {
       } else {
         setReview({ nombre: 'empty', conteo: 0, valoracion: 0.00 })
       }
-    } else if (filter == 'productos') {
+    } else if (filter === 'productos') {
       const res = await axios.get('/api/dashboardQuerys/productos', {
         params: {
           initialDate,
@@ -213,7 +203,7 @@ export default function Categorias () {
           </thead>
           <tbody>
             {comments.map(item => (
-              <tr className='text-center mt-[50px] bg-white border-b-gray'>
+              <tr key={item.id} className='text-center mt-[50px] bg-white border-b-gray'>
                 <td className='mt-[4px]'>{item.cliente}</td>
                 <td className='mt-[4px]'>{item.producto}</td>
                 <td className='mt-[40px]'>{item.valoracion}</td>
