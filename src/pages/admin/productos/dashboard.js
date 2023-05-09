@@ -59,7 +59,7 @@ export default function Categorias () {
       const res = await axios.get('/api/dashboardQuerys/valoraciones')
       setComments(res.data)
     })()
-  })
+  }, [])
 
   const query = async () => {
     const initialDate = queryAttr('input', 'id', 'initialDateInput').value
@@ -204,7 +204,7 @@ export default function Categorias () {
           <tbody>
             {comments.map(item => (
               <tr key={item.id} className='text-center mt-[50px] bg-white border-b-gray'>
-                <td className='mt-[4px]'>{item.cliente}</td>
+                <td className='mt-[4px]'>{item.nombre}</td>
                 <td className='mt-[4px]'>{item.producto}</td>
                 <td className='mt-[40px]'>{item.valoracion}</td>
                 <td className='mt-[4px]'>{item.comentario}</td>

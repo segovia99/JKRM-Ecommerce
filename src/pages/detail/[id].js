@@ -27,7 +27,6 @@ export default function Detail () {
 
   if (!product) return
 
-  console.log(product[0])
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -39,23 +38,23 @@ export default function Detail () {
                   <div className='lg:w-1/2 xl:mr-[70px] lg:mr-[50px] aos-init aos-animate'>
                     <div className='w-full'>
                       <div className='w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3'>
-                        <img src={`${product[0].url}`} />
+                        <img src={`${product[0].url}`} alt={product[0].nombre} />
                       </div>
                       <div className='flex gap-2 flex-wrap'>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${product[0].url}`} className='w-full h-full object-contain  ' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  ' alt={product[0].nombre} />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' alt={product[0].nombre} />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' alt={product[0].nombre} />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain  opacity-50' alt={product[0].nombre} />
                         </div>
                         <div className='w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer'>
-                          <img src={`${product[0].url}`} className='w-full h-full object-contain opacity-50' />
+                          <img src={`${product[0].url}`} className='w-full h-full object-contain opacity-50' alt={product[0].nombre} />
                         </div>
                       </div>
                     </div>
@@ -112,7 +111,7 @@ export default function Detail () {
                           }
                         </div>
                       </div>
-                      <ReviewForm productId={id} />
+                      <ReviewForm productId={id} reviews={reviews} setReviews={setReviews} />
                     </div>
                   </div>
                 </div>

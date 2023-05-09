@@ -9,8 +9,8 @@ export default async function handler (req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { productId, nombre, comentario, rating } = req.body
-      await pool.query('INSERT INTO review (id_producto, nombre, feedback, valoracion) VALUES (?, ?, ?, ?)', [productId, nombre, comentario, rating])
+      const { productId, nombre, feedback, valoracion } = req.body
+      await pool.query('INSERT INTO review (id_producto, nombre, feedback, valoracion) VALUES (?, ?, ?, ?)', [productId, nombre, feedback, valoracion])
       res.status(200)
     } catch (error) {
       res.status(500).json({ message: error.message })

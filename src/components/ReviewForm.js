@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 
-export default function ReviewForm ({ productId }) {
+export default function ReviewForm ({ productId, reviews, setReviews }) {
   const [rating, setRating] = useState(0)
   const nombre = useRef()
   const comentario = useRef()
@@ -13,13 +13,14 @@ export default function ReviewForm ({ productId }) {
     const data = {
       productId,
       nombre: nombre.current.value,
-      comentario: comentario.current.value,
-      rating
+      feedback: comentario.current.value,
+      valoracion: rating
     }
     console.log(data)
     if (nombre.current.value === '' || comentario.current.value === '') {
       toast.error('Por favor llene todos los campos')
     } else {
+      setReviews([...reviews, data])
       axios.post('/api/review', data)
       setRating(0)
       nombre.current.value = ''
