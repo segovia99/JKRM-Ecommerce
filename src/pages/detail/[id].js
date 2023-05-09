@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import AOS from 'aos'
-import '../../../node_modules/aos/dist/aos.css'
 import { useCart } from '@/hooks/useCart'
 import { toast } from 'react-toastify'
+import ReviewCard from '@/components/ReviewCard'
+import ReviewForm from '@/components/ReviewForm'
 
 export default function Detail () {
   const { addToCart } = useCart()
   const [product, setProduct] = useState(null)
+  const [reviews, setReviews] = useState([])
   const router = useRouter()
   const { id } = router.query
 
@@ -18,6 +20,9 @@ export default function Detail () {
     fetch(`/api/search?id=${id}`)
       .then((res) => res.json())
       .then(setProduct)
+    fetch(`/api/review?id=${id}`)
+      .then((res) => res.json())
+      .then(setReviews)
   }, [id])
 
   if (!product) return
@@ -85,6 +90,29 @@ export default function Detail () {
                           </button>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='product-des-wrapper w-full relative pb-[60px] mt-4'>
+            <div className=' w-full min-h-[400px] '>
+              <div className='container-x mx-auto'>
+                <div className='w-full tab-content-item aos-init aos-animate'>
+                  <h6 className='text-[18px] font-medium text-qblack mb-2'>Reseñas</h6>
+                  <div className='w-full'>
+                    <div className='review-wrapper w-full'>
+                      <div className='w-full reviews mb-[60px]'>
+                        <div className='w-full comments mb-[60px]'>
+                          {
+                            reviews.map((review) => (
+                              <ReviewCard key={review.id} review={review} />
+                            ))
+                          }
+                        </div>
+                      </div>
+                      <ReviewForm productId={id} />
                     </div>
                   </div>
                 </div>
