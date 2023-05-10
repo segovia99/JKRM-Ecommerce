@@ -6,16 +6,6 @@ function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
 
-function clearInputs () {
-  queryAttr('input', 'name', 'idProducto').value = ''
-  queryAttr('input', 'name', 'nombreProducto').value = ''
-  queryAttr('input', 'name', 'descripcionProducto').value = ''
-  queryAttr('input', 'name', 'precioProducto').value = ''
-  queryAttr('input', 'name', 'cantidadProducto').value = ''
-  queryAttr('input', 'name', 'imgProducto').value = ''
-  queryAttr('input', 'name', 'marcaProducto').value = ''
-}
-
 export default function Categorias () {
   let idCategorias = 1
   const [categories, setCategories] = useState([])

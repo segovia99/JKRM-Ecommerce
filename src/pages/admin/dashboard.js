@@ -28,7 +28,7 @@ function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
 }
 
-export default function Categorias () {
+export default function Dashboard () {
   const colors = [
     '#9cf7b4',
     '#f7eb9c',
