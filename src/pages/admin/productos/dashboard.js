@@ -66,6 +66,7 @@ export default function Categorias () {
     const finalDate = queryAttr('input', 'id', 'finalDateInput').value
     const filter = queryAttr('select', 'id', 'filter').value
     const elements = queryAttr('select', 'id', 'elements').value
+    console.log(elements)
     setFilterSelection(filter)
 
     if (filter === 'categorias') {
