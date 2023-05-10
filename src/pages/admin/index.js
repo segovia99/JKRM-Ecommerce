@@ -55,8 +55,8 @@ export default function Productos () {
 
   const updateProduct = async (idCategoria, id, nombre, descripcion, precio, cantidad, url, marca) => {
     const temp = { idCategoria, id, nombre, descripcion, precio, cantidad, url, marca }
-    await axios.put('/api/productosCRUD/productos', temp)
-    setProducts(...products, temp)
+    const resProducts = await axios.put('/api/productosCRUD/productos', temp)
+    setProducts(resProducts.data)
     clearInputs()
   }
 
@@ -76,7 +76,7 @@ export default function Productos () {
   }
 
   return (
-    <Layout>
+    <Layout selection='productos'>
       <div id='imgPreview' className='absolute hidden w-[60%] h-[75vh] mt-[100px] bg-white shadow-md flex flex-col justify-start items-start'>
         <div className='w-[100%]'>
           <button onClick={closeProduct} className='m-[2%] float-right hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>close</button>
@@ -108,7 +108,7 @@ export default function Productos () {
                   idCategorias++
                   if (idCategorias % 2 === 0) {
                     return (
-                      <tr key={item.id} className='h-8 bg-[#f2f2f2]'>
+                      <tr key={item.id} className='bg-[#f2f2f2]'>
                         <td>{item.id}</td>
                         <td>{item.categoria}</td>
                         <td>{item.nombre}</td>
@@ -129,7 +129,7 @@ export default function Productos () {
                     )
                   } else {
                     return (
-                      <tr key={item.id} className='h-8'>
+                      <tr key={item.id} className=''>
                         <td>{item.id}</td>
                         <td>{item.categoria}</td>
                         <td>{item.nombre}</td>
@@ -173,7 +173,6 @@ export default function Productos () {
                   queryAttr('input', 'name', 'cantidadProducto').value,
                   queryAttr('input', 'name', 'imgProducto').value,
                   queryAttr('input', 'name', 'marcaProducto').value
-
                 )
                 console.log('hola mundo')
               }} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'

@@ -40,17 +40,17 @@ export default function Categorias () {
   const insertCategory = async (nombre) => {
     const resCategories = await axios.post('/api/categoriasCRUD/categorias', { nombre })
     setCategories(resCategories.data)
-    clearInputs()
+    queryAttr('input', 'name', 'nombreCategoria').value = ''
   }
 
   const updateCategory = async (id, nombre) => {
     const resCategories = await axios.put('/api/categoriasCRUD/categorias', { id, nombre })
     setCategories(resCategories.data)
-    clearInputs()
+    queryAttr('input', 'name', 'nombreCategoria').value = ''
   }
 
   return (
-    <Layout>
+    <Layout selection='categorias'>
       <div className='w-[100%] h-[85vh] mt-[56px]'>
         <div className='w-[100%] h-[68%] overflow-y-scroll my-[10px] border-b border-gray-200'>
           <table className='w-[100%] bg-white'>
@@ -95,7 +95,6 @@ export default function Categorias () {
           <div>
             <button
               onClick={() => insertCategory(
-                queryAttr('input', 'name', 'idCategoria').value,
                 queryAttr('input', 'name', 'nombreCategoria').value
               )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
             >insertar

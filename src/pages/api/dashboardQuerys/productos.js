@@ -5,7 +5,7 @@ export default async function handler (req, res) {
 
   try {
     if (req.method === 'GET') {
-      const [rows] = await conn.execute('select productos.nombre, count(review.id) as conteo from review inner join productos on review.id_producto=productos.id where (review.fecha between ? and ?) group by productos.nombre limit ?', [req.query.initialDate, req.query.finalDate, parseInt(req.query.elements)])
+      const [rows] = await conn.execute('select productos.nombre, count(review.id) as conteo from review inner join productos on review.id_producto=productos.id where (date_format(review.fecha, "%Y-%m-%d") between ? and ?) group by productos.nombre limit ?', [req.query.initialDate, req.query.finalDate, parseInt(req.query.elements)])
 
       res.status(200).json(rows)
     }
