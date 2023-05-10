@@ -17,7 +17,7 @@ export default function ReviewForm ({ productId, reviews, setReviews }) {
       valoracion: rating
     }
     console.log(data)
-    if (nombre.current.value === '' || comentario.current.value === '') {
+    if (nombre.current.value === '' || comentario.current.value === '' || rating === 0) {
       toast.error('Por favor llene todos los campos')
     } else {
       setReviews([...reviews, data])

@@ -41,7 +41,7 @@ const LandingNavbar = () => {
           </div>
         </div>
       </div>
-      <MobileHeader />
+      <MobileHeader cartCount={cart.length} />
       <NavTabs />
     </header>
   )
