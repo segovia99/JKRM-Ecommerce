@@ -1,3 +1,4 @@
+import CardSkeletoProduct from '@/components/CardSkeletoProduct'
 import FilterCatalago from '@/components/FilterCatalago'
 import ProductCardOne from '@/components/ProductCardOne'
 import LandingLayout from '@/components/layouts/LandingLayout'
@@ -9,11 +10,13 @@ import { toast } from 'react-toastify'
 
 export default function Catalogo () {
   const [products, setProducts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const { addToCart } = useCart()
   const loadData = async () => {
     const response = await axios.get('/api/products')
     // console.log(response.data)
     setProducts(response.data)
+    setIsLoading(false)
   }
   useEffect(() => {
     loadData()
@@ -28,6 +31,15 @@ export default function Catalogo () {
               <FilterCatalago />
               <div className='flex-1'>
                 <div className='grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]'>
+                  {isLoading &&
+                    <>
+                      <CardSkeletoProduct />
+                      <CardSkeletoProduct />
+                      <CardSkeletoProduct />
+                      <CardSkeletoProduct />
+                      <CardSkeletoProduct />
+                      <CardSkeletoProduct />
+                    </>}
                   {
                 products.map((product) => {
                   const { descripcion, precio, url, nombre, id } = product

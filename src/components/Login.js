@@ -33,7 +33,6 @@ export default function Login () {
         localStorage.setItem('isLogin', JSON.stringify(true))
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
         router.push('/')
-        console.log('hola')
       }
     } catch (error) {
       toast.update(idtoast, { render: 'Email o contraseña incorrectos', autoClose: 2000, type: 'error', isLoading: false })

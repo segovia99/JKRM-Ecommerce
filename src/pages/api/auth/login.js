@@ -21,7 +21,9 @@ export default async function loginHandler (req, res) {
     {
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
       email,
-      username: email
+      username: email,
+      nombre: result[0].nombre,
+      apellido: result[0].apellido
     },
     'jkrm'
   )

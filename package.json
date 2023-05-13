@@ -26,6 +26,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
+    "react-loading-skeleton": "^3.3.1",
     "react-toastify": "^9.1.2",
     "zustand": "^4.3.7"
   },
