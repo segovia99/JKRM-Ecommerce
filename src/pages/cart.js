@@ -34,9 +34,10 @@ export default function Cart () {
                       <p className='text-[18px] font-medium text-qred'>${calculateTotal()}</p>
                     </div>
                   </div>
-                  <Link href=''>
+                  <Link href='/checkout'>
                     <div className='w-full h-[50px] black-btn flex justify-center items-center'>
                       <span className='text-sm font-semibold'>Proceder a pagar</span>
+
                     </div>
                   </Link>
                 </div>

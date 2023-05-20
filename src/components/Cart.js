@@ -37,7 +37,7 @@ function Cart () {
                 <span>Ver Carrito</span>
               </div>
             </Link>
-            <Link href='/'>
+            <Link href='/checkout'>
               <div className='w-full h-[50px] mb-[10px]'>
                 <div className='red-btn'>
                   <span className='text-sm text-white'>Pagar</span>
