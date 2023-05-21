@@ -11,7 +11,7 @@ function Maincontend () {
   }, [])
   return (
     <div className='w-full  pt-[30px] pb-[60px] bg-[#F8F8F8]'>
-      <div className='btn w-5 h-5 ' />
+      <div className='btn5 w-5 h-5 ' />
       <MainBanners />
       <ToolsSection />
       <ShopBrands />
