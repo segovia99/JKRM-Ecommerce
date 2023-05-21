@@ -60,8 +60,9 @@ const Checkout = () => {
                               }}
                               onCancel={data => console.log(data)}
                               onApprove={(data, actions) => actions.order.capture().then(data => {
-                                clearCart()
                                 const { id } = data
+                                fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, products: cart, total: calculateTotal }) })
+                                clearCart()
                                 router.push(`/paymentSuccess/${id}`)
                               })}
                             />

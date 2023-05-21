@@ -5,3 +5,5 @@ export const DB_PASSWORD = process.env.DB_PASSWORD || 'root'
 export const DB_PORT = process.env.DB_PORT || 3306
 export const CLIENTID = process.env.NEXT_PUBLIC_ID_CLIENTE || ''
 export const CLIENTSECRET = process.env.NEXT_PUBLIC_SECRET_KEY || ''
+export const EMAIL = process.env.EMAIL || ''
+export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || ''
