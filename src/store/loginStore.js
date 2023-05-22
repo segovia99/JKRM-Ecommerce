@@ -1,6 +1,20 @@
 import { create } from 'zustand'
 
-export const useIsLogin = create((set) => ({
+export const useUserStore = create((set) => ({
+  user: {
+    id: null,
+    nombre: '',
+    apellido: '',
+    email: '',
+    direccion: ''
+  },
   isLogin: false,
-  setIsLogin: (nuevo) => set((state) => ({ isLogin: nuevo }))
+  setUser: (nuevoUsuario) =>
+    set((state) => ({
+      user: {
+        ...state.user,
+        ...nuevoUsuario
+      }
+    })),
+  setIsLogin: (nuevoEstado) => set(() => ({ isLogin: nuevoEstado }))
 }))

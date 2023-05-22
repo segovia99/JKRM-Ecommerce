@@ -20,10 +20,11 @@ export default async function loginHandler (req, res) {
   const token = sign(
     {
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
-      email,
-      username: email,
+      id: result[0].id,
       nombre: result[0].nombre,
-      apellido: result[0].apellido
+      apellido: result[0].apellido,
+      email,
+      direccion: result[0].direccion
     },
     'jkrm'
   )

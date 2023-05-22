@@ -1,16 +1,20 @@
 import Link from 'next/link'
 import Login from './Login'
-import { useIsLogin } from '@/store/loginStore'
+import { useUserStore } from '@/store/loginStore'
 import { ProfileIcon } from './Icons'
+import axios from 'axios'
 
 export default function NavActions () {
-  const islogin = useIsLogin(state => state.isLogin)
-  const { setIsLogin } = useIsLogin()
-  // console.log(islogin)
+  const { setIsLogin, isLogin } = useUserStore()
+
+  const handledLogout = async () => {
+    setIsLogin(false)
+    await axios.put('/api/auth/logout')
+  }
   return (
     <div className='flex h-full flex-1 items-center justify-end space-x-6'>
 
-      {islogin
+      {isLogin
         ? (
           <div className='dropdown cursor-pointer'>
             <span tabIndex={0}>
@@ -22,8 +26,7 @@ export default function NavActions () {
                 <li><a>Mis Pedidos</a></li>
                 <li>
                   <button onClick={() => {
-                    localStorage.removeItem('isLogin')
-                    setIsLogin(false)
+                    handledLogout()
                   }}
                   >Cerrar Sesión
                   </button>

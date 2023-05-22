@@ -5,10 +5,12 @@ import { useCart } from '@/hooks/useCart'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import { CLIENTID } from '@/services/config'
+import { useUserStore } from '@/store/loginStore'
 
 const Checkout = () => {
   const router = useRouter()
   const { cart, calculateTotal, clearCart } = useCart()
+  const { user } = useUserStore()
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -27,6 +29,13 @@ const Checkout = () => {
           <div className='checkout-main-content w-full'>
             <div className='container-x mx-auto'>
               <div className='w-full lg:flex lg:space-x-[30px]'>
+                <div className='lg:w-1/2 w-full'>
+                  <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Detalles de facturación</h1>
+                  <div className='w-[70%] px-10 py-[30px] border border-[#EDEDED]'>
+                    <h2 className='text-qblack font-medium mb-5'>Direccion de Envio</h2>
+                    <p>{user.direccion}</p>
+                  </div>
+                </div>
                 <div className='flex-1'>
                   <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Resumen del pedido</h1>
                   <div className='w-full px-10 py-[30px] border border-[#EDEDED]'>
@@ -61,7 +70,8 @@ const Checkout = () => {
                               onCancel={data => console.log(data)}
                               onApprove={(data, actions) => actions.order.capture().then(data => {
                                 const { id } = data
-                                fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, products: cart, total: calculateTotal }) })
+                                const total = calculateTotal()
+                                fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, nombre: user.nombre, email: user.email, products: cart, total }) })
                                 clearCart()
                                 router.push(`/paymentSuccess/${id}`)
                               })}
@@ -72,9 +82,7 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-                <div className='lg:w-1/2 w-full'>
-                  <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Detalles de facturación</h1>
-                </div>
+
               </div>
             </div>
           </div>

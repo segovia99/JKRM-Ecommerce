@@ -1,4 +1,4 @@
-import { useIsLogin } from '@/store/loginStore'
+import { useUserStore } from '@/store/loginStore'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ export default function Login () {
   })
 
   const router = useRouter()
-  const { setIsLogin } = useIsLogin()
+  const { setIsLogin } = useUserStore()
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -5,7 +5,7 @@ export default async function handler (req, res) {
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
-  const { id, products, total } = JSON.parse(req.body)
+  const { id, nombre, email, products, total } = JSON.parse(req.body)
 
   let html = ''
 
@@ -22,7 +22,7 @@ export default async function handler (req, res) {
 
   await transporter.sendMail({
     from: '"Ferreteria JKRM" <ferreteria.jkrm@gmail.com>', // sender address
-    to: 'ksegovia135@gmail.com', // receiver
+    to: `${email}`, // receiver
     subject: `Tu pedido #${id} de ferreteria JKRM`, // Subject line
     html: `
     <!DOCTYPE html>
@@ -50,7 +50,7 @@ export default async function handler (req, res) {
         </tr>
         <tr>
             <td bgcolor="#ffffff" style="padding: 40px;">
-                <p style="color: #db1436; font-size: 24px;">Hola Kevin,</p>
+                <p style="color: #db1436; font-size: 24px;">Hola ${nombre},</p>
                 <p style="font-size:18px;">Gracias por comprar con nosotros. Te enviaremos una confirmación cuando tus artículos se envíen.</p>
                 <table border="1" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse;">
                     <thead>
@@ -71,7 +71,7 @@ export default async function handler (req, res) {
                         </tr>
                     </tfoot>
                 </table>
-                <p>Esperamos volver a verte pronto.</p>
+                <p style="font-size:18px;">Esperamos volver a verte pronto.</p>
             </td>
         </tr>
     </table>

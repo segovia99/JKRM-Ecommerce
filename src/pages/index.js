@@ -4,13 +4,46 @@
 
 import Maincontend from '@/components/MainContend'
 import LandingLayout from '@/components/layouts/LandingLayout'
+import { useUserStore } from '@/store/loginStore'
+import { jwtVerify } from 'jose'
+import { useEffect } from 'react'
 
 // const inter = Inter({ subsets: ['latin'] })
 
-export default function Home () {
+export default function Home ({ IsLogin, User }) {
+  const { setIsLogin, setUser } = useUserStore()
+  useEffect(() => {
+    setIsLogin(IsLogin)
+    setUser(User)
+  }, [])
   return (
     <LandingLayout>
       <Maincontend />
     </LandingLayout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion } = payload
+      User = { id, nombre, apellido, email, direccion }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }
