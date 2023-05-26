@@ -16,7 +16,7 @@ export default function NavActions () {
 
       {isLogin
         ? (
-          <div className='dropdown cursor-pointer'>
+          <div className='dropdown dropdown-end cursor-pointer'>
             <span tabIndex={0}>
               <ProfileIcon />
             </span>
