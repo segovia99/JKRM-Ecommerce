@@ -6,11 +6,14 @@ import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import { CLIENTID } from '@/services/config'
 import { useUserStore } from '@/store/loginStore'
+import Link from 'next/link'
 
 const Checkout = () => {
   const router = useRouter()
   const { cart, calculateTotal, clearCart } = useCart()
   const { user } = useUserStore()
+  const { isLogin } = useUserStore()
+
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -29,13 +32,32 @@ const Checkout = () => {
           <div className='checkout-main-content w-full'>
             <div className='container-x mx-auto'>
               <div className='w-full lg:flex lg:space-x-[30px]'>
-                <div className='lg:w-1/2 w-full'>
-                  <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Detalles de facturación</h1>
-                  <div className='w-[70%] px-10 py-[30px] border border-[#EDEDED]'>
-                    <h2 className='text-qblack font-medium mb-5'>Direccion de Envio</h2>
-                    <p>{user.direccion}</p>
-                  </div>
-                </div>
+                {isLogin
+                  ? (
+                    <div className='lg:w-1/2 w-full'>
+                      <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Detalles de facturación</h1>
+                      <div className='w-[70%] px-10 py-[30px] border border-[#EDEDED]'>
+                        <h2 className='text-qblack font-medium mb-5'>Direccion de Envio</h2>
+                        <p>{user.direccion}</p>
+                      </div>
+                    </div>
+                    )
+                  : (
+                    <div className='lg:w-1/2 w-full'>
+                      <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Inicia Sesion para seguir con tu compra</h1>
+                      <div className='w-[70%] px-10 py-[30px] border border-[#EDEDED]'>
+                        <div>
+                          <label
+                            htmlFor='my-modal'
+                            className='flex h-full items-center border-b-2 text-sm cursor-pointer btn btn-primary'
+                          >
+                            Inicia sesión
+                          </label>
+                          <Link href='/signup' className='btn btn-ghost flex h-full items-center border-b-2 text-sm cursor-pointer my-2'>Registrate</Link>
+                        </div>
+                      </div>
+                    </div>
+                    )}
                 <div className='flex-1'>
                   <h1 className='sm:text-2xl text-xl text-qblack font-medium mb-5'>Resumen del pedido</h1>
                   <div className='w-full px-10 py-[30px] border border-[#EDEDED]'>
@@ -56,27 +78,31 @@ const Checkout = () => {
                         </div>
 
                         <div className='shipping mt-[30px]'>
-                          <PayPalScriptProvider options={{ 'client-id': CLIENTID, locale: 'es_ES' }}>
-                            <PayPalButtons
-                              style={{ layout: 'vertical' }}
-                              createOrder={async () => {
-                                try {
-                                  const res = await axios.post('/api/payment', { amount: calculateTotal() })
-                                  return res.data.id
-                                } catch (error) {
+                          {
+                            isLogin && (
+                              <PayPalScriptProvider options={{ 'client-id': CLIENTID, locale: 'es_ES' }}>
+                                <PayPalButtons
+                                  style={{ layout: 'vertical' }}
+                                  createOrder={async () => {
+                                    try {
+                                      const res = await axios.post('/api/payment', { amount: calculateTotal() })
+                                      return res.data.id
+                                    } catch (error) {
 
-                                }
-                              }}
-                              onCancel={data => console.log(data)}
-                              onApprove={(data, actions) => actions.order.capture().then(data => {
-                                const { id } = data
-                                const total = calculateTotal()
-                                fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, nombre: user.nombre, email: user.email, products: cart, total }) })
-                                clearCart()
-                                router.push(`/paymentSuccess/${id}`)
-                              })}
-                            />
-                          </PayPalScriptProvider>
+                                    }
+                                  }}
+                                  onCancel={data => console.log(data)}
+                                  onApprove={(data, actions) => actions.order.capture().then(data => {
+                                    const { id } = data
+                                    const total = calculateTotal()
+                                    fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, nombre: user.nombre, email: user.email, products: cart, total }) })
+                                    clearCart()
+                                    router.push(`/paymentSuccess/${id}`)
+                                  })}
+                                />
+                              </PayPalScriptProvider>
+                            )
+                          }
                         </div>
                       </div>
                     </div>
