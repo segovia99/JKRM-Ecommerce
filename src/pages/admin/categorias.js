@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Layout from '@/components/admin/Layout'
 import axios from 'axios'
+import { useAdmin } from '@/hooks/useAdmin'
 
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
@@ -9,6 +10,10 @@ function queryAttr (element, attribute, query) {
 export default function Categorias () {
   let idCategorias = 1
   const [categories, setCategories] = useState([])
+  const { setPageTitle } = useAdmin()
+  useEffect(() => {
+    setPageTitle('Categorias')
+  }, [])
 
   useEffect(() => {
     (async () => {

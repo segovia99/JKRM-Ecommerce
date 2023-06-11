@@ -7,11 +7,13 @@ export async function middleware (request) {
   if (!jwt) return NextResponse.redirect(new URL('/', request.url))
 
   try {
-    await jwtVerify(
+    const { payload } = await jwtVerify(
       jwt.value,
       new TextEncoder().encode('jkrm')
     )
     // console.log({ payload })
+    const { rol } = payload
+    if (rol !== 1) return NextResponse.redirect(new URL('/', request.url))
     return NextResponse.next()
   } catch (error) {
     console.log(error)

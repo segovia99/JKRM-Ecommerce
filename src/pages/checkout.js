@@ -96,6 +96,7 @@ const Checkout = () => {
                                     const { id } = data
                                     const total = calculateTotal()
                                     fetch('/api/orderEmail', { method: 'POST', body: JSON.stringify({ id, nombre: user.nombre, email: user.email, products: cart, total }) })
+                                    fetch('/api/pedido', { method: 'POST', body: JSON.stringify({ id, userId: user.id, products: cart, total }) })
                                     clearCart()
                                     router.push(`/paymentSuccess/${id}`)
                                   })}

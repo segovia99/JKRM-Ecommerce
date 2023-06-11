@@ -1,6 +1,7 @@
 import Layout from '@/components/admin/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useAdmin } from '@/hooks/useAdmin'
 
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
@@ -21,12 +22,15 @@ export default function Productos () {
   let idCategorias = 1
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
+  const { setPageTitle } = useAdmin()
 
   const loadData = async () => {
     const resProducts = await axios.get('/api/productosCRUD/productos', { params: { first: '1' } })
     setProducts(resProducts.data)
   }
+
   useEffect(() => {
+    setPageTitle('Productos')
     fetch('/api/categoriasCRUD/categorias').then(res => res.json()).then(data => { setCategories(data) })
     loadData()
   }, [])

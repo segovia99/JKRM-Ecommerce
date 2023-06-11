@@ -34,8 +34,14 @@ export async function getServerSideProps (context) {
     )
     if (payload) {
       IsLogin = true
-      const { id, nombre, apellido, email, direccion } = payload
+      const { id, nombre, apellido, email, direccion, rol } = payload
       User = { id, nombre, apellido, email, direccion }
+      if (rol === 1) {
+        context.res.writeHead(302, {
+          Location: '/admin/dashboard' // URL de la página a la que se redireccionará
+        })
+        context.res.end()
+      }
     }
   }
 

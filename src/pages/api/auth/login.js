@@ -24,7 +24,8 @@ export default async function loginHandler (req, res) {
       nombre: result[0].nombre,
       apellido: result[0].apellido,
       email,
-      direccion: result[0].direccion
+      direccion: result[0].direccion,
+      rol: result[0].rol
     },
     'jkrm'
   )

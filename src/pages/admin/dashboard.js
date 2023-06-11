@@ -13,6 +13,7 @@ import {
   Legend
 } from 'chart.js'
 import { Bar, Pie } from 'react-chartjs-2'
+import { useAdmin } from '@/hooks/useAdmin'
 
 ChartJS.register(
   CategoryScale,
@@ -53,6 +54,11 @@ export default function Dashboard () {
   const [filterSelection, setFilterSelection] = useState('categorias')
   const [review, setReview] = useState({})
   const [comments, setComments] = useState([])
+
+  const { setPageTitle } = useAdmin()
+  useEffect(() => {
+    setPageTitle('Dashboard')
+  }, [])
 
   useEffect(() => {
     (async () => {
