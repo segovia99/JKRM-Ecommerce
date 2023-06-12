@@ -6,7 +6,7 @@ export default async function handler (req, res) {
     const { id, userId, total, products } = data
     await pool.query(`
         INSERT INTO pedidos (id, fecha_pedido, id_usuario, total, estado_pedido)
-        VALUES (?,date_format(curdate(), "%Y-%m-%d"),?,?,1)
+        VALUES (?,CONVERT_TZ(NOW(), 'UTC', 'America/El_Salvador'),?,?,1)
       `, [id, userId, total])
 
     products.forEach(async (product) => {

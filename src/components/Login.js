@@ -11,7 +11,7 @@ export default function Login () {
   })
 
   const router = useRouter()
-  const { setIsLogin } = useUserStore()
+  const { setIsLogin, setUser } = useUserStore()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -20,7 +20,6 @@ export default function Login () {
     try {
       idtoast = toast.loading('Comprobando Informacion')
       const res = await axios.post('/api/auth/login', credentials)
-      // console.log(res.data)
 
       if (res.status === 200 && res.data.rol === 1) {
         const { name } = res.data
@@ -28,8 +27,9 @@ export default function Login () {
         router.push('/admin/dashboard')
       }
       if (res.status === 200 && res.data.rol === 2) {
-        const { name } = res.data
+        const { name, User } = res.data
         setIsLogin(true)
+        setUser(User)
         localStorage.setItem('isLogin', JSON.stringify(true))
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
         router.push('/')

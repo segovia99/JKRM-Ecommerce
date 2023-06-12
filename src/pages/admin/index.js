@@ -95,14 +95,14 @@ export default function Productos () {
             <thead className='sticky top-0 bg-[#db1436] text-white'>
               <tr className='h-8'>
                 <th>id</th>
-                <th>categoria</th>
-                <th>nombre</th>
-                <th>descripcion</th>
-                <th>precio</th>
-                <th>cantidad</th>
-                <th>imagen</th>
-                <th>marca</th>
-                <th>op. 1</th>
+                <th className='py-4 whitespace-nowrap text-center'>categoria</th>
+                <th className='py-4 whitespace-nowrap text-center'>nombre</th>
+                <th className='py-4 whitespace-nowrap text-center'>descripcion</th>
+                <th className='py-4 whitespace-nowrap text-center'>precio</th>
+                <th className='py-4 whitespace-nowrap text-center'>cantidad</th>
+                <th className='py-4 whitespace-nowrap text-center'>imagen</th>
+                <th className='py-4 whitespace-nowrap text-center'>marca</th>
+                <th className='py-4 whitespace-nowrap text-center'>op. 1</th>
                 <th>op. 2</th>
               </tr>
             </thead>
@@ -113,16 +113,16 @@ export default function Productos () {
                   if (idCategorias % 2 === 0) {
                     return (
                       <tr key={item.id} className='bg-[#f2f2f2]'>
-                        <td>{item.id}</td>
-                        <td>{item.categoria}</td>
-                        <td>{item.nombre}</td>
-                        <td>{item.descripcion}</td>
-                        <td>{item.precio}</td>
-                        <td>{item.cantidad}</td>
-                        <td><a href={item.url} target='_blank' className='underline text-[#d97179]' rel='noreferrer'>imagen URL</a></td>
-                        <td>{item.marca}</td>
-                        <td><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
-                        <td>
+                        <td className='text-center py-4 px-2'>{item.id}</td>
+                        <td className='text-center py-4 px-2'>{item.categoria}</td>
+                        <td className='text-center py-4 px-2'>{item.nombre}</td>
+                        <td className=' py-4 px-2 text-justify'>{item.descripcion}</td>
+                        <td className='text-center py-4 px-2'>{item.precio}</td>
+                        <td className='text-center py-4 px-2'>{item.cantidad}</td>
+                        <td className='text-center py-4 px-2'><a href={item.url} target='_blank' className='underline text-[#d97179]' rel='noreferrer'>imagen URL</a></td>
+                        <td className='text-center py-4 px-2'>{item.marca}</td>
+                        <td className='text-center py-4 px-2'><button onClick={() => deleteProduct(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
+                        <td className='text-center py-4 px-2'>
                           <button
                             onClick={() => modifyProduct(item.id, item.nombre, item.descripcion, item.precio, item.cantidad, item.url, item.marca
                             )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'

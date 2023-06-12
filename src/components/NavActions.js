@@ -3,13 +3,18 @@ import Login from './Login'
 import { useUserStore } from '@/store/loginStore'
 import { ProfileIcon } from './Icons'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 export default function NavActions () {
   const { setIsLogin, isLogin } = useUserStore()
+  const { user } = useUserStore()
+
+  const router = useRouter()
 
   const handledLogout = async () => {
     setIsLogin(false)
     await axios.put('/api/auth/logout')
+    router.push('/')
   }
   return (
     <div className='flex h-full flex-1 items-center justify-end space-x-6'>
@@ -22,8 +27,8 @@ export default function NavActions () {
             </span>
             <div>
               <ul tabIndex={0} className='dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-50'>
-                <li><a>Cuenta</a></li>
-                <li><a>Mis Pedidos</a></li>
+                <li><Link href={`/account/${user.id}`}>Mi Cuenta</Link></li>
+                <li><Link href='/orders'>Mis Pedidos</Link></li>
                 <li>
                   <button onClick={() => {
                     handledLogout()

@@ -3,12 +3,15 @@ import FilterCatalago from '@/components/FilterCatalago'
 import ProductCardOne from '@/components/ProductCardOne'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import { useCart } from '@/hooks/useCart'
+import { useUserStore } from '@/store/loginStore'
 import AOS from 'aos'
 import axios from 'axios'
+import { jwtVerify } from 'jose'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-export default function Catalogo () {
+export default function Catalogo ({ IsLogin, User }) {
+  const { setIsLogin, setUser } = useUserStore()
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { addToCart } = useCart()
@@ -18,6 +21,12 @@ export default function Catalogo () {
     setProducts(response.data)
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    setIsLogin(IsLogin)
+    setUser(User)
+  }, [])
+
   useEffect(() => {
     loadData()
     AOS.init()
@@ -64,4 +73,35 @@ export default function Catalogo () {
       </div>
     </LandingLayout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion, rol } = payload
+      User = { id, nombre, apellido, email, direccion }
+      if (rol === 1) {
+        context.res.writeHead(302, {
+          Location: '/admin/dashboard' // URL de la página a la que se redireccionará
+        })
+        context.res.end()
+      }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }

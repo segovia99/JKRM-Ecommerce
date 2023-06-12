@@ -2,27 +2,18 @@
 import Squares2X2Icon from '@heroicons/react/24/outline/Squares2X2Icon'
 import StarIcon from '@heroicons/react/24/outline/StarIcon'
 import TruckIcon from '@heroicons/react/24/outline/TruckIcon'
-import CurrencyDollarIcon from '@heroicons/react/24/outline/CurrencyDollarIcon'
-import InboxArrowDownIcon from '@heroicons/react/24/outline/InboxArrowDownIcon'
+import ArchiveBoxIcon from '@heroicons/react/24/outline/ArchiveBoxIcon'
+import ListBulletIcon from '@heroicons/react/24/outline/ListBulletIcon'
+import UsersIcon from '@heroicons/react/24/outline/UsersIcon'
 
 const iconClasses = 'h-6 w-6'
 
 export const Routes = [
 
   {
-    path: '/admin/dashboard',
+    path: '/admin/dashboard2',
     icon: <Squares2X2Icon className={iconClasses} />,
     name: 'Dashboard'
-  },
-  {
-    path: '/admin', // url
-    icon: <InboxArrowDownIcon className={iconClasses} />, // icon component
-    name: 'Productos' // name that appear in Sidebar
-  },
-  {
-    path: '/admin/categorias', // url
-    icon: <CurrencyDollarIcon className={iconClasses} />, // icon component
-    name: 'Categorias' // name that appear in Sidebar
   },
   {
     path: '/admin/pedidos', // url
@@ -30,7 +21,22 @@ export const Routes = [
     name: 'Pedidos' // name that appear in Sidebar
   },
   {
-    path: '/', // url
+    path: '/admin/clientes', // url
+    icon: <UsersIcon className={iconClasses} />, // icon component
+    name: 'Clientes' // name that appear in Sidebar
+  },
+  {
+    path: '/admin', // url
+    icon: <ArchiveBoxIcon className={iconClasses} />, // icon component
+    name: 'Inventario' // name that appear in Sidebar
+  },
+  {
+    path: '/admin/categorias', // url
+    icon: <ListBulletIcon className={iconClasses} />, // icon component
+    name: 'Categorias' // name that appear in Sidebar
+  },
+  {
+    path: '/admin/dashboard', // url
     icon: <StarIcon className={iconClasses} />, // icon component
     name: 'Valoraciones' // name that appear in Sidebar
   }

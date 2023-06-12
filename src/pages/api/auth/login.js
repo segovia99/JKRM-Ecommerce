@@ -38,7 +38,7 @@ export default async function loginHandler (req, res) {
     path: '/'
 
   })
-
+  const User = { id: result[0].id, nombre: result[0].nombre, apellido: result[0].apellido, email: result[0].email, direccion: result[0].direccion, rol: result[0].rol }
   res.setHeader('Set-Cookie', serealized)
-  res.json({ name: result[0].nombre, rol: result[0].rol })
+  res.json({ name: result[0].nombre, rol: result[0].rol, User })
 }

@@ -15,7 +15,7 @@ export default function FilterCatalago () {
                     <input id='herramientas' type='checkbox' name='herramientas' />
                   </div>
                   <div>
-                    <label for='herramientas' className='text-xs font-black font-400 capitalize'>Herramientas</label>
+                    <label htmlFor='herramientas' className='text-xs font-black font-400 capitalize'>Herramientas</label>
                   </div>
                 </div>
               </li>
@@ -25,7 +25,7 @@ export default function FilterCatalago () {
                     <input id='construccion' type='checkbox' name='construccion' />
                   </div>
                   <div>
-                    <label for='construccion' className='text-xs font-black font-400 capitalize'>Materiales de construcción</label>
+                    <label htmlFor='construccion' className='text-xs font-black font-400 capitalize'>Materiales de construcción</label>
                   </div>
                 </div>
               </li>
@@ -35,7 +35,7 @@ export default function FilterCatalago () {
                     <input id='hogar' type='checkbox' name='hogar' />
                   </div>
                   <div>
-                    <label for='hogar' className='text-xs font-black font-400 capitalize'>Hogar</label>
+                    <label htmlFor='hogar' className='text-xs font-black font-400 capitalize'>Hogar</label>
                   </div>
                 </div>
               </li>
@@ -45,7 +45,7 @@ export default function FilterCatalago () {
                     <input id='fontaneria' type='checkbox' name='fontaneria' />
                   </div>
                   <div>
-                    <label for='fontaneria' className='text-xs font-black font-400 capitalize'>Fontanería</label>
+                    <label htmlFor='fontaneria' className='text-xs font-black font-400 capitalize'>Fontanería</label>
                   </div>
                 </div>
               </li>
