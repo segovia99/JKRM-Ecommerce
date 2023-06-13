@@ -1,11 +1,14 @@
 import TitleCard from '@/components/admin/Cards/TitleCard'
 import Layout from '@/components/admin/Layout'
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 export default function DetallesPedido () {
   const [products, setProducts] = useState([])
-
+  // const [estado, setEstado] = useState('')
+  let estado = ''
   const router = useRouter()
   const { id } = router.query
 
@@ -16,11 +19,42 @@ export default function DetallesPedido () {
       .then(setProducts)
   }, [id])
 
+  if (products.length > 0) {
+    estado = products[0].estado_pedido
+  }
+
+  const updateState = () => {
+    axios.post('/api/checkorder', { id, estado })
+    // if (estado === '2') setEstado('3')
+    toast.success('Estado actualizado', { position: 'top-center', autoClose: 1000 })
+  }
+
+  const TopSideButtons = ({ estado }) => {
+    let title = ''
+    let type = ''
+    if (estado === '1') {
+      title = 'Enviado'
+      type = 'btn px-6 btn-sm normal-case btn-info'
+    }
+    if (estado === '2') {
+      title = 'Entregado'
+      type = 'btn px-6 btn-sm normal-case btn-success'
+    }
+    if (estado === '3') {
+      title = ''
+      type = ''
+    }
+    return (
+      <div className='inline-block float-right'>
+        <button className={` ${type}`} onClick={() => updateState()}>{title}</button>
+      </div>
+    )
+  }
   return (
     <Layout>
       <>
 
-        <TitleCard title='Detalles del pedido' topMargin='mt-2'>
+        <TitleCard title='Detalles del pedido' topMargin='mt-2' TopSideButtons={<TopSideButtons estado={estado} />}>
 
           {products.length > 0
             ? (

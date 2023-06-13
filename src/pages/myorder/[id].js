@@ -74,7 +74,7 @@ export default function MyOrder ({ IsLogin, User }) {
                   <tfoot>
                     <tr>
                       <td colspan='3' align='right' className='text-[15px] font-semibold text-qblack'>Total:</td>
-                      <td className='text-[15px] font-semibold text-qblack'>${total}</td>
+                      <td className='text-[15px] font-semibold text-qblack px-2'>${total}</td>
                     </tr>
                   </tfoot>
                 </table>
