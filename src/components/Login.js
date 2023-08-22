@@ -22,17 +22,27 @@ export default function Login () {
       const res = await axios.post('/api/auth/login', credentials)
 
       if (res.status === 200 && res.data.rol === 1) {
-        const { name } = res.data
+        const { name, User } = res.data
+        setUser(User)
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
         router.push('/admin/dashboard')
-      }
-      if (res.status === 200 && res.data.rol === 2) {
+      } else if (res.status === 200 && res.data.rol === 2) {
         const { name, User } = res.data
         setIsLogin(true)
         setUser(User)
         localStorage.setItem('isLogin', JSON.stringify(true))
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
         router.push('/')
+      } else if (res.status === 200 && res.data.rol === 3) {
+        const { name, User } = res.data
+        setUser(User)
+        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
+        router.push('/Logistics/pedidos')
+      } else if (res.status === 200 && res.data.rol === 4) {
+        const { name, User } = res.data
+        setUser(User)
+        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
+        router.push('/inventory')
       }
     } catch (error) {
       toast.update(idtoast, { render: 'Email o contraseña incorrectos', autoClose: 2000, type: 'error', isLoading: false })

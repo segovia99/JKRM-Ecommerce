@@ -6,7 +6,8 @@ export const useUserStore = create((set) => ({
     nombre: '',
     apellido: '',
     email: '',
-    direccion: ''
+    direccion: '',
+    rol: 0
   },
   isLogin: false,
   setUser: (nuevoUsuario) =>

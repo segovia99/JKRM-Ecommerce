@@ -3,7 +3,7 @@ import { FacebookIcon, InstagramIcon, YoutubeIcon } from './Icons'
 
 function Footer () {
   return (
-    <footer className='ml-4 bg-white print:hidden'>
+    <footer className=' bg-white print:hidden' data-theme='light'>
       <div className='max-w-[1216px] block mx-auto pt-[56px]'>
         <div className='w-full flex flex-col items-center mb-[50px]'>
           <div className='mb-[40px]'>

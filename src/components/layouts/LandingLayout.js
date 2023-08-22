@@ -16,7 +16,7 @@ const LandingLayout = ({ children }) => {
 
       <LandingNavbar />
 
-      <main>
+      <main data-theme='light'>
         {children}
       </main>
       <Footer />

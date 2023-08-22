@@ -14,6 +14,7 @@ import {
 } from 'chart.js'
 import { Bar, Pie } from 'react-chartjs-2'
 import { useAdmin } from '@/hooks/useAdmin'
+import { jwtVerify } from 'jose'
 
 ChartJS.register(
   CategoryScale,
@@ -222,4 +223,39 @@ export default function Dashboard () {
       </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion, rol } = payload
+      User = { id, nombre, apellido, email, direccion }
+      if (rol !== 1) {
+        if (rol === 3) {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/Logistics/pedidos' })
+        } else if (rol === 4) {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/inventory' })
+        } else {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/' })
+        }
+        context.res.end()
+      }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }

@@ -13,7 +13,9 @@ export async function middleware (request) {
     )
     // console.log({ payload })
     const { rol } = payload
-    if (rol !== 1) return NextResponse.redirect(new URL('/', request.url))
+    if (rol !== 1 && rol !== 3 && rol !== 4) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
     return NextResponse.next()
   } catch (error) {
     console.log(error)
@@ -22,5 +24,5 @@ export async function middleware (request) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*']
+  matcher: ['/admin/:path*', '/Logistics/:path*', '/inventory']
 }

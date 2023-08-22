@@ -12,7 +12,17 @@ import { useUserStore } from '@/store/loginStore'
 import { useRouter } from 'next/router'
 
 export default function Header () {
-  const [currentTheme, setCurrentTheme] = useState('light')
+  const initialTheme = () => {
+    if (typeof window !== 'undefined') {
+      if (!localStorage.getItem('theme')) {
+        console.log('el tema es nu')
+        return window.localStorage.setItem('theme', 'light')
+      } else {
+        return localStorage.getItem('theme')
+      }
+    }
+  }
+  const [currentTheme, setCurrentTheme] = useState(initialTheme)
   const { pageTitle } = useAdmin()
   const { setIsLogin } = useUserStore()
   const router = useRouter()
@@ -47,17 +57,6 @@ export default function Header () {
         </div>
 
         <div className='order-last'>
-
-          {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection,
-also includes corporate and retro themes in tailwind.config file */}
-
-          {/* <select className="select select-sm mr-4" data-choose-theme>
-    <option disabled selected>Theme</option>
-    <option value="light">Default</option>
-    <option value="dark">Dark</option>
-    <option value="corporate">Corporate</option>
-    <option value="retro">Retro</option>
-</select> */}
 
           {/* Light and dark theme selection toogle **/}
           <label className='swap '>

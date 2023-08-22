@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Layout from '@/components/admin/Layout'
 import axios from 'axios'
 import { useAdmin } from '@/hooks/useAdmin'
+import { jwtVerify } from 'jose'
 
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
@@ -110,4 +111,39 @@ export default function Categorias () {
       </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion, rol } = payload
+      User = { id, nombre, apellido, email, direccion }
+      if (rol !== 1) {
+        if (rol === 3) {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/Logistics/pedidos' })
+        } else if (rol === 4) {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/inventory' })
+        } else {
+          context.res.writeHead(302, { Location: context.req.headers.referer || '/' })
+        }
+        context.res.end()
+      }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }

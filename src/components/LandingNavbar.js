@@ -11,8 +11,8 @@ const LandingNavbar = () => {
   const { cart } = useCart()
   return (
 
-    <header className='header-section-wrapper relative'>
-      <div className='w-full h-[86px] bg-white lg:block hidden mt-2'>
+    <header className='header-section-wrapper relative' data-theme='light'>
+      <div className='w-full h-[86px] bg-white lg:block hidden'>
         <div className='mx-auto max-w-[1216px] h-full'>
           <div className='relative h-full'>
             <div className='flex justify-between items-center h-full'>

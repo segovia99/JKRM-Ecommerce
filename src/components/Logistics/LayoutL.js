@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import SidebarNew from './SidebarNew'
-import Header from './Header'
-import { Suspense, useRef } from 'react'
-import SuspenseContent from './SuspenseContent'
+import { useRef, Suspense } from 'react'
+import Header from '../admin/Header'
 
-export default function Layout ({ children }) {
+import SuspenseContent from '../admin/SuspenseContent'
+import SidebarL from './SidebarL'
+
+export default function LayoutL ({ children }) {
   const mainContentRef = useRef(null)
   return (
     <>
@@ -27,7 +28,7 @@ export default function Layout ({ children }) {
             <div className='h-16' />
           </main>
         </div>
-        <SidebarNew />
+        <SidebarL />
       </div>
 
     </>

@@ -20,7 +20,8 @@ module.exports = {
           primary: '#db1436',
           'primary-focus': 'mediumblue'
         }
-      }
+      },
+      'dark'
     ]
   }
 }
