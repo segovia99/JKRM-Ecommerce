@@ -25,7 +25,7 @@ export const Routes = [
     name: 'Pedidos' // name that appear in Sidebar
   },
   {
-    path: '/admin', // url
+    path: '/admin/inventario', // url
     icon: <ArchiveBoxIcon className={iconClasses} />, // icon component
     name: 'Inventario' // name that appear in Sidebar
   },

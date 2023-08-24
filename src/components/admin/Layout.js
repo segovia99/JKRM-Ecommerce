@@ -3,6 +3,7 @@ import SidebarNew from './SidebarNew'
 import Header from './Header'
 import { Suspense, useRef } from 'react'
 import SuspenseContent from './SuspenseContent'
+import RightSidebar from './RightSidebar'
 
 export default function Layout ({ children }) {
   const mainContentRef = useRef(null)
@@ -29,6 +30,8 @@ export default function Layout ({ children }) {
         </div>
         <SidebarNew />
       </div>
+      {/* Right drawer - containing secondary content.. */}
+      <RightSidebar />
 
     </>
   )

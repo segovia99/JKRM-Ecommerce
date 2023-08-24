@@ -4,6 +4,7 @@ import Header from '../admin/Header'
 
 import SuspenseContent from '../admin/SuspenseContent'
 import SidebarI from './SidebarI'
+import RightSidebar from '../admin/RightSidebar'
 
 export default function LayoutI ({ children }) {
   const mainContentRef = useRef(null)
@@ -30,7 +31,8 @@ export default function LayoutI ({ children }) {
         </div>
         <SidebarI />
       </div>
-
+      {/* Right drawer - containing secondary content.. */}
+      <RightSidebar />
     </>
   )
 }

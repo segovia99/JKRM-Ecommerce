@@ -42,7 +42,7 @@ export default function Login () {
         const { name, User } = res.data
         setUser(User)
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/inventory')
+        router.push('/inventory/inventario')
       }
     } catch (error) {
       toast.update(idtoast, { render: 'Email o contraseña incorrectos', autoClose: 2000, type: 'error', isLoading: false })
