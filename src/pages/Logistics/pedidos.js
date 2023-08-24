@@ -64,7 +64,7 @@ function Pedidos () {
                                   <td>{pedido.email}</td>
                                   <td>{moment(pedido.fecha_pedido).add(0, 'days').format('DD MMM YY')}</td>
                                   <td>{getStatus(pedido.estado_pedido)}</td>
-                                  <td><Link href={`/admin/detalles-pedido/${pedido.id_pedido}`} className='btn btn-square btn-ghost'><EyeIcon className='w-5' /></Link></td>
+                                  <td><Link href={`/Logistics/detalles-pedido/${pedido.id_pedido}`} className='btn btn-square btn-ghost'><EyeIcon className='w-5' /></Link></td>
                                 </tr>
                               )
                             })
