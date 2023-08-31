@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Services from './Services'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import MainBannersSkeleto from './mainBannerSkeleto'
+import MainBannersSkeleto from './MainBannerSkeleto'
 
 function MainBanners () {
   const [banners, setBanners] = useState([])
