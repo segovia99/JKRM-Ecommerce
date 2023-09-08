@@ -4,14 +4,15 @@ import MainBanners from './MainBanners'
 import ToolsSection from './ToolsSection'
 import ShopBrands from './ShopBrands'
 import TopSellingProducts from './TopSellingProducts'
+import Carousel from './ui/Carousel'
 
 function Maincontend () {
   useEffect(() => {
     AOS.init()
   }, [])
   return (
-    <div className='w-full  pt-[30px] pb-[60px] bg-[#F8F8F8]'>
-      <div className='btn5 w-5 h-5 ' />
+    <div className='w-full  pt-[0px] pb-[60px] bg-[#F8F8F8]'>
+      <Carousel />
       <MainBanners />
       <ToolsSection />
       <ShopBrands />

@@ -2,6 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+/* custom css for carousel begin */
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow: hidden;
+}
+
+.carousel-container {
+    background-color: silver;
+    overflow: hidden;
+}
+
+.carousel-stripe {
+    transition: 0.5s;
+    width: 300%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.carousel-subcontainer {
+    width: 33.33%;
+}
+
+.carousel-subcontainer img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.carousel-controls {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+#left-button, #right-button {
+    background-color: gray;
+    padding:16px;
+    border-radius: 100%;
+}
+
+#left-button:hover, #right-button:hover {
+    background-color: silver
+}
+
+#control-1, #control-2, #control-3 {
+    width: 16px;
+    height: 16px;
+    background-color: gray;
+    border-radius: 100%;
+}
+
+.carousel-active-item {
+    background-color: silver;
+}
+
+.carousel-inactive-item {
+    background-color: gray;
+}
+/* custon css for carousel end */
+
 
 :root{
     --colors-whop-stroke: 232,232,232;
