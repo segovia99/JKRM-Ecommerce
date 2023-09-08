@@ -13,7 +13,7 @@ const navigation = {
     },
     {
       name: 'Sobre nosotros',
-      href: '/'
+      href: '/about'
     },
     {
       name: 'Contactanos',

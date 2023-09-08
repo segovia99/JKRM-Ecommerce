@@ -23,33 +23,33 @@ export default function Home ({ IsLogin, User }) {
   )
 }
 
-export async function getServerSideProps (context) {
-  const { token } = context.req.cookies
-  let IsLogin = false
-  let User = null
-  if (token) {
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode('jkrm')
-    )
-    if (payload) {
-      IsLogin = true
-      const { id, nombre, apellido, email, direccion, rol } = payload
-      User = { id, nombre, apellido, email, direccion }
-      if (rol === 1) {
-        context.res.writeHead(302, {
-          Location: '/admin/dashboard' // URL de la página a la que se redireccionará
-        })
-        context.res.end()
-      }
-    }
-  }
+// export async function getServerSideProps (context) {
+//   const { token } = context.req.cookies
+//   let IsLogin = false
+//   let User = null
+//   if (token) {
+//     const { payload } = await jwtVerify(
+//       token,
+//       new TextEncoder().encode('jkrm')
+//     )
+//     if (payload) {
+//       IsLogin = true
+//       const { id, nombre, apellido, email, direccion, rol } = payload
+//       User = { id, nombre, apellido, email, direccion }
+//       if (rol === 1) {
+//         context.res.writeHead(302, {
+//           Location: '/admin/dashboard' // URL de la página a la que se redireccionará
+//         })
+//         context.res.end()
+//       }
+//     }
+//   }
 
-  // console.log(IsLogin)
-  return {
-    props: {
-      IsLogin,
-      User
-    }
-  }
-}
+//   // console.log(IsLogin)
+//   return {
+//     props: {
+//       IsLogin,
+//       User
+//     }
+//   }
+// }
