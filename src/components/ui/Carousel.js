@@ -5,7 +5,14 @@ export default function Carousel () {
 
   useEffect(() => {
     paint()
-  })
+    const autoplayInterval = setInterval(() => {
+      toRight() // Cambia automáticamente a la siguiente opción
+    }, 2000) // Intervalo en milisegundos (3 segundos)
+
+    return () => {
+      clearInterval(autoplayInterval) // Limpia el intervalo al desmontar el componente
+    }
+  }, [])
 
   const paint = () => {
     const control1 = document.getElementById('control-1')
@@ -37,6 +44,8 @@ export default function Carousel () {
     if (option < 3) {
       slide.style.transform = 'translate(-' + 33.33 * option + '%, 0%)'
       option++
+    } else {
+      option = 0
     }
 
     paint()
