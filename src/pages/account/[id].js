@@ -17,8 +17,8 @@ export default function Account () {
   return (
     <LandingLayout>
       <div className='w-full pt-0 pb-0'>
-        <div className='container-x mx-auto my-5'>
-          <TitleCard title='Configuracin del Perfil' topMargin='mt-2'>
+        <div className='container-x mx-auto py-5'>
+          <TitleCard title='Configuracin del Perfil' topMargin='pt-2'>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               <InputText labelTitle='Nombre' defaultValue={user.nombre} updateFormValue={updateFormValue} />

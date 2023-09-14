@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import LandingNavbar from '@/components/LandingNavbar'
 import Footer from '@/components/Footer'
+import LeftMenu from '../LeftMenu'
 
 const LandingLayout = ({ children }) => {
   return (
@@ -15,7 +16,7 @@ const LandingLayout = ({ children }) => {
       </Head>
 
       <LandingNavbar />
-
+      <LeftMenu />
       <main data-theme='light'>
         {children}
       </main>

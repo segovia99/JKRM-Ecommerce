@@ -34,8 +34,8 @@ export default function Orders ({ IsLogin, User }) {
   return (
     <LandingLayout>
       <div className='w-full pt-0 pb-0 bg-[#f8f8f8]'>
-        <div className='container-x mx-auto my-5'>
-          <TitleCard title='Mis pedidos' topMargin='mt-10'>
+        <div className='container-x mx-auto pt-5'>
+          <TitleCard title='Mis pedidos' topMargin='pt-10'>
             <div className='flex-1'>
               <div className='item-body dashboard-wrapper w-full'>
                 <div className='relative w-full overflow-x-auto sm:rounded-lg'>

@@ -7,7 +7,7 @@ import success from 'success.json'
 export default function PaymentSuccess () {
   return (
     <LandingLayout>
-      <div className='mx-auto mb-8 grid max-w-3xl place-items-center text-center' data-theme='light'>
+      <div className='mx-auto mb-8 grid max-w-3xl place-items-center text-center p-2' data-theme='light'>
         <div className=' w-52 h-52'>
           <Lottie animationData={success} loop={false} />
         </div>

@@ -29,8 +29,8 @@ export default function MyOrder ({ IsLogin, User }) {
     <LandingLayout>
       <>
         <div className='w-full pt-0 pb-0 bg-[#f8f8f8]'>
-          <div className='container-x mx-auto my-5'>
-            <TitleCard title='Detalles del pedido' topMargin='mt-2'>
+          <div className='container-x mx-auto pt-5'>
+            <TitleCard title='Detalles del pedido' topMargin='pt-2'>
 
               <div className='overflow-x-auto w-full'>
                 <table className='table w-full'>
