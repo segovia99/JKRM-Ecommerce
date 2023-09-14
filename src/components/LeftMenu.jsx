@@ -2,7 +2,7 @@ import SearchMobile from './SearchMobile'
 import Link from 'next/link'
 import { useAdmin } from '@/hooks/useAdmin'
 import { ArrowRightIcon } from './Icons'
-import BuildingStoreFrontIcon from '@heroicons/react/24/outline/BuildingStoreFrontIcon'
+import BuildingStorefrontIcon from '@heroicons/react/24/outline/BuildingStorefrontIcon'
 import UserPlusIcon from '@heroicons/react/24/outline/UserPlusIcon'
 import UserIcon from '@heroicons/react/24/outline/UserIcon'
 import ArchiveBoxIcon from '@heroicons/react/24/outline/ArchiveBoxIcon'
@@ -99,7 +99,7 @@ function LeftMenu () {
               <Link href='/catalogo'>
                 <div className=' flex justify-between items-center px-5 h-12 bg-white hover:bg-primary transition-all duration-300 ease-in-out cursor-pointer'>
                   <div className='flex items-center space-x-6'>
-                    <span className='w-4 h-4'><BuildingStoreFrontIcon /></span>
+                    <span className='w-4 h-4'><BuildingStorefrontIcon /></span>
                     <span className='text-sm font-400'>Catalogo</span>
                   </div>
                   <span>
