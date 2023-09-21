@@ -1,6 +1,4 @@
 function DashboardStats ({ title, icon, value, description, colorIndex }) {
-  const COLORS = ['primary', 'primary']
-
   const getDescStyle = () => {
     if (description.includes('↗︎')) return 'font-bold text-green-700 dark:text-green-300'
     else if (description.includes('↙')) return 'font-bold text-rose-500 dark:text-red-400'
