@@ -36,12 +36,12 @@ export default function Catalogo ({ IsLogin, User }) {
     (async () => {
       const response2 = await axios.get('/api/pagination')
       setCount(response2.data[0].count)
-      const response = await axios.get('/api/products?page=' + (current * 4))
+      const response = await axios.get('/api/products?page=' + (current * 6))
       setProducts(response.data)
     })()
   }, [current])
 
-  for (let i = 0; i < Math.ceil(count / 4); i++) {
+  for (let i = 0; i < Math.ceil(count / 6); i++) {
     pages.push(i)
   }
   return (
@@ -116,7 +116,7 @@ export default function Catalogo ({ IsLogin, User }) {
                   }
                   <button
                     className='bg-[#000000] p-[10px] text-[#ffffff] w-[100px] rounded-r-md hover:bg-[#3b3b3b]' onClick={() => {
-                      if (current < 6) {
+                      if (current < pages.length - 1) {
                         setCurrent(current + 1)
                         window.scrollTo(0, 0)
                       }
