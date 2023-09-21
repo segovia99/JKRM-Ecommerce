@@ -20,7 +20,7 @@ export default function SidebarNew () {
           </button>
           <li className='mb-2 font-semibold text-xl'>
 
-            <Link href='/admin'><img className=' object-contain' src='/logo3.png' alt='Logo' /></Link>
+            <Link href='/admin/dashboardsales'><img className=' object-contain' src='/logo3.png' alt='Logo' /></Link>
           </li>
           {
                     Routes.map((route, k) => {

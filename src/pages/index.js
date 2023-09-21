@@ -38,7 +38,7 @@ export async function getServerSideProps (context) {
       User = { id, nombre, apellido, email, direccion }
       if (rol === 1) {
         context.res.writeHead(302, {
-          Location: '/admin/dashboard' // URL de la página a la que se redireccionará
+          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
         })
         context.res.end()
       }

@@ -26,7 +26,7 @@ export default function Login () {
         const { name, User } = res.data
         setUser(User)
         toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/admin/dashboard')
+        router.push('/admin/dashboardsales')
       } else if (res.status === 200 && res.data.rol === 2) {
         const { name, User } = res.data
         setIsLogin(true)

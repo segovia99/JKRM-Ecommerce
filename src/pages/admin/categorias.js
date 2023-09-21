@@ -49,8 +49,8 @@ export default function Categorias () {
     <Layout selection='categorias'>
       <div className='w-[100%] h-[85vh] mt-[56px]'>
         <div className='w-[100%] h-[68%] overflow-y-scroll my-[10px] border-b border-gray-200'>
-          <table className='w-[100%] bg-white'>
-            <thead className='sticky top-0 bg-[#db1436] text-white'>
+          <table className='w-[100%]'>
+            <thead className='sticky top-0 '>
               <tr className='h-8'>
                 <th>id</th>
                 <th>categoria</th>

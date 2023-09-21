@@ -58,7 +58,7 @@ export default function Dashboard () {
 
   const { setPageTitle } = useAdmin()
   useEffect(() => {
-    setPageTitle('Dashboard')
+    setPageTitle('Valoraciones')
   }, [])
 
   useEffect(() => {
