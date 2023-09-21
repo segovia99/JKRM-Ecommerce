@@ -18,9 +18,6 @@ export default function Catalogo ({ IsLogin, User }) {
   const [current, setCurrent] = useState(0)
   const pages = []
   const { addToCart } = useCart()
-  const loadData = async () => {
-    setIsLoading(false)
-  }
 
   useEffect(() => {
     setIsLogin(IsLogin)
@@ -28,7 +25,6 @@ export default function Catalogo ({ IsLogin, User }) {
   }, [])
 
   useEffect(() => {
-    loadData()
     AOS.init()
   }, [])
 
@@ -38,6 +34,7 @@ export default function Catalogo ({ IsLogin, User }) {
       setCount(response2.data[0].count)
       const response = await axios.get('/api/pagination/pagination?page=' + (current * 6))
       setProducts(response.data)
+      setIsLoading(false)
     })()
   }, [current])
 
