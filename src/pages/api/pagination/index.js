@@ -2,7 +2,7 @@ import { pool } from '@/db/db'
 
 export default async function handler (req, res) {
   if (req.method === 'GET') {
-    const [result] = await pool.query('SELECT * FROM productos LIMIT 4 OFFSET ' + req.query.page)
+    const [result] = await pool.query('SELECT COUNT(id) as count FROM productos')
     res.status(200).json(result)
   }
 
