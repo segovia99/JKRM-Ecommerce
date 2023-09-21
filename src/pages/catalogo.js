@@ -36,7 +36,7 @@ export default function Catalogo ({ IsLogin, User }) {
     (async () => {
       const response2 = await axios.get('/api/pagination')
       setCount(response2.data[0].count)
-      const response = await axios.get('/api/products?page=' + (current * 6))
+      const response = await axios.get('/api/pagination/pagination?page=' + (current * 6))
       setProducts(response.data)
     })()
   }, [current])
