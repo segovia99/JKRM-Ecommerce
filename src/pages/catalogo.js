@@ -137,14 +137,14 @@ export async function getServerSideProps (context) {
       User = { id, nombre, apellido, email, direccion, rol }
       if (rol === 1) {
         context.res.writeHead(302, {
-          Location: '/admin/dashboard' URL de la página a la que se redireccionará
+          Location: '/admin/dashboard' // URL de la página a la que se redireccionará
         })
         context.res.end()
       }
     }
   }
 
-  console.log(IsLogin)
+  // console.log(IsLogin)
   return {
     props: {
       IsLogin,
