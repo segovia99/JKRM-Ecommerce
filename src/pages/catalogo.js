@@ -14,11 +14,11 @@ export default function Catalogo ({ IsLogin, User }) {
   const { setIsLogin, setUser } = useUserStore()
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [count, setCount] = useState(0)
+  const [current, setCurrent] = useState(0)
+  const pages = []
   const { addToCart } = useCart()
   const loadData = async () => {
-    const response = await axios.get('/api/products')
-    // console.log(response.data)
-    setProducts(response.data)
     setIsLoading(false)
   }
 
@@ -31,6 +31,19 @@ export default function Catalogo ({ IsLogin, User }) {
     loadData()
     AOS.init()
   }, [])
+
+  useEffect(() => {
+    (async () => {
+      const response2 = await axios.get('/api/pagination')
+      setCount(response2.data[0].count)
+      const response = await axios.get('/api/pagination/pagination?page=' + (current * 6))
+      setProducts(response.data)
+    })()
+  }, [current])
+
+  for (let i = 0; i < Math.ceil(count / 6); i++) {
+    pages.push(i)
+  }
   return (
     <LandingLayout>
       <div className='w-full  pt-[30px] pb-[60px]'>
@@ -65,6 +78,51 @@ export default function Catalogo ({ IsLogin, User }) {
                   )
                 })
                }
+                </div>
+                <div className='flex flex-row justify-center'>
+                  <button
+                    className='bg-[#000000] p-[10px] text-[#ffffff] w-[100px] rounded-l-md hover:bg-[#3b3b3b]' onClick={() => {
+                      if (current > 0) {
+                        setCurrent(current - 1)
+                        window.scrollTo(0, 0)
+                      }
+                    }}
+                  >Anterior
+                  </button>
+                  {
+                    pages.map((item, index) => {
+                      if (current === item) {
+                        return (
+                          <button
+                            className='bg-[#e6e6e6] w-[60px] hover:bg-[#f0f0f0]' key={index} onClick={() => {
+                              setCurrent(index)
+                              window.scrollTo(0, 0)
+                            }}
+                          >{item + 1}
+                          </button>
+                        )
+                      } else {
+                        return (
+                          <button
+                            className='bg-[#f0f0f0] w-[60px] hover:bg-[#e6e6e6]' key={index} onClick={() => {
+                              setCurrent(index)
+                              window.scrollTo(0, 0)
+                            }}
+                          >{item + 1}
+                          </button>
+                        )
+                      }
+                    })
+                  }
+                  <button
+                    className='bg-[#000000] p-[10px] text-[#ffffff] w-[100px] rounded-r-md hover:bg-[#3b3b3b]' onClick={() => {
+                      if (current < pages.length - 1) {
+                        setCurrent(current + 1)
+                        window.scrollTo(0, 0)
+                      }
+                    }}
+                  >Siguiente
+                  </button>
                 </div>
               </div>
             </div>
