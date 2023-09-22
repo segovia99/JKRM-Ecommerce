@@ -17,7 +17,7 @@ export default function Catalogo ({ IsLogin, User }) {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const filteredProducts = filterProducts(products)
-  console.log(filteredProducts)
+  // console.log(filteredProducts)
   // const [count, setCount] = useState(0)
   // const [current, setCurrent] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -41,7 +41,7 @@ export default function Catalogo ({ IsLogin, User }) {
   }
 
   const goToNextPage = () => {
-    const totalPages = Math.ceil(products.length / itemsPerPage)
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1)
       window.scrollTo(0, 0)
@@ -76,7 +76,7 @@ export default function Catalogo ({ IsLogin, User }) {
 
   const pages = []
 
-  for (let i = 0; i < Math.ceil(products.length / itemsPerPage); i++) {
+  for (let i = 0; i < Math.ceil(filteredProducts.length / itemsPerPage); i++) {
     pages.push(i)
   }
 
