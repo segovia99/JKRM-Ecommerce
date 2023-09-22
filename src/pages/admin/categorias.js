@@ -3,6 +3,8 @@ import Layout from '@/components/admin/Layout'
 import axios from 'axios'
 import { useAdmin } from '@/hooks/useAdmin'
 import { jwtVerify } from 'jose'
+import TrashIcon from '@heroicons/react/24/outline/TrashIcon'
+import PencilSquareIcon from '@heroicons/react/24/outline/PencilSquareIcon'
 
 function queryAttr (element, attribute, query) {
   return document.querySelector(`${element}[${attribute}="${query}"]`)
@@ -47,15 +49,17 @@ export default function Categorias () {
 
   return (
     <Layout selection='categorias'>
-      <div className='w-[100%] h-[85vh] mt-[56px]'>
-        <div className='w-[100%] h-[68%] overflow-y-scroll my-[10px] border-b border-gray-200'>
-          <table className='w-[100%]'>
-            <thead className='sticky top-0 '>
+      <div className='w-[100%] h-[85vh] mt-2 bg-base-100 shadow-xl card p-6'>
+        <div className='text-xl font-semibold'>Categorias</div>
+        <div className='divider mt-2' />
+        <div className='w-[100%] h-[68%] overflow-y-auto border-gray-200 w-full'>
+          <table className='w-full table'>
+            <thead className='sticky top-0 w-full'>
               <tr className='h-8'>
                 <th>id</th>
                 <th>categoria</th>
-                <th>op. 1</th>
-                <th>op. 2</th>
+                <th />
+                <th />
               </tr>
             </thead>
             <tbody>
@@ -66,19 +70,19 @@ export default function Categorias () {
                     if (idCategorias % 2 === 0) {
                       return (
                         <tr key={item.id} className='h-8 bg-[#f2f2f2]'>
-                          <td>{item.id}</td>
-                          <td>{item.nombre}</td>
-                          <td><button onClick={() => deleteCategory(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
-                          <td><button onClick={() => modifyCategory(item)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>modificar</button></td>
+                          <td className='font-bold'>{item.id}</td>
+                          <td className='font-bold'>{item.nombre}</td>
+                          <td><button onClick={() => deleteCategory(item.id)} className='btn btn-square btn-ghost'><TrashIcon className='w-5' /></button></td>
+                          <td><button onClick={() => modifyCategory(item)} className='btn btn-square btn-ghost'><PencilSquareIcon className='w-5' /></button></td>
                         </tr>
                       )
                     } else {
                       return (
                         <tr key={item.id} className='h-8'>
-                          <td>{item.id}</td>
-                          <td>{item.nombre}</td>
-                          <td><button onClick={() => deleteCategory(item.id)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>borrar</button></td>
-                          <td><button onClick={() => modifyCategory(item)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>modificar</button></td>
+                          <td className='font-bold'>{item.id}</td>
+                          <td className='font-bold'>{item.nombre}</td>
+                          <td><button onClick={() => deleteCategory(item.id)} className='btn btn-square btn-ghost'><TrashIcon className='w-5' /></button></td>
+                          <td><button onClick={() => modifyCategory(item)} className='btn btn-square btn-ghost'><PencilSquareIcon className='w-5' /></button></td>
                         </tr>
                       )
                     }
@@ -87,25 +91,20 @@ export default function Categorias () {
             </tbody>
           </table>
         </div>
-        <div className='w-[100%] h-[20%] bg-white border-b border-gray-200 flex flex-col justify-center space-y-[16px]'>
+        <div className='divider mt-2' />
+        <div className='card shadow-xl w-[100%] h-[20%] bg-base-100 flex flex-col justify-center space-y-[16px]'>
           <div>
             <button
               onClick={() => insertCategory(
                 queryAttr('input', 'name', 'nombreCategoria').value
-              )} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'
-            >insertar
+              )} className='btn px-6 btn-sm normal-case btn-info ml-16'
+            >Insertar
             </button>
-            <button onClick={() => updateCategory(document.querySelector('input[name="idCategoria"]').value, document.querySelector('input[name="nombreCategoria"]').value)} className='hover:bg-black text-white bg-[#db1436] p-[4px] rounded-md mx-[10px]'>guardar</button>
+            <button onClick={() => updateCategory(document.querySelector('input[name="idCategoria"]').value, document.querySelector('input[name="nombreCategoria"]').value)} className='btn px-6 btn-sm normal-case btn-info ml-16'>Guardar</button>
           </div>
-          <div id='categorias' className='flex flex-row space-x-[10px] wrap'>
-            <div className='ml-[16px]'>
-              <label className='float-left w-[100px]'>id </label>
-              <input name='idCategoria' className='border border-gray-200 bg-gray-200' type='text' disabled />
-            </div>
-            <div>
-              <label className='float-left w-[100px]'>nombre </label>
-              <input name='nombreCategoria' className='border border-gray-200' type='text' />
-            </div>
+          <div id='categorias' className='flex flex-row space-x-[10px] wrap pb-6'>
+            <input name='idCategoria' className='font-bold ml-16 input input-sm input-bordered  w-full max-w-xs' type='text' disabled placeholder='Id (No necesario)' />
+            <input name='nombreCategoria' className='font-bold ml-16 input input-sm input-bordered  w-full max-w-xs' type='text' placeholder='Nombre categoria' />
           </div>
         </div>
       </div>
