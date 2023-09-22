@@ -29,6 +29,11 @@ export default function FilterCatalago () {
         ...prevState,
         category: event.target.name
       }))
+    } else {
+      setFilters(prevState => ({
+        ...prevState,
+        category: 'all'
+      }))
     }
   }
 
