@@ -37,6 +37,15 @@ export default function FilterCatalago () {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      setFilters(prevState => ({
+        ...prevState,
+        category: 'all'
+      }))
+    }
+  }, [])
+
   return (
     <div className='lg:w-[270px] categorias bg-white'>
       <div className='filter-widget w-full fixed lg:relative left-0 top-0 h-screen z-10 lg:h-auto overflow-y-scroll lg:overflow-y-auto bg-white px-[30px] pt-[40px] mb-[30px]  hidden lg:block'>
