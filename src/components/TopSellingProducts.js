@@ -25,7 +25,7 @@ export default function TopSellingProducts () {
             <h1 className='sm:text-3xl text-xl font-600 text-qblacktext leading-none'>Los productos más vendidos</h1>
           </div>
           <div>
-            <Link href='/'>
+            <Link href='/catalogo'>
               <div className='flex space-x-2 items-center'>
                 <p className='text-base font-600 text-qblack'>Ver mas</p>
                 <span className='animate-right-dir'>

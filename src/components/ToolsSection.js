@@ -27,7 +27,7 @@ function ToolsSection () {
               <h1 className='sm:text-3xl text-xl font-600 text-black leading-none'>Herramientas</h1>
             </div>
             <div>
-              <Link href='/'>
+              <Link href='/catalogo'>
                 <div className='flex space-x-2 items-center'>
                   <p className='text-base font-600 text-black'>Ver Mas</p>
                   <span className='animate-right-dir'>
