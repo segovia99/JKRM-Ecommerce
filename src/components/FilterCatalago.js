@@ -1,15 +1,47 @@
+import { useFilters } from '@/hooks/useFilters'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 export default function FilterCatalago () {
+  const { setFilters } = useFilters()
+
+  const [categorias, setCategorias] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+  const loadCategorias = async () => {
+    const response = await axios.get('/api/categoriasCRUD/categorias')
+    setCategorias(response.data)
+    // setIsLoading(false)
+  }
+  useEffect(() => {
+    loadCategorias()
+  }, [])
+
+  // const handleChangeMinPrice = (event) => {
+  //   setFilters(prevState => ({
+  //     ...prevState,
+  //     minPrice: event.target.value
+  //   }))
+  // }
+
+  const handleChangeCategory = (event) => {
+    if (event.target.checked) {
+      setFilters(prevState => ({
+        ...prevState,
+        category: event.target.name
+      }))
+    }
+  }
+
   return (
-    <div className='lg:w-[270px] categorias'>
+    <div className='lg:w-[270px] categorias bg-white'>
       <div className='filter-widget w-full fixed lg:relative left-0 top-0 h-screen z-10 lg:h-auto overflow-y-scroll lg:overflow-y-auto bg-white px-[30px] pt-[40px] mb-[30px]  hidden lg:block'>
-        <div className='filter-subject-item pb-10 border-b border-qgray-border'>
+        <div className='filter-subject-item pb-10 border-b '>
           <div className='subject-title mb-[30px]'>
             <h1 className='text-black text-base font-500'>Categorias</h1>
           </div>
           <div className='filter-items'>
             <ul>
-              <li className='item flex justify-between items-center mb-5'>
+              {/* <li className='item flex justify-between items-center mb-5'>
                 <div className='flex space-x-[14px] items-center'>
                   <div>
                     <input id='herramientas' type='checkbox' name='herramientas' />
@@ -18,37 +50,23 @@ export default function FilterCatalago () {
                     <label htmlFor='herramientas' className='text-xs font-black font-400 capitalize'>Herramientas</label>
                   </div>
                 </div>
-              </li>
-              <li className='item flex justify-between items-center mb-5'>
-                <div className='flex space-x-[14px] items-center'>
-                  <div>
-                    <input id='construccion' type='checkbox' name='construccion' />
-                  </div>
-                  <div>
-                    <label htmlFor='construccion' className='text-xs font-black font-400 capitalize'>Materiales de construcción</label>
-                  </div>
-                </div>
-              </li>
-              <li className='item flex justify-between items-center mb-5'>
-                <div className='flex space-x-[14px] items-center'>
-                  <div>
-                    <input id='hogar' type='checkbox' name='hogar' />
-                  </div>
-                  <div>
-                    <label htmlFor='hogar' className='text-xs font-black font-400 capitalize'>Hogar</label>
-                  </div>
-                </div>
-              </li>
-              <li className='item flex justify-between items-center mb-5'>
-                <div className='flex space-x-[14px] items-center'>
-                  <div>
-                    <input id='fontaneria' type='checkbox' name='fontaneria' />
-                  </div>
-                  <div>
-                    <label htmlFor='fontaneria' className='text-xs font-black font-400 capitalize'>Fontanería</label>
-                  </div>
-                </div>
-              </li>
+              </li> */}
+              {
+                categorias.map((item, index) => {
+                  return (
+                    <li className='item flex justify-between items-center mb-5' key={index}>
+                      <div className='flex space-x-[14px] items-center'>
+                        <div>
+                          <input id={item.id} type='checkbox' name={item.id} onChange={handleChangeCategory} />
+                        </div>
+                        <div>
+                          <label htmlFor={item.id} className='text-xs font-black font-400 capitalize'>{item.nombre}</label>
+                        </div>
+                      </div>
+                    </li>
+                  )
+                })
+              }
             </ul>
           </div>
         </div>

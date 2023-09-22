@@ -2,6 +2,7 @@ import { useAdmin } from '@/hooks/useAdmin'
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 import axios from 'axios'
 import { Form, Formik } from 'formik'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 function RightSidebar () {
   const { setIsOpen, isOpen, header, producto, formikRef, isUpdate, setProductosG } = useAdmin()
@@ -39,6 +40,18 @@ function RightSidebar () {
       progress: undefined
     })
   }
+
+  const [categorias, setCategorias] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+  const loadCategorias = async () => {
+    const response = await axios.get('/api/categoriasCRUD/categorias')
+    setCategorias(response.data)
+    // setIsLoading(false)
+  }
+
+  useEffect(() => {
+    loadCategorias()
+  }, [])
   return (
     <div className={' fixed overflow-hidden z-20 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out ' + (isOpen ? ' transition-opacity opacity-100 duration-500 translate-x-0  ' : ' transition-all delay-500 opacity-0 translate-x-full  ')}>
 
@@ -97,6 +110,7 @@ function RightSidebar () {
                         <input
                           type='text' placeholder='Ingresa el nombre del productos' name='nombre' className='input input-bordered w-full '
                           onChange={handleChange} value={values.nombre} required
+                          autoComplete='off'
                         />
                       </div>
                       <div className='form-control w-full'>
@@ -106,6 +120,8 @@ function RightSidebar () {
                         <input
                           type='text' placeholder='Ingresa el Precio' name='precio' className='input input-bordered w-full '
                           onChange={handleChange} value={values.precio} required
+                          autoComplete='off'
+
                         />
                       </div>
                       <div className='form-control w-full'>
@@ -115,6 +131,8 @@ function RightSidebar () {
                         <input
                           type='text' placeholder='Ingresa el stock' name='cantidad' className='input input-bordered w-full '
                           onChange={handleChange} value={values.cantidad} required
+                          autoComplete='off'
+
                         />
                       </div>
                       <div className='form-control w-full'>
@@ -124,6 +142,8 @@ function RightSidebar () {
                         <textarea
                           className='textarea textarea-bordered' placeholder='Ingresa una descripcion del producto' name='descripcion'
                           onChange={handleChange} value={values.descripcion} required
+                          autoComplete='off'
+
                         />
                       </div>
                       <div className='form-control w-full'>
@@ -133,6 +153,8 @@ function RightSidebar () {
                         <input
                           type='text' placeholder='Ingresa la url de la imagen' name='url' className='input input-bordered w-full '
                           onChange={handleChange} value={values.url} required
+                          autoComplete='off'
+
                         />
                       </div>
                       <div className='form-control w-full'>
@@ -150,9 +172,13 @@ function RightSidebar () {
                         </label>
                         <select className='select select-bordered w-full ' name='categoria' onChange={handleChange} value={values.categoria} required>
                           <option disabled selected>categorias</option>
-                          <option value='1'>Herramientas</option>
-                          <option value='3'>Hogar</option>
-                          <option value='4'>Fontaneria</option>
+                          {
+                            categorias.map((item, index) => {
+                              return (
+                                <option key={index} value={item.id} name>{item.nombre}</option>
+                              )
+                            })
+                         }
                         </select>
                       </div>
 

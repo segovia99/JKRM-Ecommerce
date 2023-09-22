@@ -12,7 +12,19 @@ import PencilSquareIcon from '@heroicons/react/24/outline/PencilSquareIcon'
 const TopSideButtons = ({ removeFilter, applyFilter, applySearch, newProduct }) => {
   const [filterParam, setFilterParam] = useState('')
   const [searchText, setSearchText] = useState('')
-  const locationFilters = ['Herramientas', 'Hogar', 'Material de contruccion', 'Fontaneria', 'Material electrico']
+  const [categorias, setCategorias] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+  const loadCategorias = async () => {
+    const response = await axios.get('/api/categoriasCRUD/categorias')
+    setCategorias(response.data)
+    // setIsLoading(false)
+  }
+
+  useEffect(() => {
+    loadCategorias()
+  }, [])
+
+  // const locationFilters = ['Herramientas', 'Hogar', 'Material de contruccion', 'Fontaneria', 'Material electrico']
 
   const showFiltersAndApply = (params) => {
     applyFilter(params)
@@ -41,8 +53,8 @@ const TopSideButtons = ({ removeFilter, applyFilter, applySearch, newProduct }) 
         <label tabIndex={0} className='btn btn-sm btn-outline'><FunnelIcon className='w-5 mr-2' />Filtrar</label>
         <ul tabIndex={0} className='dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52'>
           {
-                        locationFilters.map((l, k) => {
-                          return <li key={k}><a onClick={() => showFiltersAndApply(l)}>{l}</a></li>
+                        categorias.map((l, k) => {
+                          return <li key={k}><a onClick={() => showFiltersAndApply(l.nombre)}>{l.nombre}</a></li>
                         })
                     }
           <div className='divider mt-0 mb-0' />

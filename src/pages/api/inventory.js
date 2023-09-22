@@ -7,8 +7,8 @@ export default async function handler (req, res) {
   }
 
   if (req.method === 'POST') {
-    const { nombre, descripcion, precio, cantidad, url, marca } = req.body
-    await pool.query('INSERT INTO productos(id_categorias, nombre, descripcion, precio, cantidad, url, marca) VALUES(?, ?, ?, ?, ?, ?, ?)', [1, nombre, descripcion, precio, cantidad, url, marca])
+    const { nombre, descripcion, precio, cantidad, url, marca, categoria } = req.body
+    await pool.query('INSERT INTO productos(id_categorias, nombre, descripcion, precio, cantidad, url, marca) VALUES(?, ?, ?, ?, ?, ?, ?)', [categoria, nombre, descripcion, precio, cantidad, url, marca])
 
     const [result] = await pool.query('SELECT p.*, c.nombre AS categoria FROM productos p INNER JOIN categorias c ON p.id_categorias = c.id ORDER BY p.id DESC')
     res.status(200).json(result)
