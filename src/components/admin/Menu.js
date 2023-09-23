@@ -5,7 +5,6 @@ import ArchiveBoxIcon from '@heroicons/react/24/outline/ArchiveBoxIcon'
 import ListBulletIcon from '@heroicons/react/24/outline/ListBulletIcon'
 import UserIcon from '@heroicons/react/24/outline/UserIcon'
 import PhotoIcon from '@heroicons/react/24/outline/PhotoIcon'
-import StarIcon from '@heroicons/react/24/outline/StarIcon'
 
 const iconClasses = 'h-6 w-6'
 
@@ -40,10 +39,5 @@ export const Routes = [
     path: '/admin/banners', // url
     icon: <PhotoIcon className={iconClasses} />, // icon component
     name: 'Banners' // name that appear in Sidebar
-  },
-  {
-    path: '/admin/dashboard', // url
-    icon: <StarIcon className={iconClasses} />, // icon component
-    name: 'Valoraciones' // name that appear in Sidebar
   }
 ]
