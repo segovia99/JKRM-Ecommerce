@@ -29,7 +29,7 @@ function MainBanners () {
               : (
                 <div className='banner-card xl:flex xl:space-x-[30px] xl:h-[600px]  mb-[30px]'>
                   <div data-aos='fade-right' className='xl:w-[740px] w-full h-full'>
-                    <Link href='/'>
+                    <Link href='/catalogo'>
                       <picture>
                         <source media='(min-width:1025px)' srcSet={banners[0].url} />
                         <img src={banners[0].url} alt='' className='w-full max-w-full h-auto object-cover' />
@@ -38,12 +38,12 @@ function MainBanners () {
                   </div>
                   <div data-aos='fade-left' className='flex-1 flex xl:flex-col flex-row xl:space-y-[30px] h-full object-cover'>
                     <div className='w-full xl:h-1/2'>
-                      <Link href='/single-product'>
+                      <Link href='/catalogo'>
                         <img src={banners[1].url} alt='' className='w-full h-full' />
                       </Link>
                     </div>
                     <div className='w-full xl:h-1/2'>
-                      <Link href='/single-product'>
+                      <Link href='/catalogo'>
                         <img src={banners[2].url} alt='' className='w-full h-full' />
                       </Link>
                     </div>
