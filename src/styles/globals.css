@@ -11,6 +11,10 @@ body {
     overflow: hidden;
 }
 
+.category-dropdown {
+  transition: all .3s ease-in-out;
+}
+
 .carousel-container {
     background-color: silver;
     overflow: hidden;

@@ -7,6 +7,8 @@ export default async function handler (req, res) {
   }
 
   if (req.method === 'POST') {
-    res.status(400)
+    const { id } = req.body
+    const [result] = await pool.query('SELECT * FROM productos where id_categorias=?', [id])
+    res.status(200).json(result)
   }
 }
