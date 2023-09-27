@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-function CartProductItem ({ img, title, price, id, removeFromCart }) {
+function CartProductItem ({ img, title, price, id, quantity, removeFromCart }) {
   return (
     <>
 
@@ -10,10 +10,13 @@ function CartProductItem ({ img, title, price, id, removeFromCart }) {
         </div>
         <div className='flex-1 h-full flex flex-col justify-center '>
           <Link href={`/detail/${id}`}>
-            <p className='title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600'>{title}</p>
+            <p className='title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600'>
+              {title}
+            </p>
           </Link>
           <p className='price'>
             <span className='offer-price text-qred font-600 text-[15px] ml-2'>${price}</span>
+            <sub className='text-[13px] text-qgray ml-2 mt-2'>x{quantity}</sub>
           </p>
         </div>
       </div>
