@@ -31,7 +31,7 @@ export default function Cart () {
                   <div className='total mb-6'>
                     <div className=' flex justify-between'>
                       <p className='text-[18px] font-medium text-qblack'>Total</p>
-                      <p className='text-[18px] font-medium text-qred'>${calculateTotal()}</p>
+                      <p className='text-[18px] font-medium text-qred'>${calculateTotal().toFixed(2)}</p>
                     </div>
                   </div>
                   <Link href='/checkout'>

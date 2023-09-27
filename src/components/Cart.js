@@ -40,7 +40,7 @@ function Cart () {
               <div className='product-actions px-4 mb-[30px]'>
                 <div className='total-equation flex justify-between items-center mb-[28px]'>
                   <span className='text-[15px] font-semibold text-qblack'>Total</span>
-                  <span className='text-[15px] font-500 text-qred '>${calculateTotal()}</span>
+                  <span className='text-[15px] font-500 text-qred '>${calculateTotal().toFixed(2)}</span>
                 </div>
                 <div className='product-action-btn'>
                   <Link href='/cart'>

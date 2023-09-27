@@ -48,7 +48,7 @@ export default function CartList ({ products, removeFromCart }) {
                 </td>
                 <td className='text-right py-4'>
                   <div className='flex space-x-1 items-center justify-center'>
-                    <span className='ttext-[15px] font-normal'>${product.subtotal}</span>
+                    <span className='ttext-[15px] font-normal'>${product.subtotal.toFixed(2)}</span>
                   </div>
                 </td>
                 <td className='text-right py-4'>
