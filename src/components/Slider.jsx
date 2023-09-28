@@ -19,6 +19,7 @@ export default function SliderN () {
 
   const goToPrevious = () => {
     sliderRef.current.slickPrev()
+    console.log(currentSlide)
   }
 
   const goToNext = () => {
