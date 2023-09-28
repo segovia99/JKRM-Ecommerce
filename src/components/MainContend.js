@@ -4,6 +4,8 @@ import MainBanners from './MainBanners'
 import ToolsSection from './ToolsSection'
 import ShopBrands from './ShopBrands'
 import TopSellingProducts from './TopSellingProducts'
+// import Carousel from './ui/Carousel'
+import Slider from './Slider'
 import Carousel from './ui/Carousel'
 
 function Maincontend () {
@@ -12,11 +14,12 @@ function Maincontend () {
   }, [])
   return (
     <div className='w-full  pt-[0px] pb-[60px] bg-[#F8F8F8]'>
-      <Carousel />
+      <Slider />
       <MainBanners />
       <ToolsSection />
       <ShopBrands />
       <TopSellingProducts />
+      <Carousel />
     </div>
   )
 }

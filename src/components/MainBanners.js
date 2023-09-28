@@ -18,7 +18,7 @@ function MainBanners () {
     getBanners()
   }, [])
   return (
-    <div className='w-full banner-wrapper mb-[60px]'>
+    <div className='w-full banner-wrapper mb-[60px] mt-4'>
       <div className='container-x mx-auto'>
         <div className='w-full'>
           {
