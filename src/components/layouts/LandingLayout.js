@@ -17,7 +17,7 @@ const LandingLayout = ({ children }) => {
 
       <LandingNavbar />
       <LeftMenu />
-      <main data-theme='light'>
+      <main data-theme='light' className='bg-[#f8f8f8]'>
         {children}
       </main>
       <Footer />

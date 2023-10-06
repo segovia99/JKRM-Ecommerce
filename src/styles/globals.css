@@ -11,41 +11,30 @@ body {
     overflow: hidden;
 }
 
-.slick-list {
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
+.tracking-wide {
+  letter-spacing: .025em;
 }
 
-.slick-list, .slick-slider {
-  display: block;
-  position: relative;
+.bg-primarygray {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 248 248/var(--tw-bg-opacity));
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-qgraytwo {
+  --tw-text-opacity: 1;
+  color: rgb(142 142 142/var(--tw-text-opacity));
+}
+
+.bg-qblack {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 34 34/var(--tw-bg-opacity));
 }
 
 
-.slick-slider {
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
-  touch-action: pan-y;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -khtml-user-select: none;
-}
-
-.slick-slider .slick-list, .slick-slider .slick-track {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-.slick-track {
-  display: block;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  top: 0;
-}
 .category-dropdown {
   transition: all .3s ease-in-out;
 }
