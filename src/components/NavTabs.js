@@ -19,7 +19,7 @@ const navigation = {
     },
     {
       name: 'Contactanos',
-      href: '/'
+      href: '/contact'
     }
   ]
 }

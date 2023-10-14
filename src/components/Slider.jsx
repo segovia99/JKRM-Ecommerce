@@ -98,7 +98,7 @@ export default function SliderN () {
                       <h1 className='md:text-[66px] text-[40px]  font-bold text-black md:leading-[80px] leading-[40px] mb-[44px]'>
                         ¡Nuestra atención al cliente es rápida, personalizada y efectiva!
                       </h1>
-                      <Link href='/category/1'>
+                      <Link href='/contact'>
                         <div className='w-[160px] h-[52px] flex justify-center items-center group rounded bg-primary text-white relative transition-all duration-300 ease-in-out overflow-hidden cursor-pointer banner-wrapper mb-[60px]'>
                           <div className='flex space-x-1 items-center transition-all duration-300 ease-in-out relative z-10'>
                             <span className='text-sm font-600 tracking-wide leading-7 mr-2'>Contactanos</span>
