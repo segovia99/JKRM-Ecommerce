@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from './Icons'
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
 
 function Footer () {
   return (
@@ -8,7 +9,7 @@ function Footer () {
         <div className='w-full flex flex-col items-center mb-[50px]'>
           <div className='mb-[40px]'>
             <Link href='/'>
-              <img src='/logo.webp' width='152' height='36' />
+              <img src='/logo.webp' width='152' height='36' alt='logo' />
             </Link>
           </div>
           <div className='w-full h-[1px] bg-[#E9E9E9]' />
@@ -65,6 +66,19 @@ function Footer () {
           </div>
         </div>
       </div>
+
+      <FloatingWhatsApp
+        phoneNumber='77151617'
+        accountName='JKRM'
+        avatar='/logo.webp'
+        statusMessage='Enlinea'
+        chatMessage='Hola! ¿Cómo podemos ayudarle?'
+        placeholder='Escribe tu mensaje aquí...'
+        allowEsc
+        allowClickAway
+        notification
+        notificationSound
+      />
     </footer>
   )
 }
