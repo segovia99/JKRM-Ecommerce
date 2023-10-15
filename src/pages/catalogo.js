@@ -86,7 +86,7 @@ export default function Catalogo ({ IsLogin, User }) {
         <div className='products-page-wrapper w-full'>
           <div className='container-x mx-auto'>
             <div className='w-full lg:flex lg:space-x-[30px]'>
-              <FilterCatalago setCurrentPage={setCurrentPage} />
+              <FilterCatalago />
               <div className='flex-1'>
                 <div className='grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]'>
                   {isLoading &&

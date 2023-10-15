@@ -2,7 +2,7 @@ import { useFilters } from '@/hooks/useFilters'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export default function FilterCatalago ({ setCurrentPage }) {
+export default function FilterCatalago () {
   const { setFilters } = useFilters()
 
   const [categorias, setCategorias] = useState([])
@@ -24,52 +24,24 @@ export default function FilterCatalago ({ setCurrentPage }) {
   // }
 
   const handleChangeCategory = (event) => {
-    setCurrentPage(1)
-    const selectedCategory = event.target.name
-    setFilters((prevState) => {
-      const updatedCategories = [...prevState.categories]
-      const indexOfAll = updatedCategories.indexOf('all')
-
-      if (selectedCategory === 'all') {
-        // Si se selecciona "all," eliminarlo del array de categorías
-        if (indexOfAll !== -1) {
-          updatedCategories.splice(indexOfAll, 1)
-        }
-      } else {
-        if (indexOfAll !== -1) {
-          // Si "all" está en el array, quitarlo
-          updatedCategories.splice(indexOfAll, 1)
-        }
-
-        if (event.target.checked) {
-          // Agregar la categoría si está marcada
-          updatedCategories.push(selectedCategory)
-        } else {
-          // Eliminar la categoría si está desmarcada
-          const index = updatedCategories.indexOf(selectedCategory)
-          if (index !== -1) {
-            updatedCategories.splice(index, 1)
-          }
-        }
-      }
-
-      // Si el array de categorías está vacío, agregar "all" nuevamente
-      if (updatedCategories.length === 0) {
-        updatedCategories.push('all')
-      }
-
-      return {
+    if (event.target.checked) {
+      setFilters(prevState => ({
         ...prevState,
-        categories: updatedCategories
-      }
-    })
+        category: event.target.name
+      }))
+    } else {
+      setFilters(prevState => ({
+        ...prevState,
+        category: 'all'
+      }))
+    }
   }
 
   useEffect(() => {
     return () => {
       setFilters(prevState => ({
         ...prevState,
-        categories: ['all']
+        category: 'all'
       }))
     }
   }, [])
