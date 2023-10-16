@@ -6,13 +6,12 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 const PersonalInfo = () => {
+  const router = useRouter()
   const { user } = useUserStore()
   const makeEmail = async () => {
-    const router = useRouter()
     const { id } = router.query
-    
     const info = {
-      id: id,
+      id,
       name: user.nombre,
       lastname: user.apellido,
       email: user.email,

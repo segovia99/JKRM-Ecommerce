@@ -5,12 +5,21 @@ export default async function handler (req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
+  const { id, nombre, email, why } = req.body
+  const [result] = await pool.query(`SELECT productos.nombre AS nombre_producto, productos.url AS image, productos.precio AS price, detalle_pedido.cantidad as cantidad, detalle_pedido.cantidad * productos.precio AS total,
+    pedidos.estado_pedido
+    FROM productos
+    INNER JOIN detalle_pedido ON productos.id = detalle_pedido.producto_id
+    INNER JOIN pedidos ON detalle_pedido.pedido_id = pedidos.id
+    INNER JOIN usuarios ON pedidos.id_usuario = usuarios.id
+    WHERE detalle_pedido.pedido_id = ?
+    `, [id])
 
-  const { id, nombre, email, products, total } = JSON.parse(req.body)
+  console.log(result)
 
   let html = ''
 
-  products.forEach((product) => {
+  result.forEach((product) => {
     html += `
     <tr>
         <td style="border: 1px solid #ddd;">${product.nombre}</td>
@@ -22,8 +31,8 @@ export default async function handler (req, res) {
   })
 
   await transporter.sendMail({
-    from: '"Ferreteria JKRM" <ferreteria.jkrm@gmail.com>', // sender address
-    to: `${email}`, // receiver
+    from: '"j" <jonathanlima1204@gmail.com>', // sender address
+    to: 'ferreteria.jkrm@gmail.com', // receiver
     subject: `Tu pedido #${id} de ferreteria JKRM`, // Subject line
     html: `
     <!DOCTYPE html>
@@ -68,7 +77,6 @@ export default async function handler (req, res) {
                     <tfoot>
                         <tr>
                             <td colspan="3" align="right" style="border: 1px solid #ddd;">Total:</td>
-                            <td style="border: 1px solid #ddd;">$${total}</td>
                         </tr>
                     </tfoot>
                 </table>
