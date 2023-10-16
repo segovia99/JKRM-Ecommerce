@@ -5,7 +5,8 @@ export default async function handler (req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
-  const { id, nombre, email, why } = req.body
+  const { id, name, lastname, email, why } = req.body
+
   const [result] = await pool.query(`SELECT productos.nombre AS nombre_producto, productos.url AS image, productos.precio AS price, detalle_pedido.cantidad as cantidad, detalle_pedido.cantidad * productos.precio AS total,
     pedidos.estado_pedido
     FROM productos
@@ -15,25 +16,23 @@ export default async function handler (req, res) {
     WHERE detalle_pedido.pedido_id = ?
     `, [id])
 
-  console.log(result)
-
   let html = ''
 
   result.forEach((product) => {
     html += `
     <tr>
-        <td style="border: 1px solid #ddd;">${product.nombre}</td>
-        <td style="border: 1px solid #ddd;">${product.quantity}</td>
-        <td style="border: 1px solid #ddd;">$${product.precio}</td>
-        <td style="border: 1px solid #ddd;">$${product.subtotal}</td>
+        <td style="border: 1px solid #ddd;">${product.nombre_producto}</td>
+        <td style="border: 1px solid #ddd;">${product.cantidad}</td>
+        <td style="border: 1px solid #ddd;">$${product.price}</td>
+        <td style="border: 1px solid #ddd;">$${product.price}</td>
     </tr>
     `
   })
 
   await transporter.sendMail({
-    from: '"j" <jonathanlima1204@gmail.com>', // sender address
+    from: '"Devolucion" <ferreteria.jkrm@gmail.com>', // sender address
     to: 'ferreteria.jkrm@gmail.com', // receiver
-    subject: `Tu pedido #${id} de ferreteria JKRM`, // Subject line
+    subject: `Devolucion de pedido  ${name}  ${lastname}`, // Subject line
     html: `
     <!DOCTYPE html>
 <html lang="es">
@@ -52,7 +51,7 @@ export default async function handler (req, res) {
                             <img src="https://jkrm-ecommerce.vercel.app/logo.webp" alt="Logo de la tienda" width="150" height="auto" style="display: block;">
                         </td>
                         <td align="right" style="padding: 0 40px;">
-                            <h3 style="margin-top: 0;">Confirmación del Pedido</h3>
+                            <h3 style="margin-top: 0;">Devolucion de pedido</h3>
                         </td>
                     </tr>
                 </table>
@@ -60,8 +59,9 @@ export default async function handler (req, res) {
         </tr>
         <tr>
             <td bgcolor="#ffffff" style="padding: 40px;">
-                <p style="color: #db1436; font-size: 24px;">Hola ${nombre},</p>
-                <p style="font-size:18px;">Gracias por comprar con nosotros. Te enviaremos una confirmación cuando tus artículos se envíen.</p>
+            <p style="font-size:18px;">Cliente: ${name} ${lastname}</p>
+                <p style="font-size:18px;">Email: ${email}</p>
+                <p style="font-size:18px;">Motivo: ${why}</p>
                 <table border="1" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse;">
                     <thead>
                         <tr>
@@ -80,7 +80,6 @@ export default async function handler (req, res) {
                         </tr>
                     </tfoot>
                 </table>
-                <p style="font-size:18px;">Esperamos volver a verte pronto.</p>
             </td>
         </tr>
     </table>
