@@ -10,6 +10,8 @@ function OrderDetail () {
   const { id } = router.query
   let total = 0
 
+  const goTo = (id) => router.push(`/profile/return?id=${id}`)
+
   const orderState = (estado) => {
     if (estado === '1') return 'Tu pedido esta pendiente de envio'
     if (estado === '2') return 'Tu pedido ha sido enviado'
@@ -39,6 +41,11 @@ function OrderDetail () {
                     )
                 }
               </div>
+            </div>
+            <div className='inline-block float-right'>
+              <button type='button' onClick={() => goTo(id)} className='w-[116px] h-[46px] bg-primary text-white font-bold mb-4'>
+                Devolucion
+              </button>
             </div>
             <div className='relative w-full overflow-x-auto border border-[#EDEDED]'>
               <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
