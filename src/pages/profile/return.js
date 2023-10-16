@@ -1,21 +1,9 @@
-import InputText from '@/components/Input/InputText'
-import TextAreaInput from '@/components/Input/TextAreaInput'
 import TitleCard from '@/components/admin/Cards/TitleCard'
 import Layout from '@/components/customerinfo/Layout'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import { useUserStore } from '@/store/loginStore'
 
 const PersonalInfo = () => {
-  const { user } = useUserStore()
-  // Call API to update profile settings changes
-  const updateProfile = () => {
-    ///
-  }
-
-  const updateFormValue = ({ updateType, value }) => {
-    //
-  }
-
   const makeEmail = () => {
     const info = {
       productName: document.querySelector('input[name="productName"]').value,
@@ -24,6 +12,8 @@ const PersonalInfo = () => {
       email: document.querySelector('input[name="email"]').value,
       why: document.querySelector('input[name="why"]').value
     }
+
+    console.log(info)
   }
 
   return (
