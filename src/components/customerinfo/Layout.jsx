@@ -56,6 +56,10 @@ export default function Layout ({ children }) {
                   </div>
                 </div>
 
+                <div className='item-group'>
+                  <Link href='/profile/return'><div className='flex space-x-3 items-center text-qgray hover:text-black'><span><span className='material-symbols-outlined'>redo</span></span><span className=' font-normal text-base'>Retorno</span></div></Link>
+                </div>
+
               </div>
             </div>
             {children}
