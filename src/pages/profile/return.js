@@ -2,18 +2,25 @@ import TitleCard from '@/components/admin/Cards/TitleCard'
 import Layout from '@/components/customerinfo/Layout'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import { useUserStore } from '@/store/loginStore'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const PersonalInfo = () => {
-  const makeEmail = () => {
+  const { user } = useUserStore()
+  const makeEmail = async () => {
+    const router = useRouter()
+    const { id } = router.query
+    
     const info = {
-      productName: document.querySelector('input[name="productName"]').value,
-      name: document.querySelector('input[name="name"]').value,
-      lastname: document.querySelector('input[name="lastname"]').value,
-      email: document.querySelector('input[name="email"]').value,
+      id: id,
+      name: user.nombre,
+      lastname: user.apellido,
+      email: user.email,
       why: document.querySelector('input[name="why"]').value
     }
 
-    console.log(info)
+    const res = await axios.post('/api/sendReturn', info)
+    console.log(res)
   }
 
   return (
@@ -25,20 +32,16 @@ const PersonalInfo = () => {
               <TitleCard topMargin='pt-2'>
                 <div className='flex flex-wrap gap-6'>
                   <div className='basis-[100%] md:basis-[40%] grow'>
-                    <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Nombre del producto</div>
-                    <div><input name='productName' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' /></div>
-                  </div>
-                  <div className='basis-[100%] md:basis-[40%] grow'>
                     <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Nombre</div>
-                    <div><input name='name' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' /></div>
+                    <div><input name='name' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.nombre} /></div>
                   </div>
                   <div className='basis-[100%] md:basis-[40%] grow'>
                     <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Apellido</div>
-                    <div><input name='lastname' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' /></div>
+                    <div><input name='lastname' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.apellido} /></div>
                   </div>
                   <div className='basis-[100%] md:basis-[40%] grow'>
                     <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Correo</div>
-                    <div><input name='email' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' /></div>
+                    <div><input name='email' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.email} /></div>
                   </div>
                   <div className='basis-[100%] md:basis-[40%] grow'>
                     <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Motivo de retorno</div>
