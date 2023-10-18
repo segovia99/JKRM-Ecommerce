@@ -14,7 +14,6 @@ export default async function handler (req, res) {
     `, [id])
 
   let html = ''
-  let total = 0.00
 
   result.forEach((product) => {
     html += `
@@ -25,7 +24,6 @@ export default async function handler (req, res) {
         <td style="border: 1px solid #ddd;">$${(product.total).toFixed(2)}</td>
     </tr>
     `
-    total += (product.total)
   })
 
   await transporter.sendMail({
@@ -76,7 +74,7 @@ export default async function handler (req, res) {
                     <tfoot>
                         <tr>
                             <td colspan="3" align="right" style="border: 1px solid #ddd;">Total:</td>
-                            <td style="border: 1px solid #ddd;">$${total.toFixed(2)}</td>
+                            
                         </tr>
                     </tfoot>
                 </table>
