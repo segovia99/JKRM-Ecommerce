@@ -2,9 +2,6 @@ import { transporter } from '@/services/emails/mailer'
 import { pool } from '@/db/db'
 
 export default async function handler (req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' })
-  }
   const { id, name, lastname, email, why } = req.body
 
   const [result] = await pool.query(`SELECT productos.nombre AS nombre_producto, productos.url AS image, productos.precio AS price, detalle_pedido.cantidad as cantidad, detalle_pedido.cantidad * productos.precio AS total,
