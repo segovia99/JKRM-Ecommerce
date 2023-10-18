@@ -2,6 +2,10 @@ import { transporter } from '@/services/emails/mailer'
 import { pool } from '@/db/db'
 
 export default async function handler (req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' })
+  }
+
   const { id, name, lastname, email, why } = req.body
 
   const [result] = await pool.query(`SELECT productos.nombre AS nombre_producto, productos.url AS image, productos.precio AS price, detalle_pedido.cantidad as cantidad, detalle_pedido.cantidad * productos.precio AS total,
@@ -14,6 +18,7 @@ export default async function handler (req, res) {
     `, [id])
 
   let html = ''
+  let total = 0
 
   result.forEach((product) => {
     html += `
@@ -21,9 +26,11 @@ export default async function handler (req, res) {
         <td style="border: 1px solid #ddd;">${product.nombre_producto}</td>
         <td style="border: 1px solid #ddd;">${product.cantidad}</td>
         <td style="border: 1px solid #ddd;">$${product.price}</td>
-        <td style="border: 1px solid #ddd;">$${(product.total).toFixed(2)}</td>
+        <td style="border: 1px solid #ddd;">$${product.total}</td>
     </tr>
     `
+    const subtotal = parseFloat(product.total)
+    total = total + subtotal
   })
 
   await transporter.sendMail({
@@ -74,6 +81,7 @@ export default async function handler (req, res) {
                     <tfoot>
                         <tr>
                             <td colspan="3" align="right" style="border: 1px solid #ddd;">Total:</td>
+                            <td style="border: 1px solid #ddd;">$${total.toFixed(2)}</td>
                             
                         </tr>
                     </tfoot>

@@ -21,9 +21,7 @@ const PersonalInfo = () => {
       email: user.email,
       why: document.querySelector('input[name="why"]').value
     }
-
-    setIsSend(true)
-    toast.success('Solicitud enviada', {
+    const idtoast = toast.loading('Enviando Solicitud de devolucion', {
       position: 'top-center',
       autoClose: 1500,
       hideProgressBar: true,
@@ -32,9 +30,35 @@ const PersonalInfo = () => {
       draggable: true,
       progress: undefined
     })
-
     const res = await axios.post('/api/sendReturn', info)
-    console.log(res)
+    if (res.status === 200) {
+      setIsSend(true)
+      toast.update(idtoast, {
+        render: 'Solicitud Enviada',
+        type: 'success',
+        isLoading: false,
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    } else {
+      toast.update(idtoast, {
+        render: 'Ups algo salio mal',
+        type: 'error',
+        isLoading: false,
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    }
   }
 
   return (
