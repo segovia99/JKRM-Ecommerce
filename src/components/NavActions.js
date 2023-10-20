@@ -4,7 +4,7 @@ import { useUserStore } from '@/store/loginStore'
 import { ProfileIcon } from './Icons'
 
 export default function NavActions () {
-  const { isLogin } = useUserStore()
+  const { isLogin, user } = useUserStore()
 
   return (
     <div className='flex h-full flex-1 items-center justify-end space-x-6'>
@@ -12,10 +12,12 @@ export default function NavActions () {
       {isLogin
         ? (
           // <div className='dropdown dropdown-end cursor-pointer'>
-          <Link href='/profile'>
+          <Link href='/profile' className='flex gap-2'>
             <span tabIndex={0}>
               <ProfileIcon />
             </span>
+            <h1>{user.nombre} {user.apellido}
+            </h1>
           </Link>
 
           )
