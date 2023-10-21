@@ -42,11 +42,19 @@ function OrderDetail () {
                 }
               </div>
             </div>
-            <div className='inline-block float-right'>
-              <button type='button' onClick={() => goTo(id)} className='w-[116px] h-[46px] bg-primary text-white font-bold mb-4'>
-                Devolucion
-              </button>
-            </div>
+            {
+              products.length > 0 && (
+
+                products[0].estado_pedido === '3' && (
+                  <div className='inline-block float-right'>
+                    <button type='button' onClick={() => goTo(id)} className='w-[116px] h-[46px] bg-primary text-white font-bold mb-4'>
+                      Devolucion
+                    </button>
+                  </div>
+                )
+
+              )
+            }
             <div className='relative w-full overflow-x-auto border border-[#EDEDED]'>
               <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
                 <tr className='text-[13px] font-medium text-black bg-[#F6F6F6] whitespace-nowrap px-2 border-b default-border-bottom uppercase '>
