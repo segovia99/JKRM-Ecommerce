@@ -16,7 +16,8 @@ export function AdminProvider ({ children }) {
     categoria: '',
     cantidad: '',
     url: '',
-    marca: ''
+    marca: '',
+    descuento: 0
   })
   const formikRef = useRef()
   const updateFieldValue = (key, value) => {

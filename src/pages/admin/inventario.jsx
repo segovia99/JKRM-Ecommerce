@@ -116,6 +116,7 @@ function Inventario () {
     updateFieldValue('url', filteredProduct[0].url)
     updateFieldValue('marca', filteredProduct[0].marca)
     updateFieldValue('cantidad', filteredProduct[0].cantidad)
+    updateFieldValue('descuento', filteredProduct[0].descuento)
   }
 
   const cleanFields = () => {
@@ -126,6 +127,7 @@ function Inventario () {
     updateFieldValue('url', '')
     updateFieldValue('marca', '')
     updateFieldValue('cantidad', '')
+    updateFieldValue('descuento', 0)
   }
   const newProducto = () => {
     setIsUpdate(false)
@@ -148,6 +150,7 @@ function Inventario () {
                   <th>Producto</th>
                   <th>Precio</th>
                   <th>Stock</th>
+                  <th>Descuento</th>
                   <th>Categoria</th>
                   <th />
                   <th />
@@ -172,6 +175,7 @@ function Inventario () {
                         </td>
                         <td>${product.precio}</td>
                         <td>{product.cantidad}</td>
+                        <td>{product.descuento}%</td>
                         <td>{product.categoria}</td>
                         <td><button className='btn btn-square btn-ghost'><TrashIcon className='w-5' /></button></td>
                         <td><button className='btn btn-square btn-ghost' onClick={() => updateProduct(product.id)}><PencilSquareIcon className='w-5' /></button></td>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Cart3Icon } from './Icons'
 
-function ProductCardOne ({ id, title, img, price, addToCart }) {
+function ProductCardOne ({ id, title, img, price, descuento, addToCart }) {
   return (
     <div className='product-card-one w-full h-full bg-white relative group overflow-hidden' style={{ boxShadow: ' rgba(0, 0, 0, 0.05) 0px 15px 64px 0px' }}>
       <div
@@ -27,9 +27,20 @@ function ProductCardOne ({ id, title, img, price, addToCart }) {
           </p>
         </Link>
         <p className='price'>
-          <span className=' text-red-600 font-600 text-[18px] ml-2'>
-            ${price}
-          </span>
+          {
+            parseFloat(price) !== parseFloat(descuento)
+              ? (
+                <>
+                  <span className='main-price text-qgray line-through font-600 text-[18px]'>${price}</span>
+                  <span className='offer-price text-qred font-600 text-[18px] ml-2'>${parseFloat(descuento).toFixed(2)}</span>
+                </>
+                )
+              : (
+                <span className=' text-red-600 font-600 text-[18px] ml-2'>
+                  ${price}
+                </span>
+                )
+          }
         </p>
       </div>
     </div>

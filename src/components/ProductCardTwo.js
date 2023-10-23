@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function ProductCardTwo ({ img, title, price, id, addToCart }) {
+export default function ProductCardTwo ({ img, title, price, descuento, id, addToCart }) {
   return (
     <div data-aos='fade-left' className='product-row-card-style-one w-full h-[250px] bg-white group relative overflow-hidden aos-init aos-animate'>
       <div className='flex space-x-5 items-center w-full h-full lg:p-[30px] sm:p-5 p-2'>
@@ -16,9 +16,20 @@ export default function ProductCardTwo ({ img, title, price, id, addToCart }) {
               </p>
             </Link>
             <p className='price mb-[26px]'>
-              <span className='offer-price text-qred font-600 sm:text-[18px] text-base ml-2'>
-                ${price}
-              </span>
+              {
+            parseFloat(price) !== parseFloat(descuento)
+              ? (
+                <>
+                  <span className='main-price text-qgray line-through font-600 text-[18px]'>${price}</span>
+                  <span className='offer-price text-qred font-600 text-[18px] ml-2'>${parseFloat(descuento).toFixed(2)}</span>
+                </>
+                )
+              : (
+                <span className=' text-red-600 font-600 text-[18px] ml-2'>
+                  ${price}
+                </span>
+                )
+          }
             </p>
             <button type='button' className='w-[160px] h-[30px] text-white' onClick={addToCart}>
               <span className='red-btn text-white'>

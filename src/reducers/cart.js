@@ -20,9 +20,9 @@ export const updateLocalStorage = (state) => {
 
 const UPDATE_STATE_BY_ACTION = {
   [CART_ACTION_TYPES.ADD_TO_CART]: (state, action) => {
-    const { id, precio } = action.payload
+    const { id, descuento } = action.payload
     const productInCartIndex = state.findIndex(item => item.id === id)
-    const price = parseFloat(precio)
+    const price = parseFloat(descuento)
     if (productInCartIndex >= 0) {
       // ⚡ usando el spread operator y slice
       const newState = [

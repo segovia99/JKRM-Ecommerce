@@ -126,6 +126,17 @@ function RightSidebar () {
                       </div>
                       <div className='form-control w-full'>
                         <label className='label'>
+                          Porcentaje de descuento
+                        </label>
+                        <input
+                          type='number' placeholder='Ingresa el descuento' name='descuento' className='input input-bordered w-full '
+                          onChange={handleChange} value={values.descuento} required
+                          autoComplete='off'
+
+                        />
+                      </div>
+                      <div className='form-control w-full'>
+                        <label className='label'>
                           Stock
                         </label>
                         <input

@@ -24,7 +24,7 @@ function Cart () {
               cart.map(product => {
                 return (
                   <li className='w-full h-full flex' key={product.id}>
-                    <CartProductItem img={product.url} title={product.nombre} price={product.precio} id={product.id} quantity={product.quantity} removeFromCart={() => removeFromCart(product)} />
+                    <CartProductItem img={product.url} title={product.nombre} price={parseFloat(product.descuento).toFixed(2)} id={product.id} quantity={product.quantity} removeFromCart={() => removeFromCart(product)} />
                   </li>
                 )
               })

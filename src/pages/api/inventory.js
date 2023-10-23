@@ -15,8 +15,8 @@ export default async function handler (req, res) {
   }
 
   if (req.method === 'PUT') {
-    const { nombre, descripcion, precio, cantidad, url, marca, id } = req.body
-    await pool.query('UPDATE productos SET nombre=?, descripcion=?, precio=?, cantidad=?, url=?, marca=? WHERE id=?', [nombre, descripcion, precio, cantidad, url, marca, id])
+    const { nombre, descripcion, precio, cantidad, url, marca, descuento, id } = req.body
+    await pool.query('UPDATE productos SET nombre=?, descripcion=?, precio=?, cantidad=?, url=?, marca=?, descuento=? WHERE id=?', [nombre, descripcion, precio, cantidad, url, marca, descuento, id])
 
     const [result] = await pool.query('SELECT p.*, c.nombre AS categoria FROM productos p INNER JOIN categorias c ON p.id_categorias = c.id')
     res.status(200).json(result)

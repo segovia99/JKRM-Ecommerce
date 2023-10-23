@@ -32,7 +32,7 @@ export default function CartList ({ products, removeFromCart }) {
                 </td>
                 <td className='text-center py-4 px-2'>
                   <div className='flex space-x-1 items-center justify-center'>
-                    <span className='text-[15px] font-normal'>${product.precio}</span>
+                    <span className='text-[15px] font-normal'>${parseFloat(product.descuento).toFixed(2)}</span>
                   </div>
                 </td>
                 <td className=' py-4'>

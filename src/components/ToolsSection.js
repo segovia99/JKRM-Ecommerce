@@ -42,10 +42,10 @@ function ToolsSection () {
               <div className='grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5'>
                 {
                 products.slice(0, 4).map((product) => {
-                  const { descripcion, precio, url, nombre, id } = product
+                  const { descripcion, precio, url, nombre, id, descuento } = product
                   return (
                     <ProductCardOne
-                      key={id} title={nombre} description={descripcion} price={precio} img={url} id={id} addToCart={
+                      key={id} title={nombre} descuento={descuento} description={descripcion} price={precio} img={url} id={id} addToCart={
                         () => {
                           addToCart(product)
                           toast.success('se agrego al carrito', { autoClose: 1000 })
