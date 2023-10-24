@@ -114,8 +114,19 @@ export default function Detail ({ IsLogin, User }) {
                     <div className='product-details w-full mt-10 lg:mt-0'>
                       <p data-aos className='text-xl font-medium text-black mb-4 aos-init aos-animate'>{product[0].nombre}</p>
                       <div data-aos='fade-up' className='flex space-x-2 items-center mb-7 aos-init aos-animate'>
-                        <span className='text-sm font-500 text-qgray line-through mt-2'>${product[0].precio}</span>
-                        <span className='text-2xl font-500 text-red-600'>${parseFloat(product[0].descuento).toFixed(2)}</span>
+                        {
+                        parseFloat(product[0].precio) !== parseFloat(product[0].descuento)
+                          ? (
+                            <>
+                              <span className='text-sm font-500 text-qgray line-through mt-2'>${product[0].precio}</span>
+                              <span className='text-2xl font-500 text-red-600'>${parseFloat(product[0].descuento).toFixed(2)}</span>
+                            </>
+                            )
+                          : (
+                            <span className='text-2xl font-500 text-red-600'>${product[0].precio}</span>
+                            )
+                        }
+
                       </div>
                       <p data-aos='fade-up' className='text-gray-500 text-sm text-normal mb-[30px] leading-7 aos-init aos-animate'>{product[0].descripcion}</p>
                       <div data-aos='fade-up' className='quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px] aos-init aos-animate'>
