@@ -6,9 +6,21 @@ import MobileHeader from './MobileHeader'
 import Search from './Search'
 import Cart from './Cart'
 import { useCart } from '@/hooks/useCart'
+import { useUserStore } from '@/store/loginStore'
+import { useWishlistStore } from '@/store/wishlistStore'
+import { useEffect } from 'react'
 
 const LandingNavbar = () => {
   const { cart } = useCart()
+  const { isLogin, user } = useUserStore()
+  const { items, setItems } = useWishlistStore()
+
+  useEffect(() => {
+    fetch(`/api/wishlist-v2?userId=${user.id}`)
+      .then(res => res.json())
+      .then(data => { setItems(data[0].items) })
+  }, [])
+
   return (
 
     <header className='header-section-wrapper relative' data-theme='light'>
@@ -22,12 +34,16 @@ const LandingNavbar = () => {
               <Search />
 
               <div className='flex space-x-6 items-center'>
-                <div className='relative'>
-                  <Link href='/'>
-                    <span><FavoriteIcon /></span>
-                    <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>0</span>
-                  </Link>
-                </div>
+                {
+                  isLogin && (
+                    <div className='relative'>
+                      <Link href='/wishlist'>
+                        <span><FavoriteIcon /></span>
+                        <span className='w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] bg-[#db1436] text-white'>{items}</span>
+                      </Link>
+                    </div>
+                  )
+                }
                 <div className='cart-wrapper group relative py-4'>
                   <div className='cart relative cursor-pointer'>
                     <span><CartIcon /></span>

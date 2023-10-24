@@ -5,7 +5,7 @@ export default async function handler (req, res) {
 
   // we have an id available
   if (id) {
-    const [result] = await pool.query(`SELECT * FROM productos WHERE id = ${id}`)
+    const [result] = await pool.query(`SELECT id, nombre, descripcion, precio, id_categorias, cantidad, url, marca, precio - (precio * (descuento / 100)) AS descuento FROM productos WHERE id = ${id}`)
     return res.status(200).json(result)
   }
 

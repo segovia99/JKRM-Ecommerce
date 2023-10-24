@@ -46,8 +46,6 @@ export default function Layout ({ children }) {
                   </Link>
                 </div>
 
-                <div className='item group'><Link href='/profile/whishlist'><div className='flex space-x-3 items-center text-qgray hover:text-black'><span><svg width='16' height='14' viewBox='0 0 16 14' fill='none' class='fill-current' xmlns='http://www.w3.org/2000/svg'><path d='M8.00893 1.94301C8.25673 1.6737 8.45526 1.43535 8.67664 1.22148C10.387 -0.426805 13.0628 -0.402322 14.7246 1.27189C16.3985 2.95834 16.4356 5.68748 14.7674 7.3977C12.6907 9.52701 10.5848 11.6268 8.48882 13.7374C8.13819 14.0902 7.85825 14.0881 7.50619 13.7331C5.4188 11.6311 3.32426 9.53637 1.25187 7.42002C-0.424185 5.70837 -0.410617 2.98786 1.25258 1.29349C2.92721 -0.413123 5.62304 -0.434006 7.35265 1.24885C7.56475 1.45479 7.76042 1.67874 8.00893 1.94301Z' /></svg></span><span className=' font-normal text-base'>Wishlist</span></div></Link></div>
-
                 <div className='item group'>
                   <div onClick={() => handledLogout()} className='flex space-x-3 items-center text-qgray hover:text-black cursor-pointer'>
                     <span>
