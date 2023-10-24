@@ -11,8 +11,9 @@ import axios from 'axios'
 import Lottie from 'lottie-react'
 import heart from 'heart.json'
 import { useWishlistStore } from '@/store/wishlistStore'
+import { jwtVerify } from 'jose'
 
-export default function Detail () {
+export default function Detail ({ IsLogin, User }) {
   const { addToCart } = useCart()
   const [product, setProduct] = useState(null)
   const [isAdded, setIsAdded] = useState(false)
@@ -21,6 +22,12 @@ export default function Detail () {
   const { id } = router.query
   const { user } = useUserStore()
   const { setItems, items } = useWishlistStore()
+
+  const { setIsLogin, setUser } = useUserStore()
+  useEffect(() => {
+    setIsLogin(IsLogin)
+    setUser(User)
+  }, [])
 
   useEffect(() => {
     AOS.init()
@@ -47,7 +54,7 @@ export default function Detail () {
 
   useEffect(() => {
     checkIsAdded()
-  }, [])
+  }, [id])
 
   if (!product) return
 
@@ -180,4 +187,35 @@ export default function Detail () {
       </div>
     </LandingLayout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion, rol } = payload
+      User = { id, nombre, apellido, email, direccion }
+      if (rol === 1) {
+        context.res.writeHead(302, {
+          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
+        })
+        context.res.end()
+      }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }

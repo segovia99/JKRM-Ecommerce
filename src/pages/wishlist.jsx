@@ -4,8 +4,9 @@ import { WishList } from '@/components/WishList'
 import axios from 'axios'
 import { useUserStore } from '@/store/loginStore'
 import { useCart } from '@/hooks/useCart'
+import { jwtVerify } from 'jose'
 
-export default function WishListPage () {
+export default function WishListPage ({ IsLogin, User }) {
   const [list, setList] = useState([])
   const { user } = useUserStore()
   const { addToCart } = useCart()
@@ -14,6 +15,11 @@ export default function WishListPage () {
     const response = await axios.get('/api/wishlist', { params: { userId: user.id } })
     setList(response.data)
   }
+  const { setIsLogin, setUser } = useUserStore()
+  useEffect(() => {
+    setIsLogin(IsLogin)
+    setUser(User)
+  }, [])
   useEffect(() => {
     loadList()
   }, [])
@@ -46,4 +52,35 @@ export default function WishListPage () {
       </div>
     </LandingLayout>
   )
+}
+
+export async function getServerSideProps (context) {
+  const { token } = context.req.cookies
+  let IsLogin = false
+  let User = null
+  if (token) {
+    const { payload } = await jwtVerify(
+      token,
+      new TextEncoder().encode('jkrm')
+    )
+    if (payload) {
+      IsLogin = true
+      const { id, nombre, apellido, email, direccion, rol } = payload
+      User = { id, nombre, apellido, email, direccion }
+      if (rol === 1) {
+        context.res.writeHead(302, {
+          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
+        })
+        context.res.end()
+      }
+    }
+  }
+
+  // console.log(IsLogin)
+  return {
+    props: {
+      IsLogin,
+      User
+    }
+  }
 }
