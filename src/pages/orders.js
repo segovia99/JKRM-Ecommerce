@@ -1,19 +1,17 @@
 import TitleCard from '@/components/admin/Cards/TitleCard'
 import LandingLayout from '@/components/layouts/LandingLayout'
-import { useUserStore } from '@/store/loginStore'
 import axios from 'axios'
-import { jwtVerify } from 'jose'
 import moment from 'moment'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export default function Orders ({ IsLogin, User }) {
+export default function Orders () {
   const [orders, setOrders] = useState([])
-
-  const { setIsLogin, setUser } = useUserStore()
+  const { data: session } = useSession()
 
   const getOrders = async () => {
-    const response = await axios.get(`/api/orders?id=${User.id}`)
+    const response = await axios.get(`/api/orders?id=${session.user.id}`)
     setOrders(response.data)
   }
 
@@ -24,13 +22,8 @@ export default function Orders ({ IsLogin, User }) {
   }
 
   useEffect(() => {
-    setIsLogin(IsLogin)
-    setUser(User)
-  }, [])
-
-  useEffect(() => {
-    getOrders()
-  }, [])
+    if (session) getOrders()
+  }, [session])
   return (
     <LandingLayout>
       <div className='w-full pt-0 pb-0 bg-[#f8f8f8]'>
@@ -84,35 +77,4 @@ export default function Orders ({ IsLogin, User }) {
       </div>
     </LandingLayout>
   )
-}
-
-export async function getServerSideProps (context) {
-  const { token } = context.req.cookies
-  let IsLogin = false
-  let User = null
-  if (token) {
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode('jkrm')
-    )
-    if (payload) {
-      IsLogin = true
-      const { id, nombre, apellido, email, direccion, rol } = payload
-      User = { id, nombre, apellido, email, direccion }
-      if (rol === 1) {
-        context.res.writeHead(302, {
-          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
-        })
-        context.res.end()
-      }
-    }
-  }
-
-  // console.log(IsLogin)
-  return {
-    props: {
-      IsLogin,
-      User
-    }
-  }
 }

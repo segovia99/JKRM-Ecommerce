@@ -6,28 +6,21 @@ import { useCart } from '@/hooks/useCart'
 import { toast } from 'react-toastify'
 import ReviewCard from '@/components/ReviewCard'
 import ReviewForm from '@/components/ReviewForm'
-import { useUserStore } from '@/store/loginStore'
 import axios from 'axios'
 import Lottie from 'lottie-react'
 import heart from 'heart.json'
 import { useWishlistStore } from '@/store/wishlistStore'
-import { jwtVerify } from 'jose'
+import { useSession } from 'next-auth/react'
 
-export default function Detail ({ IsLogin, User }) {
+export default function Detail () {
   const { addToCart } = useCart()
   const [product, setProduct] = useState(null)
   const [isAdded, setIsAdded] = useState(false)
   const [reviews, setReviews] = useState([])
   const router = useRouter()
   const { id } = router.query
-  const { user } = useUserStore()
   const { setItems, items } = useWishlistStore()
-
-  const { setIsLogin, setUser } = useUserStore()
-  useEffect(() => {
-    setIsLogin(IsLogin)
-    setUser(User)
-  }, [])
+  const { data: session } = useSession()
 
   useEffect(() => {
     AOS.init()
@@ -42,7 +35,7 @@ export default function Detail ({ IsLogin, User }) {
 
   const checkIsAdded = async () => {
     const values = {
-      idUsuario: user.id,
+      idUsuario: session.user.id,
       idProducto: id
     }
     const response = await axios.post('/api/wishlist-v2', values)
@@ -53,14 +46,14 @@ export default function Detail ({ IsLogin, User }) {
   }
 
   useEffect(() => {
-    checkIsAdded()
-  }, [id])
+    if (session) checkIsAdded()
+  }, [session])
 
   if (!product) return
 
   const addToWishlist = async () => {
     const values = {
-      idUsuario: user.id,
+      idUsuario: session.user.id,
       idProducto: id
     }
     if (!isAdded) {
@@ -137,9 +130,11 @@ export default function Detail ({ IsLogin, User }) {
                             <button type='button' className='text-base text-qgray'>+</button>
                           </div>
                         </div>
-                        <div className='w-[60px] h-full flex justify-center items-center border border-qgray-border'>
-                          <button type='button' onClick={() => addToWishlist()}>
-                            {
+                        {
+                          session && (
+                            <div className='w-[60px] h-full flex justify-center items-center border border-qgray-border'>
+                              <button type='button' onClick={() => addToWishlist()}>
+                                {
                               isAdded
                                 ? (
                                   <span className='w-[24px] h-[24px]'>
@@ -151,8 +146,10 @@ export default function Detail ({ IsLogin, User }) {
                                   </span>
                                   )
                             }
-                          </button>
-                        </div>
+                              </button>
+                            </div>
+                          )
+                        }
                         <div className='flex-1 h-full'>
                           <button
                             type='button' className='black-btn text-sm font-semibold w-full h-full' onClick={
@@ -198,35 +195,4 @@ export default function Detail ({ IsLogin, User }) {
       </div>
     </LandingLayout>
   )
-}
-
-export async function getServerSideProps (context) {
-  const { token } = context.req.cookies
-  let IsLogin = false
-  let User = null
-  if (token) {
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode('jkrm')
-    )
-    if (payload) {
-      IsLogin = true
-      const { id, nombre, apellido, email, direccion, rol } = payload
-      User = { id, nombre, apellido, email, direccion }
-      if (rol === 1) {
-        context.res.writeHead(302, {
-          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
-        })
-        context.res.end()
-      }
-    }
-  }
-
-  // console.log(IsLogin)
-  return {
-    props: {
-      IsLogin,
-      User
-    }
-  }
 }

@@ -1,8 +1,8 @@
-import { useUserStore } from '@/store/loginStore'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { signIn, getSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Login () {
   const [credentials, setCredentials] = useState({
@@ -11,42 +11,27 @@ export default function Login () {
   })
 
   const router = useRouter()
-  const { setIsLogin, setUser } = useUserStore()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // console.log(credentials)
-    let idtoast
-    try {
-      idtoast = toast.loading('Comprobando Informacion')
-      const res = await axios.post('/api/auth/login', credentials)
 
-      if (res.status === 200 && res.data.rol === 1) {
-        const { name, User } = res.data
-        setUser(User)
-        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/admin/dashboardsales')
-      } else if (res.status === 200 && res.data.rol === 2) {
-        const { name, User } = res.data
-        setIsLogin(true)
-        setUser(User)
-        localStorage.setItem('isLogin', JSON.stringify(true))
-        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/')
-      } else if (res.status === 200 && res.data.rol === 3) {
-        const { name, User } = res.data
-        setUser(User)
-        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/Logistics/pedidos')
-      } else if (res.status === 200 && res.data.rol === 4) {
-        const { name, User } = res.data
-        setUser(User)
-        toast.update(idtoast, { render: `Bienvenido ${name}`, autoClose: 1000, type: 'success', isLoading: false })
-        router.push('/inventory/inventario')
-      }
-    } catch (error) {
-      toast.update(idtoast, { render: 'Email o contraseña incorrectos', autoClose: 2000, type: 'error', isLoading: false })
-      console.log(error)
+    const responseNextAuth = await signIn('credentials', {
+      email: credentials.email,
+      password: credentials.password,
+      redirect: false
+    })
+
+    if (responseNextAuth?.error) {
+      return toast.error(responseNextAuth.error, { position: 'top-center', autoClose: 1500 })
+    }
+
+    const session = await getSession()
+    if (session) {
+      if (session.user.rol === 1) router.push('/admin/dashboardsales')
+      // if (session.user.rol === 2) router.push('/')
+      if (session.user.rol === 3) router.push('/Logistics/pedidos')
+      if (session.user.rol === 4) router.push('/inventory/inventario')
+      return toast.success(`Bienvenido ${session.user.nombre}`, { position: 'top-center', autoClose: 1500 })
     }
   }
 
@@ -98,7 +83,7 @@ export default function Login () {
                   </div>
                   <button type='submit' className='w-full text-white bg-[#db1436] hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark1:bg-blue-600 dark1:hover:bg-blue-700 dark1:focus:ring-blue-800'>Acceder</button>
                   <div className='text-sm font-medium text-gray-500 dark1:text-gray-300'>
-                    ¿No estas registrado? <a href='#' className='text-blue-700 hover:underline dark1:text-blue-500'>Crea una cuenta</a>
+                    ¿No estas registrado? <Link href='/signup' className='text-blue-700 hover:underline dark1:text-blue-500'>Crea una cuenta</Link>
                   </div>
                 </form>
               </div>
