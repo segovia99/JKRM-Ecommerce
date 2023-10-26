@@ -7,9 +7,8 @@ import Link from 'next/link'
 import { themeChange } from 'theme-change'
 import { useAdmin } from '@/hooks/useAdmin'
 import Avatar from '../Avatar'
-import axios from 'axios'
-import { useUserStore } from '@/store/loginStore'
 import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
 
 export default function Header () {
   const initialTheme = () => {
@@ -24,11 +23,9 @@ export default function Header () {
   }
   const [currentTheme, setCurrentTheme] = useState(initialTheme)
   const { pageTitle } = useAdmin()
-  const { setIsLogin } = useUserStore()
   const router = useRouter()
   const logoutUser = async () => {
-    await axios.put('/api/auth/logout')
-    setIsLogin(false)
+    await signOut()
     router.push('/')
   }
 
@@ -79,7 +76,9 @@ export default function Header () {
               <div className='w-10 rounded-full'>
                 <Avatar />
               </div>
+              <h1 />
             </label>
+
             <ul tabIndex={0} className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>
               <li className='justify-between'>
                 <Link href='/app/settings-profile'>

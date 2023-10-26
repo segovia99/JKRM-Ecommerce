@@ -6,20 +6,22 @@ import MobileHeader from './MobileHeader'
 import Search from './Search'
 import Cart from './Cart'
 import { useCart } from '@/hooks/useCart'
-import { useUserStore } from '@/store/loginStore'
 import { useWishlistStore } from '@/store/wishlistStore'
 import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
 const LandingNavbar = () => {
+  const { data: session } = useSession()
   const { cart } = useCart()
-  const { isLogin, user } = useUserStore()
   const { items, setItems } = useWishlistStore()
 
   useEffect(() => {
-    fetch(`/api/wishlist-v2?userId=${user.id}`)
-      .then(res => res.json())
-      .then(data => { setItems(data[0].items) })
-  }, [])
+    if (session) {
+      fetch(`/api/wishlist-v2?userId=${session.user.id}`)
+        .then(res => res.json())
+        .then(data => { setItems(data[0].items) })
+    }
+  }, [session])
 
   return (
 
@@ -35,7 +37,7 @@ const LandingNavbar = () => {
 
               <div className='flex space-x-6 items-center'>
                 {
-                  isLogin && (
+                  session && (
                     <div className='relative'>
                       <Link href='/wishlist'>
                         <span><FavoriteIcon /></span>

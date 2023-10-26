@@ -1,22 +1,23 @@
 import Link from 'next/link'
 import Login from './Login'
-import { useUserStore } from '@/store/loginStore'
 import { ProfileIcon } from './Icons'
+import { useSession } from 'next-auth/react'
 
 export default function NavActions () {
-  const { isLogin, user } = useUserStore()
+  // const { isLogin, user } = useUserStore()
+  const { data: session } = useSession()
 
   return (
     <div className='flex h-full flex-1 items-center justify-end space-x-6'>
 
-      {isLogin
+      {session
         ? (
           // <div className='dropdown dropdown-end cursor-pointer'>
           <Link href='/profile' className='flex gap-2'>
             <span tabIndex={0}>
               <ProfileIcon />
             </span>
-            <h1>{user.nombre} {user.apellido}
+            <h1>{session.user?.nombre} {session.user?.apellido}
             </h1>
           </Link>
 

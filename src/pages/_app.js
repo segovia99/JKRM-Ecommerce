@@ -10,19 +10,22 @@ import { ToastContainer } from 'react-toastify'
 import { CartProvider } from '@/context/cart.js'
 import { AdminProvider } from '@/context/admin'
 import { FiltersProvider } from '@/context/filters'
+import { SessionProvider } from 'next-auth/react'
 
-export default function App ({ Component, pageProps }) {
+export default function App ({ Component, pageProps, session }) {
   return (
 
     <>
-      <AdminProvider>
-        <CartProvider>
-          <FiltersProvider>
-            <Component {...pageProps} />
-            <ToastContainer />
-          </FiltersProvider>
-        </CartProvider>
-      </AdminProvider>
+      <SessionProvider session={session}>
+        <AdminProvider>
+          <CartProvider>
+            <FiltersProvider>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </FiltersProvider>
+          </CartProvider>
+        </AdminProvider>
+      </SessionProvider>
     </>
 
   )

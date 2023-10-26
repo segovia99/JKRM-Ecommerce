@@ -2,27 +2,23 @@ import { useState, useEffect } from 'react'
 import LandingLayout from '@/components/layouts/LandingLayout'
 import { WishList } from '@/components/WishList'
 import axios from 'axios'
-import { useUserStore } from '@/store/loginStore'
 import { useCart } from '@/hooks/useCart'
-import { jwtVerify } from 'jose'
+import { useSession } from 'next-auth/react'
 
-export default function WishListPage ({ IsLogin, User }) {
+export default function WishListPage () {
   const [list, setList] = useState([])
-  const { user } = useUserStore()
   const { addToCart } = useCart()
+  const { data: session } = useSession()
 
   const loadList = async () => {
-    const response = await axios.get('/api/wishlist', { params: { userId: user.id } })
+    const response = await axios.get('/api/wishlist', { params: { userId: session.user.id } })
     setList(response.data)
   }
-  const { setIsLogin, setUser } = useUserStore()
+
   useEffect(() => {
-    setIsLogin(IsLogin)
-    setUser(User)
-  }, [])
-  useEffect(() => {
-    loadList()
-  }, [])
+    if (session) loadList()
+  }, [session])
+
   return (
     <LandingLayout>
       <div className='w-full  pt-0 pb-0'>
@@ -52,35 +48,4 @@ export default function WishListPage ({ IsLogin, User }) {
       </div>
     </LandingLayout>
   )
-}
-
-export async function getServerSideProps (context) {
-  const { token } = context.req.cookies
-  let IsLogin = false
-  let User = null
-  if (token) {
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode('jkrm')
-    )
-    if (payload) {
-      IsLogin = true
-      const { id, nombre, apellido, email, direccion, rol } = payload
-      User = { id, nombre, apellido, email, direccion }
-      if (rol === 1) {
-        context.res.writeHead(302, {
-          Location: '/admin/dashboardsales' // URL de la página a la que se redireccionará
-        })
-        context.res.end()
-      }
-    }
-  }
-
-  // console.log(IsLogin)
-  return {
-    props: {
-      IsLogin,
-      User
-    }
-  }
 }

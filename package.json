@@ -33,6 +33,7 @@
     "moment": "^2.29.4",
     "mysql2": "^3.2.3",
     "next": "13.2.4",
+    "next-auth": "^4.24.3",
     "nodemailer": "^6.9.2",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",

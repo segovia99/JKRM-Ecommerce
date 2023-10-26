@@ -2,12 +2,12 @@ import { toast } from 'react-toastify'
 import { Cart3Icon } from './Icons'
 import { useWishlistStore } from '@/store/wishlistStore'
 import axios from 'axios'
-import { useUserStore } from '@/store/loginStore'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export const WishList = ({ products, addToCart, setList }) => {
   const { items, setItems } = useWishlistStore()
-  const { user } = useUserStore()
+  const { data: session } = useSession()
 
   const deleteItem = (idProducto, idUsuario) => {
     toast.success('Eliminado de tu wishlist', { autoClose: 1000 })
@@ -56,7 +56,7 @@ export const WishList = ({ products, addToCart, setList }) => {
                       toast.success('Agregado al carrito', { autoClose: 1000 })
                       setItems(items - 1)
                       setList(products.filter(p => p.id !== product.id))
-                      axios.delete('/api/wishlist', { params: { idProducto: product.id, idUsuario: user.id } })
+                      axios.delete('/api/wishlist', { params: { idProducto: product.id, idUsuario: session.user.id } })
                     }}
                   >
                     <div className='flex items-center space-x-3'>
@@ -71,7 +71,7 @@ export const WishList = ({ products, addToCart, setList }) => {
                 <td className='text-right py-4 px-2'>
                   <div
                     className='flex space-x-1 items-center justify-center cursor-pointer' onClick={
-                    () => deleteItem(product.id, user.id)
+                    () => deleteItem(product.id, session.user.id)
 }
                   >
                     <span>

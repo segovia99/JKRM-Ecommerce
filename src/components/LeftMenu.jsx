@@ -6,13 +6,13 @@ import BuildingStorefrontIcon from '@heroicons/react/24/outline/BuildingStorefro
 import UserPlusIcon from '@heroicons/react/24/outline/UserPlusIcon'
 import UserIcon from '@heroicons/react/24/outline/UserIcon'
 import ArchiveBoxIcon from '@heroicons/react/24/outline/ArchiveBoxIcon'
-import { useUserStore } from '@/store/loginStore'
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon'
 import EnvelopeIcon from '@heroicons/react/24/outline/EnvelopeIcon'
+import { useSession } from 'next-auth/react'
 
 function LeftMenu () {
   const { setIsOpen, isOpen } = useAdmin()
-  const { isLogin, user } = useUserStore()
+  const { data: session } = useSession()
 
   const close = (e) => {
     setIsOpen(false)
@@ -31,11 +31,11 @@ function LeftMenu () {
           <ul>
 
             {
-            isLogin
+            session
               ? (
                 <>
                   <li onClick={() => close()}>
-                    <Link href={`/account/${user.id}`}>
+                    <Link href={`/account/${session.user.id}`}>
                       <div className=' flex justify-between items-center px-5 h-12 bg-white hover:bg-primary transition-all duration-300 ease-in-out cursor-pointer'>
                         <div className='flex items-center space-x-6'>
                           <span className='w-4 h-4'><UserIcon /></span>
