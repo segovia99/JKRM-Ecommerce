@@ -1,24 +1,24 @@
 import TitleCard from '@/components/admin/Cards/TitleCard'
 import Layout from '@/components/customerinfo/Layout'
 import LandingLayout from '@/components/layouts/LandingLayout'
-import { useUserStore } from '@/store/loginStore'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { useSession } from 'next-auth/react'
 
 const PersonalInfo = () => {
   const router = useRouter()
-  const { user } = useUserStore()
+  const { data: session } = useSession()
   const [isSend, setIsSend] = useState(false)
 
   const makeEmail = async () => {
     const { id } = router.query
     const info = {
       id,
-      name: user.nombre,
-      lastname: user.apellido,
-      email: user.email,
+      name: session.user.nombre,
+      lastname: session.user.apellido,
+      email: session.user.email,
       why: document.querySelector('input[name="why"]').value
     }
     const idtoast = toast.loading('Enviando Solicitud de devolucion', {
@@ -64,10 +64,12 @@ const PersonalInfo = () => {
   return (
     <LandingLayout>
       <Layout>
-        <div className='flex-1'>
-          <div className='w-full pt-0 pb-0'>
-            <div className='container-x mx-auto py-5'>
-              {
+        {
+          session && (
+            <div className='flex-1'>
+              <div className='w-full pt-0 pb-0'>
+                <div className='container-x mx-auto py-5'>
+                  {
                 isSend
                   ? (
                     <div className='mx-auto mb-8 grid max-w-3xl place-items-center text-center p-2' data-theme='light'>
@@ -75,7 +77,7 @@ const PersonalInfo = () => {
                       <div className='break-words text-black py-24 mx-auto max-w-prose md:px-2'>
 
                         <p className='mb-8 text-black/90 max-w-xl text-justify'>
-                          Estimado {user.nombre} {user.apellido},
+                          Estimado {session.user.nombre} {session.user.apellido},
                         </p>
                         <p className='mb-8 text-black/90 max-w-xl text-justify'>
                           Gracias por contactarnos con respecto a tu solicitud de devolución en Ferretería JKRM. Lamentamos los inconvenientes que puedas haber experimentado con tu pedido y estamos aquí para ayudarte a resolverlo de manera efectiva.
@@ -106,15 +108,15 @@ const PersonalInfo = () => {
                       <div className='flex flex-wrap gap-6'>
                         <div className='basis-[100%] md:basis-[40%] grow'>
                           <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Nombre</div>
-                          <div><input name='name' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.nombre} /></div>
+                          <div><input name='name' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={session.user.nombre} /></div>
                         </div>
                         <div className='basis-[100%] md:basis-[40%] grow'>
                           <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Apellido</div>
-                          <div><input name='lastname' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.apellido} /></div>
+                          <div><input name='lastname' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={session.user.apellido} /></div>
                         </div>
                         <div className='basis-[100%] md:basis-[40%] grow'>
                           <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Correo</div>
-                          <div><input name='email' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={user.email} /></div>
+                          <div><input name='email' className='w-[100%] h-[3em] border-[1px] rounded-[0.5em] border-[silver]' type='text' value={session.user.email} /></div>
                         </div>
                         <div className='basis-[100%] md:basis-[40%] grow'>
                           <div className='pl-[4px] pt-[8px] pb-[8px] text-[0.875rem]'>Motivo de retorno</div>
@@ -128,9 +130,11 @@ const PersonalInfo = () => {
                     )
 
               }
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )
+        }
       </Layout>
     </LandingLayout>
   )
