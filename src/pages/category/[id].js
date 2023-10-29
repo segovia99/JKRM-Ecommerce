@@ -86,10 +86,10 @@ export default function Catalogo () {
                     </>}
                   {
                 currentProducts.map((product) => {
-                  const { descripcion, precio, url, nombre, id } = product
+                  const { descripcion, precio, url, nombre, id, descuento } = product
                   return (
                     <ProductCardOne
-                      key={id} title={nombre} description={descripcion} price={precio} img={url} id={id} addToCart={
+                      key={id} title={nombre} description={descripcion} price={precio} descuento={descuento} img={url} id={id} addToCart={
                         () => {
                           addToCart(product)
                           toast.success('se agrego al carrito', { autoClose: 1000 })
