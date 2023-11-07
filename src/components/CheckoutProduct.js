@@ -13,7 +13,7 @@ export default function CheckoutProduct ({ cart }) {
                  </h4>
                </div>
                <div>
-                 <span className='text-[15px] text-qblack font-medium'>${item.subtotal}</span>
+                 <span className='text-[15px] text-qblack font-medium'>${parseFloat(item.subtotal).toFixed(2)}</span>
                </div>
              </div>
            </li>
