@@ -42,7 +42,7 @@ export default function TopBar ({ updateDashboardPeriod }) {
             updateFormValue={updateSelectBoxValue}
         /> */}
       </div>
-      <div className='text-right '>
+      {/* <div className='text-right '>
         <button className='btn btn-ghost btn-sm normal-case'><ArrowPathIcon className='w-4 mr-2' />Actualizar Datos</button>
         <button className='btn btn-ghost btn-sm normal-case  ml-2'><ShareIcon className='w-4 mr-2' />Compartir</button>
 
@@ -53,7 +53,7 @@ export default function TopBar ({ updateDashboardPeriod }) {
             <li><a><ArrowDownTrayIcon className='w-4' />Descargar</a></li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

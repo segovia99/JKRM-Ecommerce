@@ -11,6 +11,9 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import TitleCard from '../Cards/TitleCard'
+import { useState, useEffect } from 'react'
+
+import axios from 'axios'
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +27,7 @@ ChartJS.register(
 )
 
 function LineChart () {
+  const [data, setData] = useState({})
   const options = {
     responsive: true,
     plugins: {
@@ -33,24 +37,23 @@ function LineChart () {
     }
   }
 
-  const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        fill: true,
-        label: 'Ventas',
-        data: labels.map(() => { return Math.random() * 100 + 500 }),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)'
-      }
-    ]
+  const loadData = async () => {
+    const response = await axios.get('/api/stats/sales')
+    setData(response.data)
   }
+
+  useEffect(() => {
+    loadData()
+  }, [])
 
   return (
     <TitleCard title='Ventas Mensuales'>
-      <Line data={data} options={options} />
+
+      {
+      Object.keys(data).length > 0 &&
+        <Line data={data} options={options} />
+     }
+
     </TitleCard>
   )
 }

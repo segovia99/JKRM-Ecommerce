@@ -1,4 +1,3 @@
-import BellIcon from '@heroicons/react/24/outline/BellIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 import MoonIcon from '@heroicons/react/24/outline/MoonIcon'
 import SunIcon from '@heroicons/react/24/outline/SunIcon'
@@ -8,9 +7,11 @@ import { themeChange } from 'theme-change'
 import { useAdmin } from '@/hooks/useAdmin'
 import Avatar from '../Avatar'
 import { useRouter } from 'next/router'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 export default function Header () {
+  const { data: session } = useSession()
+
   const initialTheme = () => {
     if (typeof window !== 'undefined') {
       if (!localStorage.getItem('theme')) {
@@ -63,20 +64,21 @@ export default function Header () {
           </label>
 
           {/* Notification icon */}
-          <button className='btn btn-ghost ml-4  btn-circle'>
+          {/* <button className='btn btn-ghost ml-4  btn-circle'>
             <div className='indicator'>
-              <BellIcon className='h-6 w-6' />
-              {/* {noOfNotifications > 0 ? <span className='indicator-item badge badge-secondary badge-sm'>{noOfNotifications}</span> : null} */}
-            </div>
-          </button>
+              <BellIcon className='h-6 w-6' /> */}
+          {/* {noOfNotifications > 0 ? <span className='indicator-item badge badge-secondary badge-sm'>{noOfNotifications}</span> : null} */}
+          {/* </div>
+          </button> */}
 
           {/* Profile icon, opening menu on click */}
+          <h1 className='px-4'>{session.user.nombre} {session.user.apellido}</h1>
           <div className='dropdown dropdown-end ml-4'>
-            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+            <label tabIndex={0} className='btn btn-ghost btn-circle avatar flex'>
               <div className='w-10 rounded-full'>
                 <Avatar />
               </div>
-              <h1 />
+
             </label>
 
             <ul tabIndex={0} className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>
