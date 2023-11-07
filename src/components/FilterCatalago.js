@@ -2,7 +2,7 @@ import { useFilters } from '@/hooks/useFilters'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export default function FilterCatalago () {
+export default function FilterCatalago ({ setCurrentPage }) {
   const { setFilters } = useFilters()
 
   const [categorias, setCategorias] = useState([])
@@ -16,24 +16,19 @@ export default function FilterCatalago () {
     loadCategorias()
   }, [])
 
-  // const handleChangeMinPrice = (event) => {
-  //   setFilters(prevState => ({
-  //     ...prevState,
-  //     minPrice: event.target.value
-  //   }))
-  // }
-
   const handleChangeCategory = (event) => {
     if (event.target.checked) {
       setFilters(prevState => ({
         ...prevState,
         category: event.target.name
       }))
+      setCurrentPage(1)
     } else {
       setFilters(prevState => ({
         ...prevState,
         category: 'all'
       }))
+      setCurrentPage(1)
     }
   }
 
