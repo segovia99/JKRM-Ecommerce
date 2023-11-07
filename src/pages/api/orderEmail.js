@@ -1,3 +1,4 @@
+import { pool } from '@/db/db'
 import { transporter } from '@/services/emails/mailer'
 
 export default async function handler (req, res) {
@@ -77,6 +78,12 @@ export default async function handler (req, res) {
 </body>
 </html>
     `
+  })
+
+  products.forEach(async (product) => {
+    const [result] = await pool.query('SELECT cantidad FROM productos WHERE id = ?', [product.id])
+    const { cantidad } = result[0]
+    await pool.query('UPDATE productos SET cantidad = ? WHERE id = ?', [cantidad - product.quantity, product.id])
   })
 
   res.status(200).json({ message: 'Email sent' })

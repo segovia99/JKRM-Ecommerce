@@ -89,9 +89,9 @@ function OrderDetail () {
                               </div>
                             </div>
                           </td>
-                          <td className='text-center py-4 px-2'>${product.precio}</td>
+                          <td className='text-center py-4 px-2'>${parseFloat(product.descuento).toFixed(2)}</td>
                           <td className='text-center py-4 px-2'>{product.cantidad}</td>
-                          <td className='text-center py-4 px-2'>${product.total}</td>
+                          <td className='text-center py-4 px-2'>${parseFloat(product.total).toFixed(2)}</td>
 
                         </tr>
                       )
@@ -100,7 +100,7 @@ function OrderDetail () {
                 <tfoot>
                   <tr>
                     <td colspan='3' align='right' className='text-[15px] font-semibold text-qblack'>Total:</td>
-                    <td className='text-[15px] font-semibold text-qblack px-2'>${total}</td>
+                    <td className='text-[15px] font-semibold text-qblack px-2'>${total.toFixed(2)}</td>
                   </tr>
                 </tfoot>
               </table>

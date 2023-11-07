@@ -17,7 +17,7 @@ export default async function handler (req, res) {
 
   if (req.method === 'GET') {
     const { id } = req.query
-    const [result] = await pool.query(`SELECT usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.direccion, productos.nombre AS nombre_producto, productos.url, productos.precio, detalle_pedido.cantidad, detalle_pedido.cantidad * productos.precio AS total,
+    const [result] = await pool.query(`SELECT usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.direccion, productos.nombre AS nombre_producto, productos.url, productos.precio, precio - (precio * (descuento / 100)) AS descuento, detalle_pedido.cantidad, detalle_pedido.cantidad * (precio - (precio * (descuento / 100))) AS total,
     pedidos.estado_pedido
     FROM productos
     INNER JOIN detalle_pedido ON productos.id = detalle_pedido.producto_id

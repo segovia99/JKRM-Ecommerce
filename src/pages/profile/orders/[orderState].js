@@ -1,8 +1,8 @@
 import Layout from '@/components/customerinfo/Layout'
 import LandingLayout from '@/components/layouts/LandingLayout'
-import { useUserStore } from '@/store/loginStore'
 import axios from 'axios'
 import moment from 'moment/moment'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
@@ -11,8 +11,8 @@ const Oders = () => {
   const router = useRouter()
   const { orderState } = router.query
   const [orders, setOrders] = useState([])
-  const { user } = useUserStore()
   const [isloading, setIsloading] = useState(true)
+  const { data: session } = useSession()
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
@@ -47,7 +47,7 @@ const Oders = () => {
   }
 
   const getOrders = async () => {
-    const response = await axios.post(`/api/profile/ordersbystate?id=${user.id}&state=${orderState}`)
+    const response = await axios.post(`/api/profile/ordersbystate?id=${session.user.id}&state=${orderState}`)
     setOrders(response.data)
     setIsloading(false)
   }
