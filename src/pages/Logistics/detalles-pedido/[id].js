@@ -60,15 +60,15 @@ export default function DetallesPedido () {
             ? (
               <div className='flex w-[70%] px-10 py-[30px] '>
                 <div className='mx-auto'>
-                  <h2 className='text-qblack font-medium mb-2'>Cliente</h2>
+                  <h2 className='font-medium mb-2'>Cliente</h2>
                   <p>{products[0].nombre} {products[0].apellido}</p>
                 </div>
                 <div className='mx-auto'>
-                  <h2 className='text-qblack font-medium mb-2'>Dirección de Envío</h2>
+                  <h2 className=' font-medium mb-2'>Dirección de Envío</h2>
                   <p>{products[0].direccion}</p>
                 </div>
                 <div className='mx-auto'>
-                  <h2 className='text-qblack font-medium mb-2'>Correo Electrónico</h2>
+                  <h2 className=' font-medium mb-2'>Correo Electrónico</h2>
                   <p>{products[0].email}</p>
                 </div>
               </div>

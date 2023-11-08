@@ -6,10 +6,10 @@ import { themeChange } from 'theme-change'
 import { useAdmin } from '@/hooks/useAdmin'
 import Avatar from '../Avatar'
 import { useRouter } from 'next/router'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 
 export default function Header () {
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
   const initialTheme = () => {
     if (typeof window !== 'undefined') {
@@ -71,7 +71,7 @@ export default function Header () {
           </button> */}
 
           {/* Profile icon, opening menu on click */}
-          <h1 className='px-4'>{session.user.nombre} {session.user.apellido}</h1>
+          {/* <h1 className='px-4'>{session.user.nombre} {session.user.apellido}</h1> */}
           <div className='dropdown dropdown-end ml-4'>
             <label tabIndex={0} className='btn btn-ghost btn-circle avatar flex'>
               <div className='w-10 rounded-full'>
