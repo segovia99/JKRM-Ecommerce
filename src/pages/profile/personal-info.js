@@ -1,21 +1,34 @@
-import InputText from '@/components/Input/InputText'
-import TextAreaInput from '@/components/Input/TextAreaInput'
 import TitleCard from '@/components/admin/Cards/TitleCard'
 import Layout from '@/components/customerinfo/Layout'
 import LandingLayout from '@/components/layouts/LandingLayout'
+import axios from 'axios'
+import { Form, Formik } from 'formik'
 import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 const PersonalInfo = () => {
   const { data: session } = useSession()
+  const [info, setInfo] = useState({})
+  const [state, setState] = useState(false)
 
   // Call API to update profile settings changes
-  const updateProfile = () => {
-    ///
+  const updateProfile = async (values) => {
+    await axios.put('/api/users', { id: session.user.id, ...values })
+    toast.success('Informacion Actualizada', { position: 'top-center', autoClose: 1500 })
   }
 
-  const updateFormValue = ({ updateType, value }) => {
-    //
+  const getInfo = async () => {
+    const res = await axios.post('/api/cliente', { id: session.user.id })
+    setInfo(res.data)
+    setState(true)
   }
+
+  useEffect(() => {
+    if (session) {
+      getInfo()
+    }
+  }, [session])
 
   return (
     <LandingLayout>
@@ -26,17 +39,50 @@ const PersonalInfo = () => {
               <TitleCard topMargin='pt-2'>
 
                 {
-                  session && (
+                  state && (
                     <>
-                      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                        <InputText labelTitle='Nombre' defaultValue={session.user.nombre} updateFormValue={updateFormValue} />
-                        <InputText labelTitle='Apellido' defaultValue={session.user.apellido} updateFormValue={updateFormValue} />
-                        <InputText labelTitle='Correo' defaultValue={session.user.email} updateFormValue={updateFormValue} />
-                        <TextAreaInput labelTitle='Dirección' defaultValue={session.user.direccion} updateFormValue={updateFormValue} />
-                      </div>
-                      <div className='divider' />
 
-                      <div className='mt-16'><button className='btn btn-primary float-right' onClick={() => updateProfile()}>Actualizar</button></div>
+                      <Formik
+                        initialValues={info}
+                        enableReinitialize
+                        onSubmit={async (values) => {
+                          updateProfile(values)
+                        }}
+                      >
+                        {
+                      ({ handleChange, handleSubmit, values, isSubmitting }) => (
+                        <Form onSubmit={handleSubmit}>
+                          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                            <div className='form-control w-full'>
+                              <label className='label'>
+                                <span className='label-text text-base-content '>Nombre</span>
+                              </label>
+                              <input type='text' name='nombre' value={values.nombre} placeholder='' className='input  input-bordered w-full ' onChange={handleChange} />
+                            </div>
+
+                            <div className='form-control w-full'>
+                              <label className='label'>
+                                <span className='label-text text-base-content '>Apellido</span>
+                              </label>
+                              <input type='text' name='Apellido' value={values.apellido} placeholder='' className='input  input-bordered w-full ' onChange={handleChange} />
+                            </div>
+
+                            <div className='form-control w-full'>
+                              <label className='label'>
+                                <span className='label-text text-base-content '>Direccion</span>
+                              </label>
+                              <textarea name='direccion' placeholder='' value={values.direccion} className='textarea textarea-bordered w-full' onChange={handleChange} />
+                            </div>
+
+                          </div>
+                          <div className='divider' />
+
+                          <div className='mt-16'><button type='submit' className='btn btn-primary float-right'>Actualizar</button></div>
+                        </Form>
+                      )
+                     }
+                      </Formik>
+
                     </>
                   )
                 }
