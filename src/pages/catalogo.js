@@ -14,9 +14,6 @@ export default function Catalogo () {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const filteredProducts = filterProducts(products)
-  // console.log(filteredProducts)
-  // const [count, setCount] = useState(0)
-  // const [current, setCurrent] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
 
@@ -56,16 +53,6 @@ export default function Catalogo () {
     loadProducts()
   }, [])
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response2 = await axios.get('/api/pagination')
-  //     setCount(response2.data[0].count)
-  //     const response = await axios.get('/api/pagination/pagination?page=' + (current * 6))
-  //     setProducts(response.data)
-  //     setIsLoading(false)
-  //   })()
-  // }, [current])
-
   const pages = []
 
   for (let i = 0; i < Math.ceil(filteredProducts.length / itemsPerPage); i++) {
@@ -78,7 +65,7 @@ export default function Catalogo () {
         <div className='products-page-wrapper w-full'>
           <div className='container-x mx-auto'>
             <div className='w-full lg:flex lg:space-x-[30px]'>
-              <FilterCatalago />
+              <FilterCatalago setCurrentPage={setCurrentPage} />
               <div className='flex-1'>
                 <div className='grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]'>
                   {isLoading &&

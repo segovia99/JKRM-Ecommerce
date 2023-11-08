@@ -142,7 +142,6 @@ function Inventario () {
 
         <TitleCard title='Productos' topMargin='mt-2' TopSideButtons={<TopSideButtons applySearch={applySearch} applyFilter={applyFilter} removeFilter={removeFilter} newProduct={newProducto} />}>
 
-          {/* Leads List in table format loaded from slice after api call */}
           <div className='overflow-x-auto w-full'>
             <table className='table w-full'>
               <thead>

@@ -1,53 +1,52 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js'
-import { Bar } from 'react-chartjs-2'
-import TitleCard from '../Cards/TitleCard'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+import { useState, useEffect } from 'react'
+import TitleCard from '../Cards/TitleCard'
+import axios from 'axios'
 
 function BarChart () {
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top'
-      }
-    }
+  const [products, setProducts] = useState([])
+  const getProducts = async () => {
+    const response = await axios.get('/api/stats/lowstock')
+    setProducts(response.data)
   }
-
-  const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: 'Ventas',
-        data: labels.map(() => { return Math.random() * 1000 + 500 }),
-        backgroundColor: 'rgba( 0, 255, 128)'
-      },
-      {
-        label: 'Costos',
-        data: labels.map(() => { return Math.random() * 1000 + 500 }),
-        backgroundColor: 'rgba(53, 162, 235, 1)'
-      },
-      {
-        label: 'Gastos',
-        data: labels.map(() => { return Math.random() * 1000 + 500 }),
-        backgroundColor: 'rgba(255, 99, 132, 1)'
-      }
-    ]
-  }
-
+  useEffect(() => {
+    getProducts()
+  }, [])
   return (
-    <TitleCard title='Resumen'>
-      <Bar options={options} data={data} />
+    <TitleCard title='Productos con bajo stock'>
+      <div className='overflow-x-auto w-full'>
+        <table className='table w-full'>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+                  products.map((product, k) => {
+                    return (
+                      <tr key={k}>
+                        <td>
+                          <div className='flex items-center space-x-3'>
+                            <div className='avatar'>
+                              <div className='mask mask-squircle w-12 h-12'>
+                                <img src={product.url} alt='Avatar' />
+                              </div>
+                            </div>
+                            <div>
+                              <div className='font-bold'>{product.nombre}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{product.cantidad}</td>
+                      </tr>
+                    )
+                  })
+                }
+          </tbody>
+        </table>
+      </div>
     </TitleCard>
 
   )
