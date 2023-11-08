@@ -1,8 +1,3 @@
-import ArrowDownTrayIcon from '@heroicons/react/24/outline/ArrowDownTrayIcon'
-import ShareIcon from '@heroicons/react/24/outline/ShareIcon'
-import EnvelopeIcon from '@heroicons/react/24/outline/EnvelopeIcon'
-import EllipsisVerticalIcon from '@heroicons/react/24/outline/EllipsisVerticalIcon'
-import ArrowPathIcon from '@heroicons/react/24/outline/ArrowPathIcon'
 import { useState } from 'react'
 import Datepicker from 'react-tailwindcss-datepicker'
 
