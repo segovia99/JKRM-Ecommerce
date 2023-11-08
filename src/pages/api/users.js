@@ -28,7 +28,6 @@ export default async function handler (req, res) {
   if (req.method === 'PUT') {
     const { id, nombre, apellido, direccion } = req.body
     await pool.query('UPDATE usuarios SET nombre = ?, apellido = ?, direccion = ? WHERE id = ?', [nombre, apellido, direccion, id])
-    console.log('los')
     res.status(200).json({ message: 'Usuario actualizado' })
   }
 }

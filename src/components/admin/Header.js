@@ -82,12 +82,7 @@ export default function Header () {
             </label>
 
             <ul tabIndex={0} className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>
-              <li className='justify-between'>
-                <Link href='/app/settings-profile'>
-                  Cuenta
-                  {/* <span className='badge'>New</span> */}
-                </Link>
-              </li>
+
               {/* <li className=''><Link href='/app/settings-billing'>Bill History</Link></li> */}
               <div className='divider mt-0 mb-0' />
               <li><a onClick={logoutUser}>Cerrar Sesión</a></li>
